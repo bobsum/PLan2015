@@ -1,0 +1,80 @@
+﻿
+
+<div class="row">
+
+    <div class="col-xs-12">
+        <table class="table table-hover table-condensed">
+            <thead>
+            <tr>
+                <th class="col-xs-4 col-sm-3">Navn</th>
+                <th class="col-xs-4 col-sm-6">Deltager</th>
+                <th class="col-xs-4 col-sm-3">Point</th>
+                <th colspan="2" class="text-center"><span class="glyphicon glyphicon-option-horizontal"></span></th>
+            </tr>
+            </thead>
+            <tbody data-bind="foreach: events">
+            <tr>
+                <td data-bind="text: name"></td>
+                <td data-bind="visible: !isExpanded(), text: houseNames"></td>
+                <td data-bind="visible: isExpanded">
+                    <form class="form-horizontal" data-bind="submit: sendUpdate">
+                        <!-- ko foreach: points-->
+                        <div class="form-group form-group-sm">
+                            <label class="col-xs-12 col-sm-2 control-label" data-bind="text: houseName"></label>
+                            <div class="col-xs-12 col-sm-10">
+                                <input type="number" class="form-control" data-bind="value: amount, valueUpdate: 'afterkeydown'">
+                            </div>
+                        </div>
+                        <!-- /ko -->
+                        <div class="form-group form-group-sm">
+                            <div class="col-xs-12 col-sm-offset-2 col-sm-10">
+                                <button type="submit" class="btn btn-primary btn-xs" data-bind="enable: isValid">Gem</button>
+                            </div>
+                        </div>
+                    </form>
+                </td>
+                <td data-bind="text: sum() + ' af ' + totalPoints"></td>
+                <td><button data-bind="click: toggleExpanded, attr: { title: isExpanded() ? 'Skjul': 'Vis'}" class="btn btn-default btn-xs"><span data-bind="css: isExpanded() ? 'glyphicon-chevron-up': 'glyphicon-chevron-down'" class="glyphicon glyphicon-chevron-down"></span></button></td>
+                <td><button data-bind="click: sendDelete" class="btn btn-danger btn-xs" title="Slet"><span class="glyphicon glyphicon glyphicon-trash"></span></button></td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+    <div class="col-xs-12">
+        <div class="panel panel-default">
+            <div class="panel-heading">Ny begivenhed</div>
+            <div class="panel-body">
+                <form class="form-horizontal" data-bind="submit: sendCreate, with: newEvent">
+                    <div class="form-group">
+                        <label for="name" class="col-sm-2 control-label">Navn</label>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control" id="name" placeholder="Navn" data-bind="value: name, valueUpdate: 'afterkeydown'">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="totalPoints" class="col-sm-2 control-label">Samlede point</label>
+                        <div class="col-sm-10">
+                            <input type="number" class="form-control" id="totalPoints" placeholder="Samlede point" data-bind="value: totalPoints, valueUpdate: 'afterkeydown'">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="houses" class="col-sm-2 control-label">Deltager</label>
+                        <div class="col-sm-10">
+                            <select multiple class="form-control" id="houses" size="12" data-bind="options: $parent.houses, selectedOptions: houseIds, optionsText: 'name', optionsValue: 'id'"></select>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-sm-offset-2 col-sm-10">
+                            <button type="submit" class="btn btn-primary" data-bind="enable: isValid">Opret begivenhed</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts
+{
+    <script type="text/javascript" src="~/Scripts/App.js"></script>
+}

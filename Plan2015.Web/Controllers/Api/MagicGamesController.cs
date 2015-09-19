@@ -1,0 +1,55 @@
+using System;
+using System.Collections.Generic;
+using System.Data.Entity;
+using System.Linq;
+using System.Linq.Expressions;
+using System.Threading.Tasks;
+using Plan2015.Data.Entities;
+using Plan2015.Web.Hubs;
+using Plan2015.Web.Models;
+
+namespace Plan2015.Web.Controllers.Api
+{
+    public class MagicGamesController : ApiControllerWithHub<MagicGamesHub>
+    {
+        public async Task<IEnumerable<MagicGamesHouseDto>> GetMagicGames()
+        {
+            return await Db.Houses.Include(h => h.Scouts).Select(ToDto()).ToListAsync();
+        }
+
+        public async Task<MagicGamesHouseDto> PutMagicGame(MagicGamesHouseDto dto)
+        {
+            foreach (var interval in dto.Intervals)
+            {
+                var scout = Db.Scouts.Single(s => s.Id == interval.ScoutId);
+                if (scout.MagicGamesInterval == null)
+                    scout.MagicGamesInterval = new MagicGamesInterval();
+
+                scout.MagicGamesInterval.Amount = interval.Amount;
+            }
+
+            await Db.SaveChangesAsync();
+
+            dto = await Db.Houses.Select(ToDto()).SingleAsync(h => h.HouseId == dto.HouseId);
+
+            Hub.Clients.All.Update(dto);
+
+            return dto;
+        }
+
+        private Expression<Func<House, MagicGamesHouseDto>> ToDto()
+        {
+            return h => new MagicGamesHouseDto
+            {
+                HouseId = h.Id,
+                HouseName = h.Name,
+                Intervals = h.Scouts.Select(s => new MagicGamesIntervalDto
+                {
+                    ScoutId = s.Id,
+                    ScoutName = s.Name,
+                    Amount = s.MagicGamesInterval != null ? s.MagicGamesInterval.Amount : 0
+                })
+            };
+        }
+    }
+}
