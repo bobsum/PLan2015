@@ -4,16 +4,15 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{FE192D12-8EE7-4EA5-AEB6-2D870826A854}</ProjectGuid>
-    <OutputType>Exe</OutputType>
+    <ProjectGuid>{848AA55E-0C27-4447-95AE-647032864390}</ProjectGuid>
+    <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Plan2015.Sorting.Hat</RootNamespace>
-    <AssemblyName>Plan2015.Sorting.Hat</AssemblyName>
+    <RootNamespace>Plan2015.Dtos</RootNamespace>
+    <AssemblyName>Plan2015.Dtos</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
-    <PlatformTarget>AnyCPU</PlatformTarget>
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
@@ -23,7 +22,6 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
-    <PlatformTarget>AnyCPU</PlatformTarget>
     <DebugType>pdbonly</DebugType>
     <Optimize>true</Optimize>
     <OutputPath>bin\Release\</OutputPath>
@@ -32,12 +30,6 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="EntityFramework">
-      <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.dll</HintPath>
-    </Reference>
-    <Reference Include="EntityFramework.SqlServer">
-      <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.SqlServer.dll</HintPath>
-    </Reference>
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
@@ -48,22 +40,14 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Program.cs" />
+    <Compile Include="EventDto.cs" />
+    <Compile Include="EventPointDto.cs" />
+    <Compile Include="HouseDto.cs" />
+    <Compile Include="MagicGamesHouseDto.cs" />
+    <Compile Include="MagicGamesIntervalDto.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="App.config" />
-    <None Include="packages.config" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\Plan2015.Data\Plan2015.Data.csproj">
-      <Project>{FBB32C73-A98F-4CE1-8E99-1F86FB443F8A}</Project>
-      <Name>Plan2015.Data</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Plan2015.Helpers\Plan2015.Helpers.csproj">
-      <Project>{A23E84C6-9062-4BB4-AAC5-B0A6E06E35F7}</Project>
-      <Name>Plan2015.Helpers</Name>
-    </ProjectReference>
+    <Compile Include="PunctualityDto.cs" />
+    <Compile Include="PunctualitySwipeDto.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

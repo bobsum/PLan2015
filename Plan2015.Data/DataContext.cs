@@ -20,5 +20,7 @@ namespace Plan2015.Data
         public DbSet<School> Schools { get; set; }
         public DbSet<TurnoutPoint> TurnoutPoints { get; set; }
         public DbSet<MarkerPoint> MarkerPoints { get; set; }
+        public DbSet<Punctuality> Punctualities { get; set; }
+        public DbSet<PunctualitySwipe> PunctualitySwipes { get; set; }
     }
 }

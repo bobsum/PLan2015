@@ -5,8 +5,8 @@ using System.Linq;
 using System.Linq.Expressions;
 using System.Threading.Tasks;
 using Plan2015.Data.Entities;
+using Plan2015.Dtos;
 using Plan2015.Web.Hubs;
-using Plan2015.Web.Models;
 
 namespace Plan2015.Web.Controllers.Api
 {

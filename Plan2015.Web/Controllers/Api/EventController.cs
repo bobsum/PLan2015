@@ -1,22 +1,21 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Data.Entity;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Threading.Tasks;
 using System.Web.Http;
 using System.Web.Http.Description;
-using System.Web.Http.Results;
-using Plan2015.Data;
 using Plan2015.Data.Entities;
+using Plan2015.Dtos;
 using Plan2015.Web.Hubs;
-using Plan2015.Web.Models;
 
 namespace Plan2015.Web.Controllers.Api
 {
     public class EventController : ApiControllerWithHub<EventHub>
     {
-        [ResponseType(typeof (EventDto))]
+        /*[ResponseType(typeof (EventDto))]
         public async Task<IHttpActionResult> GetEvent(int id)
         {
             var dto = await Db.Events.Select(ToDto()).SingleOrDefaultAsync(e => e.Id == id);
@@ -24,7 +23,7 @@ namespace Plan2015.Web.Controllers.Api
             if (dto == null) return NotFound();
 
             return Ok(dto);
-        }
+        }*/
 
         public async Task<IEnumerable<EventDto>> GetEvents()
         {

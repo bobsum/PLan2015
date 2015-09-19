@@ -31,6 +31,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Plan2015.Score.ConsoleClien
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Plan2015.Score.MockServer", "Plan2015.Score.MockServer\Plan2015.Score.MockServer.csproj", "{F2C4C5DD-9861-418A-BD1D-3035B5278A6A}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Plan2015.Dtos", "Plan2015.Dtos\Plan2015.Dtos.csproj", "{848AA55E-0C27-4447-95AE-647032864390}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Plan2015.Helpers", "Plan2015.Helpers\Plan2015.Helpers.csproj", "{A23E84C6-9062-4BB4-AAC5-B0A6E06E35F7}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -73,6 +77,14 @@ Global
 		{F2C4C5DD-9861-418A-BD1D-3035B5278A6A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F2C4C5DD-9861-418A-BD1D-3035B5278A6A}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{F2C4C5DD-9861-418A-BD1D-3035B5278A6A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{848AA55E-0C27-4447-95AE-647032864390}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{848AA55E-0C27-4447-95AE-647032864390}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{848AA55E-0C27-4447-95AE-647032864390}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{848AA55E-0C27-4447-95AE-647032864390}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A23E84C6-9062-4BB4-AAC5-B0A6E06E35F7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A23E84C6-9062-4BB4-AAC5-B0A6E06E35F7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A23E84C6-9062-4BB4-AAC5-B0A6E06E35F7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A23E84C6-9062-4BB4-AAC5-B0A6E06E35F7}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

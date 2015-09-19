@@ -2,27 +2,90 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Net.Http;
-using System.Text;
+using System.Net.Http.Headers;
+using System.Threading;
 using System.Threading.Tasks;
+using Plan2015.Dtos;
+using Plan2015.Helpers;
 
 namespace Plan2015.Punctuality.Swiper
 {
     class Program
     {
-        static void Main(string[] args)
+        static void Main()
         {
-            //vent på swipe
-            //send til Api hvis online eller log til disk
-
-            using (var client = new HttpClient())
-            {
-                client.BaseAddress = new Uri("http://localhost:49383/api/punctuality");
-                //client.PostAsJsonAsync()
-                //http://www.asp.net/web-api/overview/advanced/calling-a-web-api-from-a-net-client
-            }
-
+            RunAsync().Wait();
+            Console.ReadLine();
         }
 
+        static async Task RunAsync()
+        {
+            using (var client = new HttpClient())
+            {
+                client.BaseAddress = new Uri("http://localhost:2015/");
+                client.DefaultRequestHeaders.Accept.Clear();
+                client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
 
+                // HTTP GET
+                HttpResponseMessage response = await client.GetAsync("api/punctuality");
+                if (!response.IsSuccessStatusCode)
+                {
+                    Console.BackgroundColor = ConsoleColor.Red;
+                    Console.ForegroundColor = ConsoleColor.Black;
+                    Console.WriteLine("FEJL!!! Server gav følgende fejl: {0}", response.StatusCode);
+                    Console.ResetColor();
+                    return;
+                }
+                
+                var punctualities = await response.Content.ReadAsAsync<IEnumerable<PunctualityDto>>();
+                var upcomming = punctualities.Where(p => p.Deadline > DateTime.Now).OrderBy(p => p.Deadline).ToList();
+                foreach (var p in upcomming)
+                {
+                    Console.WriteLine("{0:000}: ({1}) {2}", p.Id, p.Deadline, p.Name);
+                }
+
+                PunctualityDto punctuality = null;
+                while (punctuality == null)
+                {
+                    Console.Write("#");
+                    int punctualityId;
+
+                    if (!int.TryParse(Console.ReadLine(), out punctualityId)) continue;
+
+                    punctuality = upcomming.FirstOrDefault(p => p.Id == punctualityId);
+                }
+                
+                while (true)
+                {
+                    Console.Clear();
+                    Console.WriteLine("Svirp tryllestav");
+                    var rfid = UsbRfid.Parse(Console.ReadLine());
+                    Console.Clear();
+                    if(rfid == null) continue;
+
+                    var swipe = new PunctualitySwipeDto
+                    {
+                        PunctualityId = punctuality.Id,
+                        Rfid = rfid,
+                        Time = DateTime.Now
+                    };
+
+                    response = await client.PostAsJsonAsync("api/punctualityswipe", swipe);
+                    if (response.IsSuccessStatusCode)
+                    {
+                        Console.ForegroundColor = ConsoleColor.Green;
+                        Console.WriteLine("Svirp godkendt!");
+                        Console.ResetColor();
+                    }
+                    else
+                    {
+                        Console.ForegroundColor = ConsoleColor.Red;
+                        Console.WriteLine("Svirp ikke godkendt prøv igen!");
+                        Console.ResetColor();
+                    }
+                    Thread.Sleep(2000);
+                }
+            }
+        }
     }
 }

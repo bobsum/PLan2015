@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
-namespace Plan2015.Web.Models
+namespace Plan2015.Dtos
 {
     public class MagicGamesHouseDto
     {

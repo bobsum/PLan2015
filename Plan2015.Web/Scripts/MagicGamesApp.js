@@ -104,4 +104,27 @@ var MagicGames;
     })();
     MagicGames.App = App;
 })(MagicGames || (MagicGames = {}));
+var MagicGames;
+(function (MagicGames) {
+    var Score;
+    (function (Score) {
+        var HouseViewModel = (function () {
+            function HouseViewModel() {
+            }
+            return HouseViewModel;
+        })();
+        var App = (function () {
+            function App() {
+                this.houses = ko.observableArray();
+                $.get('/api/magicgamesScore', function (houses) {
+                    /*this.houses(ko.utils.arrayMap(houses, house => {
+                        return new HouseViewModel(<IMagicGamesHouseDto>house);
+                    }));*/
+                }, 'json');
+            }
+            return App;
+        })();
+        Score.App = App;
+    })(Score = MagicGames.Score || (MagicGames.Score = {}));
+})(MagicGames || (MagicGames = {}));
 //# sourceMappingURL=MagicGamesApp.js.map

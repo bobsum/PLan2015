@@ -121,3 +121,21 @@
         }
     }
 }
+
+module MagicGames.Score {
+    class HouseViewModel {
+        
+    }
+
+    export class App {
+        houses = ko.observableArray<HouseViewModel>();
+
+        constructor() {
+            $.get('/api/magicgamesScore', houses => {
+                /*this.houses(ko.utils.arrayMap(houses, house => {
+                    return new HouseViewModel(<IMagicGamesHouseDto>house);
+                }));*/
+            }, 'json');
+        }
+    }
+}

@@ -163,19 +163,21 @@
     <Compile Include="Controllers\Api\ApiControllerWithDB.cs" />
     <Compile Include="Controllers\Api\ApiControllerWithHub.cs" />
     <Compile Include="Controllers\Api\EventController.cs" />
+    <Compile Include="Hubs\IPunctualityClient.cs" />
     <Compile Include="Controllers\Api\MagicGamesController.cs" />
+    <Compile Include="Controllers\Api\MagicGamesScoreController.cs" />
+    <Compile Include="Controllers\Api\PunctualityController.cs" />
+    <Compile Include="Hubs\PunctualityHub.cs" />
+    <Compile Include="Controllers\Api\PunctualitySwipeController.cs" />
+    <Compile Include="Hubs\IEventClient.cs" />
+    <Compile Include="Hubs\IMagicGamesClient.cs" />
     <Compile Include="Hubs\MagicGamesHub.cs" />
     <Compile Include="Controllers\Mvc\EventController.cs" />
     <Compile Include="Controllers\Mvc\MagicGamesController.cs" />
-    <Compile Include="Models\EventDto.cs" />
-    <Compile Include="Models\EventPointDto.cs" />
     <Compile Include="Controllers\Api\HouseController.cs" />
-    <Compile Include="Models\HouseDto.cs" />
     <Compile Include="Controllers\Mvc\HomeController.cs" />
     <Compile Include="Filters\InvalidModelStateFilterAttribute.cs" />
     <Compile Include="Hubs\EventHub.cs" />
-    <Compile Include="Models\MagicGamesHouseDto.cs" />
-    <Compile Include="Models\MagicGamesIntervalDto.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
   </ItemGroup>
@@ -186,6 +188,10 @@
     <ProjectReference Include="..\Plan2015.Data\Plan2015.Data.csproj">
       <Project>{FBB32C73-A98F-4CE1-8E99-1F86FB443F8A}</Project>
       <Name>Plan2015.Data</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Plan2015.Dtos\Plan2015.Dtos.csproj">
+      <Project>{848AA55E-0C27-4447-95AE-647032864390}</Project>
+      <Name>Plan2015.Dtos</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
