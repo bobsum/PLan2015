@@ -10,5 +10,12 @@ namespace Plan2015.Web.Controllers.Mvc
 
             return View();
         }
+
+        public ActionResult Score()
+        {
+            ViewBag.Title = "De magiske lege - Score";
+
+            return View();
+        }
     }
 }

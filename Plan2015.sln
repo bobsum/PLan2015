@@ -29,6 +29,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Score", "Score", "{1813FF1A
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Plan2015.Score.ConsoleClient", "Plan2015.Score.ConsoleClient\Plan2015.Score.ConsoleClient.csproj", "{F916C534-025D-4B69-B87F-912C6B48979A}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Plan2015.Score.MockServer", "Plan2015.Score.MockServer\Plan2015.Score.MockServer.csproj", "{F2C4C5DD-9861-418A-BD1D-3035B5278A6A}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -67,6 +69,10 @@ Global
 		{F916C534-025D-4B69-B87F-912C6B48979A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F916C534-025D-4B69-B87F-912C6B48979A}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{F916C534-025D-4B69-B87F-912C6B48979A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F2C4C5DD-9861-418A-BD1D-3035B5278A6A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F2C4C5DD-9861-418A-BD1D-3035B5278A6A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F2C4C5DD-9861-418A-BD1D-3035B5278A6A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F2C4C5DD-9861-418A-BD1D-3035B5278A6A}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -78,5 +84,6 @@ Global
 		{CA3554EA-9A39-4541-A46A-444EED94FCF1} = {FBFD5668-F812-4AAD-B6E0-B5ABA2E71F2D}
 		{F9CB1826-2E7C-4755-A51D-0E590C19BE51} = {869F60CD-C951-41EF-963C-C36B051C2AFD}
 		{F916C534-025D-4B69-B87F-912C6B48979A} = {1813FF1A-BC93-4057-9654-04142CBD4431}
+		{F2C4C5DD-9861-418A-BD1D-3035B5278A6A} = {1813FF1A-BC93-4057-9654-04142CBD4431}
 	EndGlobalSection
 EndGlobal

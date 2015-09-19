@@ -1,8 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Microsoft.AspNet.SignalR.Client;
 
 namespace Plan2015.Score.ConsoleClient
@@ -13,9 +10,9 @@ namespace Plan2015.Score.ConsoleClient
         {
             //http://localhost:49383/
 
-            var connection = new HubConnection("http://localhost:49383/");
+            var connection = new HubConnection("http://localhost:8080/");
 
-            var hub = connection.CreateHubProxy("EventHub");
+            var hub = connection.CreateHubProxy("ScoreHub");
 
             connection.Start().ContinueWith(task =>
             {
@@ -29,7 +26,7 @@ namespace Plan2015.Score.ConsoleClient
                 }
             }).Wait();
 
-            hub.On<object>("update", Console.WriteLine);
+            hub.On<int,int>("ScoreChanged", (houseId, score) => Console.WriteLine("{0}: {1}", houseId, score));
 
             Console.ReadLine();
         }
