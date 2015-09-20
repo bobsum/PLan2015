@@ -123,18 +123,12 @@
 }
 
 module MagicGames.Score {
-    class HouseViewModel {
-        
-    }
-
     export class App {
-        houses = ko.observableArray<HouseViewModel>();
+        houses = ko.observableArray<IMagicGamesScoreDto>();
 
         constructor() {
-            $.get('/api/magicgamesScore', houses => {
-                /*this.houses(ko.utils.arrayMap(houses, house => {
-                    return new HouseViewModel(<IMagicGamesHouseDto>house);
-                }));*/
+            $.get('/api/magicgamesscore', houses => {
+                this.houses(houses);
             }, 'json');
         }
     }

@@ -3,6 +3,7 @@
     name: string;
 }
 
+
 interface IEventPointDto {
     id: number;
     houseId: number;
@@ -27,4 +28,11 @@ interface IMagicGamesHouseDto {
     houseId: number;
     houseName: string;
     intervals: IMagicGamesIntervalDto[];
+}
+
+interface IMagicGamesScoreDto {
+    id: number;
+    name: string;
+    timePoints: number;
+    marker: number;
 }

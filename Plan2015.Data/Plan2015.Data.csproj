@@ -51,7 +51,10 @@
     <Compile Include="Entities\EventPoint.cs" />
     <Compile Include="Entities\House.cs" />
     <Compile Include="Entities\MagicGamesInterval.cs" />
-    <Compile Include="Entities\MarkerPoint.cs" />
+    <Compile Include="Entities\MagicGamesTimePoint.cs" />
+    <Compile Include="Entities\MagicGamesMarkerPoint.cs" />
+    <Compile Include="Entities\Punctuality.cs" />
+    <Compile Include="Entities\PunctualitySwipe.cs" />
     <Compile Include="Entities\School.cs" />
     <Compile Include="Entities\Scout.cs" />
     <Compile Include="Entities\TeamMember.cs" />
@@ -72,6 +75,14 @@
     <Compile Include="Migrations\201509191645171_Punctuality.Designer.cs">
       <DependentUpon>201509191645171_Punctuality.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201509201344390_TimeSwipe.cs" />
+    <Compile Include="Migrations\201509201344390_TimeSwipe.Designer.cs">
+      <DependentUpon>201509201344390_TimeSwipe.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201509201433437_TimeSwipe_added_time.cs" />
+    <Compile Include="Migrations\201509201433437_TimeSwipe_added_time.Designer.cs">
+      <DependentUpon>201509201433437_TimeSwipe_added_time.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -91,6 +102,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201509191645171_Punctuality.resx">
       <DependentUpon>201509191645171_Punctuality.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201509201344390_TimeSwipe.resx">
+      <DependentUpon>201509201344390_TimeSwipe.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201509201433437_TimeSwipe_added_time.resx">
+      <DependentUpon>201509201433437_TimeSwipe_added_time.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

@@ -55,7 +55,7 @@ namespace Plan2015.MagicGames.MarkerReader
                         continue;
                     }
 
-                    if (db.MarkerPoints.Any(mp => mp.MarkerName == markerName && mp.HouseId == scout.HouseId))
+                    if (db.MagicGamesMarkerPoints.Any(mp => mp.MarkerName == markerName && mp.HouseId == scout.HouseId))
                     {
                         Console.ForegroundColor = ConsoleColor.Yellow;
                         Console.WriteLine("ADVARSEL!!! Double svirp");
@@ -63,13 +63,13 @@ namespace Plan2015.MagicGames.MarkerReader
                         continue;
                     }
 
-                    var point = new MarkerPoint
+                    var point = new MagicGamesMarkerPoint
                     {
                         House = scout.House,
                         MarkerName = markerName
                     };
                     Console.WriteLine("{0} har fået point", scout.House.Name);
-                    db.MarkerPoints.Add(point);
+                    db.MagicGamesMarkerPoints.Add(point);
                     db.SaveChanges();
                 }
             }

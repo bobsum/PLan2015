@@ -1,3 +1,5 @@
+using System.Collections.Generic;
+
 namespace Plan2015.Data.Entities
 {
     public class Scout

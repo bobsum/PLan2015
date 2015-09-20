@@ -4,6 +4,8 @@ using Plan2015.Data.Entities;
 
 namespace Plan2015.Data
 {
+
+    //Import-Module .\packages\EntityFramework.6.1.1\tools\EntityFramework.psm1
     public class DataContext : DbContext
     {
         public DataContext() : base("Plan2015")
@@ -12,15 +14,20 @@ namespace Plan2015.Data
             Database.Log = s => Debug.WriteLine(s);
         }
 
-        public DbSet<Event> Events { get; set; }
-        public DbSet<EventPoint> EventPoints { get; set; }
         public DbSet<TeamMember> TeamMembers { get; set; }
         public DbSet<Scout> Scouts { get; set; }
         public DbSet<House> Houses { get; set; }
         public DbSet<School> Schools { get; set; }
+
+        public DbSet<Event> Events { get; set; }
+        public DbSet<EventPoint> EventPoints { get; set; }
+        
         public DbSet<TurnoutPoint> TurnoutPoints { get; set; }
-        public DbSet<MarkerPoint> MarkerPoints { get; set; }
+        
         public DbSet<Punctuality> Punctualities { get; set; }
         public DbSet<PunctualitySwipe> PunctualitySwipes { get; set; }
+
+        public DbSet<MagicGamesMarkerPoint> MagicGamesMarkerPoints { get; set; }
+        public DbSet<MagicGamesTimePoint> MagicGamesTimePoints { get; set; }
     }
 }

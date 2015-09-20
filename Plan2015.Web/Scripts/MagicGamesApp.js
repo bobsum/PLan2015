@@ -108,18 +108,12 @@ var MagicGames;
 (function (MagicGames) {
     var Score;
     (function (Score) {
-        var HouseViewModel = (function () {
-            function HouseViewModel() {
-            }
-            return HouseViewModel;
-        })();
         var App = (function () {
             function App() {
+                var _this = this;
                 this.houses = ko.observableArray();
-                $.get('/api/magicgamesScore', function (houses) {
-                    /*this.houses(ko.utils.arrayMap(houses, house => {
-                        return new HouseViewModel(<IMagicGamesHouseDto>house);
-                    }));*/
+                $.get('/api/magicgamesscore', function (houses) {
+                    _this.houses(houses);
                 }, 'json');
             }
             return App;

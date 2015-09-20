@@ -1,3 +1,4 @@
+using System;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
@@ -7,7 +8,8 @@ namespace Plan2015.Data.Entities
     {
         [Key, ForeignKey("Scout")]
         public int ScoutId { get; set; }
-        public int Amount { get; set; }
         public virtual Scout Scout { get; set; }
+        public int Amount { get; set; }
+        public DateTime? LastSwipe { get; set; }
     }
 }

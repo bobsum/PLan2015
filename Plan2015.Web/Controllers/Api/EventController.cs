@@ -1,12 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
 using System.Data.Entity;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Threading.Tasks;
 using System.Web.Http;
-using System.Web.Http.Description;
 using Plan2015.Data.Entities;
 using Plan2015.Dtos;
 using Plan2015.Web.Hubs;
