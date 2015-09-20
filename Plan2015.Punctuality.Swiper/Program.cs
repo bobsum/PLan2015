@@ -15,7 +15,6 @@ namespace Plan2015.Punctuality.Swiper
         static void Main()
         {
             RunAsync().Wait();
-            Console.ReadLine();
         }
 
         static async Task RunAsync()
@@ -59,29 +58,40 @@ namespace Plan2015.Punctuality.Swiper
                 {
                     Console.Clear();
                     Console.WriteLine("Svirp tryllestav");
-                    var rfid = UsbRfid.Parse(Console.ReadLine());
+                    var line = Console.ReadLine();
+                    if(line != null && line.Equals("q",StringComparison.InvariantCultureIgnoreCase)) break;
+                    var rfid = UsbRfid.Parse(line);
                     Console.Clear();
-                    if(rfid == null) continue;
-
-                    var swipe = new PunctualitySwipeDto
+                    if (punctuality.Deadline < DateTime.Now)
                     {
-                        PunctualityId = punctuality.Id,
-                        Rfid = rfid,
-                        Time = DateTime.Now
-                    };
-
-                    response = await client.PostAsJsonAsync("api/punctualityswipe", swipe);
-                    if (response.IsSuccessStatusCode)
-                    {
-                        Console.ForegroundColor = ConsoleColor.Green;
-                        Console.WriteLine("Svirp godkendt!");
+                        Console.ForegroundColor = ConsoleColor.Yellow;
+                        Console.WriteLine("Deadline er overskredet!");
                         Console.ResetColor();
                     }
                     else
                     {
-                        Console.ForegroundColor = ConsoleColor.Red;
-                        Console.WriteLine("Svirp ikke godkendt prøv igen!");
-                        Console.ResetColor();
+                        if (rfid == null) continue;
+
+                        var swipe = new PunctualitySwipeDto
+                        {
+                            PunctualityId = punctuality.Id,
+                            Rfid = rfid,
+                            Time = DateTime.Now
+                        };
+
+                        response = await client.PostAsJsonAsync("api/punctualityswipe", swipe);
+                        if (response.IsSuccessStatusCode)
+                        {
+                            Console.ForegroundColor = ConsoleColor.Green;
+                            Console.WriteLine("Svirp godkendt!");
+                            Console.ResetColor();
+                        }
+                        else
+                        {
+                            Console.ForegroundColor = ConsoleColor.Red;
+                            Console.WriteLine("Svirp ikke godkendt prøv igen!");
+                            Console.ResetColor();
+                        }
                     }
                     Thread.Sleep(2000);
                 }
