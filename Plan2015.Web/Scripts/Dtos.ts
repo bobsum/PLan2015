@@ -23,7 +23,7 @@ interface IMagicGamesIntervalDto {
     amount: number;
 }
 
-interface IMagicGamesHouseDto {
+interface IMagicGamesSetupDto {
     houseId: number;
     houseName: string;
     intervals: IMagicGamesIntervalDto[];

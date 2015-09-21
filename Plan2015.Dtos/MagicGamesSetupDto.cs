@@ -3,7 +3,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace Plan2015.Dtos
 {
-    public class MagicGamesHouseDto
+    public class MagicGamesSetupDto
     {
         [Required]
         public int HouseId { get; set; }

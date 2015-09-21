@@ -138,8 +138,8 @@
     <Content Include="Views\Shared\_Layout.cshtml" />
     <Content Include="Views\_ViewStart.cshtml" />
     <Content Include="Views\Web.config" />
-    <Content Include="Views\MagicGames\Setup.cshtml" />
-    <None Include="Views\MagicGames\Score.cshtml" />
+    <Content Include="Views\MagicGamesSetup\Setup.cshtml" />
+    <None Include="Views\MagicGamesSetup\Score.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -163,16 +163,16 @@
     <Compile Include="Controllers\Api\ApiControllerWithHub.cs" />
     <Compile Include="Controllers\Api\ActivityController.cs" />
     <Compile Include="Hubs\IPunctualityClient.cs" />
-    <Compile Include="Controllers\Api\MagicGamesController.cs" />
+    <Compile Include="Controllers\Api\MagicGamesSetupController.cs" />
     <Compile Include="Controllers\Api\MagicGamesScoreController.cs" />
     <Compile Include="Controllers\Api\PunctualityController.cs" />
     <Compile Include="Hubs\PunctualityHub.cs" />
     <Compile Include="Controllers\Api\PunctualitySwipeController.cs" />
     <Compile Include="Hubs\IActivityClient.cs" />
-    <Compile Include="Hubs\IMagicGamesClient.cs" />
-    <Compile Include="Hubs\MagicGamesHub.cs" />
+    <Compile Include="Hubs\IMagicGamesSetupClient.cs" />
+    <Compile Include="Hubs\MagicGamesSetupHub.cs" />
     <Compile Include="Controllers\Mvc\ActivityController.cs" />
-    <Compile Include="Controllers\Mvc\MagicGamesController.cs" />
+    <Compile Include="Controllers\Mvc\MagicGamesSetupController.cs" />
     <Compile Include="Controllers\Api\HouseController.cs" />
     <Compile Include="Filters\InvalidModelStateFilterAttribute.cs" />
     <Compile Include="Hubs\ActivityHub.cs" />

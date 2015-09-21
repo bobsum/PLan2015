@@ -2,7 +2,7 @@
 
 namespace Plan2015.Web.Controllers.Mvc
 {
-    public class MagicGamesController : Controller
+    public class MagicGamesSetupController : Controller
     {
         public ActionResult Setup()
         {

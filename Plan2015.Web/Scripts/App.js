@@ -157,8 +157,8 @@ var MagicGames;
             }
             return IntervalViewModel;
         })();
-        var HouseViewModel = (function () {
-            function HouseViewModel(house) {
+        var SetupViewModel = (function () {
+            function SetupViewModel(setup) {
                 var _this = this;
                 this.isSaved = ko.observable(true);
                 this.intervals = ko.observableArray();
@@ -187,15 +187,15 @@ var MagicGames;
                 };
                 this.isExpanded = ko.observable();
                 this.distribution = ko.computed(function () { return ko.utils.arrayMap(_this.intervals(), function (i) { return '(' + i.scoutName + ' = ' + (i.amount() || '?') + ' min)'; }).join(', '); });
-                this.houseId = house.houseId;
-                this.houseName = house.houseName;
-                this.intervals(ko.utils.arrayMap(house.intervals, function (interval) {
+                this.houseId = setup.houseId;
+                this.houseName = setup.houseName;
+                this.intervals(ko.utils.arrayMap(setup.intervals, function (interval) {
                     return new IntervalViewModel(interval);
                 }));
             }
-            HouseViewModel.prototype.sendSave = function () {
+            SetupViewModel.prototype.sendSave = function () {
                 $.ajax({
-                    url: '/api/magicgames/' + this.houseId,
+                    url: '/Api/MagicGamesSetup/' + this.houseId,
                     type: 'PUT',
                     data: {
                         houseId: this.houseId,
@@ -210,30 +210,30 @@ var MagicGames;
                     }
                 });
             };
-            HouseViewModel.prototype.update = function (house) {
-                this.intervals(ko.utils.arrayMap(house.intervals, function (interval) {
+            SetupViewModel.prototype.update = function (setup) {
+                this.intervals(ko.utils.arrayMap(setup.intervals, function (interval) {
                     return new IntervalViewModel(interval);
                 }));
                 this.isSaved(true);
             };
-            HouseViewModel.prototype.toggleExpanded = function () {
+            SetupViewModel.prototype.toggleExpanded = function () {
                 this.isExpanded(!this.isExpanded());
             };
-            return HouseViewModel;
+            return SetupViewModel;
         })();
         var App = (function () {
             function App() {
                 var _this = this;
-                this.houses = ko.observableArray();
-                var hub = $.connection.magicGamesHub;
+                this.setups = ko.observableArray();
+                var hub = $.connection.magicGamesSetupHub;
                 hub.client.update = function (dto) {
-                    var house = ko.utils.arrayFirst(_this.houses(), function (h) { return (h.houseId === dto.houseId); });
+                    var house = ko.utils.arrayFirst(_this.setups(), function (h) { return (h.houseId === dto.houseId); });
                     house.update(dto);
                 };
                 $.connection.hub.start();
-                $.get('/api/magicgames', function (houses) {
-                    _this.houses(ko.utils.arrayMap(houses, function (house) {
-                        return new HouseViewModel(house);
+                $.get('/Api/MagicGamesSetup', function (setups) {
+                    _this.setups(ko.utils.arrayMap(setups, function (setup) {
+                        return new SetupViewModel(setup);
                     }));
                 }, 'json');
             }
@@ -250,7 +250,7 @@ var MagicGames;
             function App() {
                 var _this = this;
                 this.houses = ko.observableArray();
-                $.get('/api/magicgamesscore', function (houses) {
+                $.get('/Api/MagicGamesScore', function (houses) {
                     _this.houses(houses);
                 }, 'json');
             }

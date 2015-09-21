@@ -1,6 +1,6 @@
 interface SignalR {
     activityHub: IActivityHubProxy;
-    magicGamesHub: IMagicGamesProxy;
+    magicGamesSetupHub: IMagicGamesSetupProxy;
 }
 
 interface IActivityHubProxy {
@@ -17,10 +17,10 @@ interface IActivityClient {
 /*interface IActivityServer {
 }*/
 
-interface IMagicGamesProxy {
-    client: IMagicGamesClient;
+interface IMagicGamesSetupProxy {
+    client: IMagicGamesSetupClient;
 }
 
-interface IMagicGamesClient {
-    update: (house: IMagicGamesHouseDto) => void;
+interface IMagicGamesSetupClient {
+    update: (house: IMagicGamesSetupDto) => void;
 }

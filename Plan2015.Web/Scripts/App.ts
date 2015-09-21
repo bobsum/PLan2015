@@ -157,7 +157,6 @@
     }
 }
 
-
 module MagicGames.Setup {
     function compare(a: any, b: any): number {
         return (a - b);
@@ -185,15 +184,15 @@ module MagicGames.Setup {
         }
     }
 
-    class HouseViewModel {
+    class SetupViewModel {
         houseId: number;
         houseName: string;
         isSaved = ko.observable<boolean>(true);
 
-        constructor(house: IMagicGamesHouseDto) {
-            this.houseId = house.houseId;
-            this.houseName = house.houseName;
-            this.intervals(ko.utils.arrayMap(house.intervals, interval => {
+        constructor(setup: IMagicGamesSetupDto) {
+            this.houseId = setup.houseId;
+            this.houseName = setup.houseName;
+            this.intervals(ko.utils.arrayMap(setup.intervals, interval => {
                 return new IntervalViewModel(interval);
             }));
         }
@@ -229,7 +228,7 @@ module MagicGames.Setup {
 
         sendSave() {
             $.ajax({
-                url: '/api/magicgames/' + this.houseId,
+                url: '/Api/MagicGamesSetup/' + this.houseId,
                 type: 'PUT',
                 data: {
                     houseId: this.houseId,
@@ -245,8 +244,8 @@ module MagicGames.Setup {
             });
         }
 
-        update(house: IMagicGamesHouseDto) {
-            this.intervals(ko.utils.arrayMap(house.intervals, interval => {
+        update(setup: IMagicGamesSetupDto) {
+            this.intervals(ko.utils.arrayMap(setup.intervals, interval => {
                 return new IntervalViewModel(interval);
             }));
             this.isSaved(true);
@@ -262,20 +261,20 @@ module MagicGames.Setup {
     }
 
     export class App {
-        houses = ko.observableArray<HouseViewModel>();
+        setups = ko.observableArray<SetupViewModel>();
         constructor() {
-            var hub = $.connection.magicGamesHub;
+            var hub = $.connection.magicGamesSetupHub;
 
             hub.client.update = dto => {
-                var house = ko.utils.arrayFirst(this.houses(), h => (h.houseId === dto.houseId));
+                var house = ko.utils.arrayFirst(this.setups(), h => (h.houseId === dto.houseId));
                 house.update(dto);
             };
 
             $.connection.hub.start();
 
-            $.get('/api/magicgames', houses => {
-                this.houses(ko.utils.arrayMap(houses, house => {
-                    return new HouseViewModel(<IMagicGamesHouseDto>house);
+            $.get('/Api/MagicGamesSetup', setups => {
+                this.setups(ko.utils.arrayMap(setups, setup => {
+                    return new SetupViewModel(<IMagicGamesSetupDto>setup);
                 }));
             }, 'json');
         }
@@ -287,7 +286,7 @@ module MagicGames.Score {
         houses = ko.observableArray<IMagicGamesScoreDto>();
 
         constructor() {
-            $.get('/api/magicgamesscore', houses => {
+            $.get('/Api/MagicGamesScore', houses => {
                 this.houses(houses);
             }, 'json');
         }

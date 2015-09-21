@@ -2,7 +2,7 @@ using Microsoft.AspNet.SignalR;
 
 namespace Plan2015.Web.Hubs
 {
-    public class MagicGamesHub : Hub<IMagicGamesClient>
+    public class MagicGamesSetupHub : Hub<IMagicGamesSetupClient>
     {
     }
 }

@@ -43,7 +43,7 @@
     <Compile Include="LessonDto.cs" />
     <Compile Include="LessonPointDto.cs" />
     <Compile Include="HouseDto.cs" />
-    <Compile Include="MagicGamesHouseDto.cs" />
+    <Compile Include="MagicGamesSetupDto.cs" />
     <Compile Include="MagicGamesIntervalDto.cs" />
     <Compile Include="MagicGamesScoreDto.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

@@ -10,14 +10,14 @@ using Plan2015.Web.Hubs;
 
 namespace Plan2015.Web.Controllers.Api
 {
-    public class MagicGamesController : ApiControllerWithHub<MagicGamesHub>
+    public class MagicGamesSetupController : ApiControllerWithHub<MagicGamesSetupHub>
     {
-        public async Task<IEnumerable<MagicGamesHouseDto>> GetMagicGames()
+        public async Task<IEnumerable<MagicGamesSetupDto>> GetMagicGames()
         {
             return await Db.Houses.Include(h => h.Scouts).Select(ToDto()).ToListAsync();
         }
 
-        public async Task<MagicGamesHouseDto> PutMagicGame(MagicGamesHouseDto dto)
+        public async Task<MagicGamesSetupDto> PutMagicGamesSetup(MagicGamesSetupDto dto)
         {
             foreach (var interval in dto.Intervals)
             {
@@ -37,17 +37,17 @@ namespace Plan2015.Web.Controllers.Api
             return dto;
         }
 
-        private Expression<Func<House, MagicGamesHouseDto>> ToDto()
+        private Expression<Func<House, MagicGamesSetupDto>> ToDto()
         {
-            return h => new MagicGamesHouseDto
+            return s => new MagicGamesSetupDto
             {
-                HouseId = h.Id,
-                HouseName = h.Name,
-                Intervals = h.Scouts.Select(s => new MagicGamesIntervalDto
+                HouseId = s.Id,
+                HouseName = s.Name,
+                Intervals = s.Scouts.Select(si => new MagicGamesIntervalDto
                 {
-                    ScoutId = s.Id,
-                    ScoutName = s.Name,
-                    Amount = s.MagicGamesInterval != null ? s.MagicGamesInterval.Amount : 0
+                    ScoutId = si.Id,
+                    ScoutName = si.Name,
+                    Amount = si.MagicGamesInterval != null ? si.MagicGamesInterval.Amount : 0
                 })
             };
         }
