@@ -292,3 +292,14 @@ module MagicGames.Score {
         }
     }
 }
+
+module Turnout.Index {
+    export class App {
+        selectFile = (a: App, e: Event) => {
+        }
+
+        sendUplaod() { }
+        isValid = true;
+        
+    }
+}

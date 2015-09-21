@@ -11,4 +11,14 @@ namespace Plan2015.Web.Controllers.Mvc
             return View();
         }
     }
+
+    public class TurnoutController : Controller
+    {
+        public ActionResult Index()
+        {
+            ViewBag.Title = "Turnout";
+
+            return View();
+        }
+    }
 }

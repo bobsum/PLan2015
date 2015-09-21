@@ -1,22 +1,20 @@
-﻿<div class="row">
-    <div class="col-xs-12">
-        <table class="table table-hover">
-            <thead>
-                <tr>
-                    <th class="col-xs-6">Kollegie</th>
-                    <th class="col-xs-3">Tids svirp</th>
-                    <th class="col-xs-3">Oløb</th>
-                </tr>
-            </thead>
-            <tbody data-bind="foreach: houses">
-                <tr>
-                    <td data-bind="text: name"></td>
-                    <td data-bind="text: timePoints"></td>
-                    <td data-bind="text: markerPoints"></td>
-                </tr>
-            </tbody>
-        </table>
-    </div>
+﻿<div class="col-xs-12">
+    <table class="table table-hover">
+        <thead>
+        <tr>
+            <th class="col-xs-6">Kollegie</th>
+            <th class="col-xs-3">Tids svirp</th>
+            <th class="col-xs-3">Oløb</th>
+        </tr>
+        </thead>
+        <tbody data-bind="foreach: houses">
+        <tr>
+            <td data-bind="text: name"></td>
+            <td data-bind="text: timePoints"></td>
+            <td data-bind="text: markerPoints"></td>
+        </tr>
+        </tbody>
+    </table>
 </div>
 
 @section Scripts

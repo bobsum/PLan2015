@@ -10,14 +10,20 @@
         <div class="container">
             <ul class="nav navbar-nav">
                 <li><a href="@Url.Action("Index", "Activity")">Begivenheder</a></li>
-                <li><a href="@Url.Action("Setup", "MagicGamesSetup")">De Magiske Lege - Setup</a></li>
-                <li><a href="@Url.Action("Score", "MagicGamesSetup")">De Magiske Lege - Resultat</a></li>
+                <li><a href="@Url.Action("Index", "Turnout")">Turnout</a></li>
+            </ul>
+            <ul class="nav navbar-nav navbar-right">
+                <li class="disabled"><a href="#">De Magiske Lege</a></li>
+                <li><a href="@Url.Action("Setup", "MagicGamesSetup")">Setup</a></li>
+                <li><a href="@Url.Action("Score", "MagicGamesSetup")">Resultat</a></li>
             </ul>
         </div>
     </header>
 <div class="container">
     <h1>@ViewBag.Title</h1>
-    @RenderBody()
+    <div class="row">
+        @RenderBody()
+    </div>
 </div>
 <script type="text/javascript" src="~/Scripts/jquery-2.1.4.min.js"></script>
 <script type="text/javascript" src="~/Scripts/knockout-3.3.0.js"></script>

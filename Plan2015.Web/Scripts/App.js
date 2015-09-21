@@ -259,4 +259,20 @@ var MagicGames;
         Score.App = App;
     })(Score = MagicGames.Score || (MagicGames.Score = {}));
 })(MagicGames || (MagicGames = {}));
+var Turnout;
+(function (Turnout) {
+    var Index;
+    (function (Index) {
+        var App = (function () {
+            function App() {
+                this.selectFile = function (a, e) {
+                };
+                this.isValid = true;
+            }
+            App.prototype.sendUplaod = function () { };
+            return App;
+        })();
+        Index.App = App;
+    })(Index = Turnout.Index || (Turnout.Index = {}));
+})(Turnout || (Turnout = {}));
 //# sourceMappingURL=App.js.map
