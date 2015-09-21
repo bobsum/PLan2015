@@ -17,7 +17,7 @@ namespace Plan2015.Web.Controllers.Api
             return await Db.Punctualities.Select(ToDto()).ToListAsync();
         }
 
-        public async Task<IHttpActionResult> PostEvent(PunctualityDto dto)
+        public async Task<IHttpActionResult> PostPunctuality(PunctualityDto dto)
         {
             var entity = new Punctuality
             {

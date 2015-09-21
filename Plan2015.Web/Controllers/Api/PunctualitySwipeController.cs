@@ -9,7 +9,7 @@ namespace Plan2015.Web.Controllers.Api
 {
     public class PunctualitySwipeController : ApiControllerWithDB
     {
-        public async Task<IHttpActionResult> PostEvent(PunctualitySwipeDto dto)
+        public async Task<IHttpActionResult> PostPunctualitySwipe(PunctualitySwipeDto dto)
         {
             var scout = Db.Scouts.FirstOrDefault(s => s.Rfid == dto.Rfid);
             if (scout == null) return StatusCode(HttpStatusCode.BadRequest);

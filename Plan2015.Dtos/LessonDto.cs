@@ -3,7 +3,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace Plan2015.Dtos
 {
-    public class EventDto
+    public class LessonDto
     {
         public int Id { get; set; }
         [Required]
@@ -11,6 +11,6 @@ namespace Plan2015.Dtos
         [Required]
         public int TotalPoints { get; set; }
         [Required]
-        public IEnumerable<EventPointDto> Points { get; set; }
+        public IEnumerable<LessonPointDto> Points { get; set; }
     }
 }

@@ -40,7 +40,7 @@ namespace Plan2015.Web
             RouteTable.Routes.MapRoute(
                 "Default",
                 "{controller}/{action}/{id}",
-                new { controller = "Home", action = "Index", id = UrlParameter.Optional }
+                new { controller = "Lesson", action = "Index", id = UrlParameter.Optional }
             );
 
             app.MapSignalR();

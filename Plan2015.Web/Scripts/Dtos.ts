@@ -4,18 +4,18 @@
 }
 
 
-interface IEventPointDto {
+interface ILessonPointDto {
     id: number;
     houseId: number;
     houseName: string;
     amount: number;
 }
 
-interface IEventDto {
+interface ILessonDto {
     id: number;
     name: string;
     totalPoints: number;
-    points: Array<IEventPointDto>;
+    points: Array<ILessonPointDto>;
 }
 
 interface IMagicGamesIntervalDto {

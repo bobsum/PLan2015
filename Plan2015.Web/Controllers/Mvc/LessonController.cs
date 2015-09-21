@@ -2,7 +2,7 @@
 
 namespace Plan2015.Web.Controllers.Mvc
 {
-    public class EventController : Controller
+    public class LessonController : Controller
     {
         public ActionResult Index()
         {

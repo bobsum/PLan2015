@@ -4,7 +4,7 @@ namespace Plan2015.Web.Controllers.Mvc
 {
     public class MagicGamesController : Controller
     {
-        public ActionResult Index()
+        public ActionResult Setup()
         {
             ViewBag.Title = "De magiske lege";
 

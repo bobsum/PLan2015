@@ -18,7 +18,7 @@
                         <form class="form-horizontal" data-bind="submit: sendSave">
                             <div><strong data-bind="text: next"></strong></div>
                             <div class="list-group" data-bind="foreach: intervals">
-                                <button type="button" class="list-group-item" style="padding: 5px 10px" data-bind="click: function(data) { $parent.setInterval(data); }">
+                                <button type="button" class="list-group-item" style="padding: 5px 10px" data-bind="click: $parent.setInterval">
                                     <span class="badge" data-bind="visible: amount, text: amount() + ' min'"></span>
                                     <span data-bind="text : scoutName"></span>
                                 </button>
@@ -26,7 +26,7 @@
                             <button type="submit" class="btn btn-primary btn-xs" data-bind="enable: !availableIntervals().length && !isSaved()">Gem</button> <span class="label label-warning" data-bind="visible: !availableIntervals().length && !isSaved()">Ændringer er ikke gemt!</span>
                         </form>
                     </td>
-                    <td><button data-bind="click: toggleExpanded, attr: { title: isExpanded() ? 'Skjul': 'Vis'}" class="btn btn-default btn-xs"><span data-bind="css: isExpanded() ? 'glyphicon-chevron-up': 'glyphicon-chevron-down'" class="glyphicon glyphicon-chevron-down"></span></button></td>
+                    <td><button data-bind="click: toggleExpanded, attr: { title: isExpanded() ? 'Skjul': 'Vis'}" class="btn btn-default btn-xs"><span data-bind="css: isExpanded() ? 'glyphicon-chevron-up': 'glyphicon-chevron-down'" class="glyphicon"></span></button></td>
                 </tr>
             </tbody>
         </table>
@@ -38,7 +38,7 @@
     <script src="~/Scripts/MagicGamesApp.js"></script>
     <script type="text/javascript">
         $(function() {
-            ko.applyBindings(new MagicGames.App());
+            ko.applyBindings(new MagicGames.Setup.App());
         });
     </script>
 }

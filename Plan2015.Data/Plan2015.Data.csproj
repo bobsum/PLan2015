@@ -46,9 +46,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Entities\Event.cs" />
+    <Compile Include="Entities\Lesson.cs" />
     <Compile Include="DataContext.cs" />
-    <Compile Include="Entities\EventPoint.cs" />
+    <Compile Include="Entities\LessonPoint.cs" />
     <Compile Include="Entities\House.cs" />
     <Compile Include="Entities\MagicGamesInterval.cs" />
     <Compile Include="Entities\MagicGamesTimePoint.cs" />
@@ -83,6 +83,10 @@
     <Compile Include="Migrations\201509201433437_TimeSwipe_added_time.Designer.cs">
       <DependentUpon>201509201433437_TimeSwipe_added_time.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201509211558333_RenameEvent2Lesson.cs" />
+    <Compile Include="Migrations\201509211558333_RenameEvent2Lesson.Designer.cs">
+      <DependentUpon>201509211558333_RenameEvent2Lesson.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -108,6 +112,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201509201433437_TimeSwipe_added_time.resx">
       <DependentUpon>201509201433437_TimeSwipe_added_time.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201509211558333_RenameEvent2Lesson.resx">
+      <DependentUpon>201509211558333_RenameEvent2Lesson.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

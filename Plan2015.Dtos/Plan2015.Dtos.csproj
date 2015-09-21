@@ -40,8 +40,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="EventDto.cs" />
-    <Compile Include="EventPointDto.cs" />
+    <Compile Include="LessonDto.cs" />
+    <Compile Include="LessonPointDto.cs" />
     <Compile Include="HouseDto.cs" />
     <Compile Include="MagicGamesHouseDto.cs" />
     <Compile Include="MagicGamesIntervalDto.cs" />

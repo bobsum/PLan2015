@@ -4,7 +4,6 @@ using Plan2015.Data.Entities;
 
 namespace Plan2015.Data
 {
-
     //Import-Module .\packages\EntityFramework.6.1.1\tools\EntityFramework.psm1
     public class DataContext : DbContext
     {
@@ -19,8 +18,8 @@ namespace Plan2015.Data
         public DbSet<House> Houses { get; set; }
         public DbSet<School> Schools { get; set; }
 
-        public DbSet<Event> Events { get; set; }
-        public DbSet<EventPoint> EventPoints { get; set; }
+        public DbSet<Lesson> Lessons { get; set; }
+        public DbSet<LessonPoint> LessonPoints { get; set; }
         
         public DbSet<TurnoutPoint> TurnoutPoints { get; set; }
         
