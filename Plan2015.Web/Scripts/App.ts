@@ -1,11 +1,11 @@
-﻿module Lesson.Index {
-    class LessonPointViewModel {
+﻿module Activity.Index {
+    class ActivityPointViewModel {
         id: number;
         houseId: number;
         houseName: string;
         amount: KnockoutObservable<number>;
 
-        constructor(point: ILessonPointDto) {
+        constructor(point: IActivityPointDto) {
             this.id = point.id;
             this.houseId = point.houseId;
             this.houseName = point.houseName;
@@ -13,11 +13,11 @@
         }
     }
 
-    class LessonViewModel {
+    class ActivityViewModel {
         id: number;
         name: string;
         totalPoints: number;
-        points: KnockoutObservableArray<LessonPointViewModel>;
+        points: KnockoutObservableArray<ActivityPointViewModel>;
         houseNames: string;
         sum: KnockoutComputed<number>;
         isValid: KnockoutComputed<boolean>;
@@ -27,12 +27,12 @@
             this.isExpanded(!this.isExpanded());
         }
 
-        constructor(lesson: ILessonDto) {
-            this.id = lesson.id;
-            this.name = lesson.name;
-            this.totalPoints = lesson.totalPoints;
-            this.points = ko.observableArray(ko.utils.arrayMap(lesson.points, p => new LessonPointViewModel(p)));
-            this.houseNames = ko.utils.arrayMap(lesson.points, p => p.houseName).join(', ');
+        constructor(activity: IActivityDto) {
+            this.id = activity.id;
+            this.name = activity.name;
+            this.totalPoints = activity.totalPoints;
+            this.points = ko.observableArray(ko.utils.arrayMap(activity.points, p => new ActivityPointViewModel(p)));
+            this.houseNames = ko.utils.arrayMap(activity.points, p => p.houseName).join(', ');
             this.sum = ko.computed(() => {
                 var sum = 0;
                 ko.utils.arrayForEach(this.points(), p => {
@@ -43,9 +43,9 @@
             this.isValid = ko.computed(() => (this.totalPoints === this.sum()));
         }
 
-        sendUpdate(lesson: LessonViewModel) {
+        sendUpdate(activity: ActivityViewModel) {
             $.ajax({
-                url: '/Api/Lesson/' + this.id,
+                url: '/Api/Activity/' + this.id,
                 type: 'PUT',
                 data: {
                     id: this.id,
@@ -69,13 +69,13 @@
             if (!confirm("Er du sikker på du vil slette begivenheden?")) return;
 
             $.ajax({
-                url: '/Api/Lesson/' + this.id,
+                url: '/Api/Activity/' + this.id,
                 type: 'DELETE'
             });
         }
     }
 
-    class CreateLessonViewModel {
+    class CreateActivityViewModel {
         name = ko.observable<string>();
         totalPoints = ko.observable<number>();
         houseIds = ko.observableArray<number>();
@@ -87,35 +87,35 @@
     }
 
     export class App {
-        newLesson = ko.observable(new CreateLessonViewModel());
+        newActivity = ko.observable(new CreateActivityViewModel());
         houses = ko.observableArray<IHouseDto>();
-        lessons = ko.observableArray<LessonViewModel>();
+        activities = ko.observableArray<ActivityViewModel>();
 
-        add(lesson: ILessonDto) {
-            this.lessons.push(new LessonViewModel(lesson));
+        add(activity: IActivityDto) {
+            this.activities.push(new ActivityViewModel(activity));
         }
 
         remove(id: number) {
-            this.lessons.remove(e => (e.id === id));
+            this.activities.remove(e => (e.id === id));
         }
 
-        update(lesson: ILessonDto) {
-            var old = ko.utils.arrayFirst(this.lessons(), l => (l.id === lesson.id));
+        update(activity: IActivityDto) {
+            var old = ko.utils.arrayFirst(this.activities(), l => (l.id === activity.id));
             if (old) {
-                old.points(ko.utils.arrayMap(lesson.points, p => new LessonPointViewModel(p)));
+                old.points(ko.utils.arrayMap(activity.points, p => new ActivityPointViewModel(p)));
             }
         }
 
         sendCreate() {
-            var lesson = this.newLesson();
+            var activity = this.newActivity();
 
             $.ajax({
-                url: '/Api/Lesson',
+                url: '/Api/Activity',
                 type: 'POST',
                 data: {
-                    name: lesson.name(),
-                    totalPoints: lesson.totalPoints(),
-                    points: ko.utils.arrayMap(lesson.houseIds(), id => {
+                    name: activity.name(),
+                    totalPoints: activity.totalPoints(),
+                    points: ko.utils.arrayMap(activity.houseIds(), id => {
                         return {
                             houseId: id,
                             amount: 0
@@ -124,18 +124,18 @@
                 }
             });
 
-            this.newLesson(new CreateLessonViewModel());
+            this.newActivity(new CreateActivityViewModel());
         }
 
         constructor() {
-            var hub = $.connection.lessonHub;
+            var hub = $.connection.activityHub;
             
-            hub.client.add = lesson => {
-                this.add(lesson);
+            hub.client.add = activity => {
+                this.add(activity);
             };
 
-            hub.client.update = lesson => {
-                this.update(lesson);
+            hub.client.update = activity => {
+                this.update(activity);
             };
 
             hub.client.remove = id => {
@@ -144,9 +144,9 @@
 
             $.connection.hub.start();
 
-            $.get('/Api/Lesson', lessons => {
-                ko.utils.arrayForEach(lessons, lesson => {
-                    this.add(<ILessonDto>lesson);
+            $.get('/Api/Activity', activities => {
+                ko.utils.arrayForEach(activities, activity => {
+                    this.add(<IActivityDto>activity);
                 });
             }, 'json');
 

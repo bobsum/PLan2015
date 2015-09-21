@@ -11,64 +11,64 @@ using Plan2015.Web.Hubs;
 
 namespace Plan2015.Web.Controllers.Api
 {
-    public class LessonController : ApiControllerWithHub<LessonHub>
+    public class ActivityController : ApiControllerWithHub<ActivityHub>
     {
-        /*[ResponseType(typeof (LessonDto))]
-        public async Task<IHttpActionResult> GetLesson(int id)
+        /*[ResponseType(typeof (ActivityDto))]
+        public async Task<IHttpActionResult> GetActivity(int id)
         {
-            var dto = await Db.Lessons.Select(ToDto()).SingleOrDefaultAsync(l => l.Id == id);
+            var dto = await Db.Activities.Select(ToDto()).SingleOrDefaultAsync(l => l.Id == id);
 
             if (dto == null) return NotFound();
 
             return Ok(dto);
         }*/
 
-        public async Task<IEnumerable<LessonDto>> GetLessons()
+        public async Task<IEnumerable<ActivityDto>> GetActivities()
         {
-            return await Db.Lessons.Select(ToDto()).ToListAsync();
+            return await Db.Activities.Select(ToDto()).ToListAsync();
         }
 
-        public async Task<IHttpActionResult> PostLesson(LessonDto dto)
+        public async Task<IHttpActionResult> PostActivity(ActivityDto dto)
         {
-            var entity = new Lesson
+            var entity = new Activity
             {
                 Id = dto.Id,
                 Name = dto.Name,
                 TotalPoints = dto.TotalPoints,
-                Points = dto.Points.Select(p => new LessonPoint{ HouseId = p.HouseId}).ToList()
+                Points = dto.Points.Select(p => new ActivityPoint{ HouseId = p.HouseId}).ToList()
             };
 
-            Db.Lessons.Add(entity);
+            Db.Activities.Add(entity);
             await Db.SaveChangesAsync();
 
-            dto = await Db.Lessons.Select(ToDto()).SingleAsync(l => l.Id == entity.Id);
+            dto = await Db.Activities.Select(ToDto()).SingleAsync(l => l.Id == entity.Id);
 
             Hub.Clients.All.Add(dto);
 
             return CreatedAtRoute("DefaultApi", new {id = dto.Id}, dto);
         }
 
-        public async Task<LessonDto> PutLesson(LessonDto dto)
+        public async Task<ActivityDto> PutActivity(ActivityDto dto)
         {
             foreach (var point in dto.Points)
             {
-                var ep = Db.LessonPoints.Single(l => l.Id == point.Id);
+                var ep = Db.ActivityPoints.Single(l => l.Id == point.Id);
                 ep.Amount = point.Amount;
             }
 
             await Db.SaveChangesAsync();
 
-            dto = await Db.Lessons.Select(ToDto()).SingleAsync(l => l.Id == dto.Id);
+            dto = await Db.Activities.Select(ToDto()).SingleAsync(l => l.Id == dto.Id);
             
             Hub.Clients.All.Update(dto);
 
             return dto;
         }
 
-        public async Task<IHttpActionResult> DeleteLesson(int id)
+        public async Task<IHttpActionResult> DeleteActivity(int id)
         {
-            var entity = await Db.Lessons.SingleAsync(l => l.Id == id);
-            Db.Lessons.Remove(entity);
+            var entity = await Db.Activities.SingleAsync(l => l.Id == id);
+            Db.Activities.Remove(entity);
 
             await Db.SaveChangesAsync();
             
@@ -77,14 +77,14 @@ namespace Plan2015.Web.Controllers.Api
             return Ok();
         }
 
-        private Expression<Func<Lesson, LessonDto>> ToDto()
+        private Expression<Func<Activity, ActivityDto>> ToDto()
         {
-            return l => new LessonDto
+            return l => new ActivityDto
             {
                 Id = l.Id,
                 Name = l.Name,
                 TotalPoints = l.TotalPoints,
-                Points = l.Points.Select(p => new LessonPointDto
+                Points = l.Points.Select(p => new ActivityPointDto
                 {
                     Id = p.Id,
                     Amount = p.Amount,

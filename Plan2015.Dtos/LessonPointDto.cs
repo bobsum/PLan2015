@@ -2,7 +2,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace Plan2015.Dtos
 {
-    public class LessonPointDto
+    public class ActivityPointDto
     {
         public int Id { get; set; }
         [Required]

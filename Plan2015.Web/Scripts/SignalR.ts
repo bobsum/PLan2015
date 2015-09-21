@@ -1,20 +1,20 @@
 interface SignalR {
-    lessonHub: ILessonHubProxy;
+    activityHub: IActivityHubProxy;
     magicGamesHub: IMagicGamesProxy;
 }
 
-interface ILessonHubProxy {
-    client: ILessonClient;
-    //server: ILessonServer;
+interface IActivityHubProxy {
+    client: IActivityClient;
+    //server: IActivityServer;
 }
 
-interface ILessonClient {
-    add: (lesson: ILessonDto) => void;
-    update: (lesson: ILessonDto) => void;
+interface IActivityClient {
+    add: (activity: IActivityDto) => void;
+    update: (activity: IActivityDto) => void;
     remove: (id: number) => void;
 }
 
-/*interface ILessonServer {
+/*interface IActivityServer {
 }*/
 
 interface IMagicGamesProxy {

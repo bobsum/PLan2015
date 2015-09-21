@@ -134,7 +134,7 @@
     <Content Include="packages.config">
       <SubType>Designer</SubType>
     </Content>
-    <Content Include="Views\Lesson\Index.cshtml" />
+    <Content Include="Views\Activity\Index.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
     <Content Include="Views\_ViewStart.cshtml" />
     <Content Include="Views\Web.config" />
@@ -161,21 +161,21 @@
   <ItemGroup>
     <Compile Include="Controllers\Api\ApiControllerWithDB.cs" />
     <Compile Include="Controllers\Api\ApiControllerWithHub.cs" />
-    <Compile Include="Controllers\Api\EventController.cs" />
+    <Compile Include="Controllers\Api\ActivityController.cs" />
     <Compile Include="Hubs\IPunctualityClient.cs" />
     <Compile Include="Controllers\Api\MagicGamesController.cs" />
     <Compile Include="Controllers\Api\MagicGamesScoreController.cs" />
     <Compile Include="Controllers\Api\PunctualityController.cs" />
     <Compile Include="Hubs\PunctualityHub.cs" />
     <Compile Include="Controllers\Api\PunctualitySwipeController.cs" />
-    <Compile Include="Hubs\ILessonClient.cs" />
+    <Compile Include="Hubs\IActivityClient.cs" />
     <Compile Include="Hubs\IMagicGamesClient.cs" />
     <Compile Include="Hubs\MagicGamesHub.cs" />
-    <Compile Include="Controllers\Mvc\LessonController.cs" />
+    <Compile Include="Controllers\Mvc\ActivityController.cs" />
     <Compile Include="Controllers\Mvc\MagicGamesController.cs" />
     <Compile Include="Controllers\Api\HouseController.cs" />
     <Compile Include="Filters\InvalidModelStateFilterAttribute.cs" />
-    <Compile Include="Hubs\LessonHub.cs" />
+    <Compile Include="Hubs\ActivityHub.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
   </ItemGroup>
@@ -195,7 +195,6 @@
   <ItemGroup>
     <TypeScriptCompile Include="Scripts\App.ts" />
     <TypeScriptCompile Include="Scripts\Dtos.ts" />
-    <TypeScriptCompile Include="Scripts\MagicGamesApp.ts" />
     <TypeScriptCompile Include="Scripts\SignalR.ts" />
     <TypeScriptCompile Include="Scripts\typings\jquery\jquery.d.ts" />
     <TypeScriptCompile Include="Scripts\typings\knockout\knockout.d.ts" />

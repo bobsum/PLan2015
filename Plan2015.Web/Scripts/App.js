@@ -1,25 +1,25 @@
-var Lesson;
-(function (Lesson) {
+var Activity;
+(function (Activity) {
     var Index;
     (function (Index) {
-        var LessonPointViewModel = (function () {
-            function LessonPointViewModel(point) {
+        var ActivityPointViewModel = (function () {
+            function ActivityPointViewModel(point) {
                 this.id = point.id;
                 this.houseId = point.houseId;
                 this.houseName = point.houseName;
                 this.amount = ko.observable(point.amount);
             }
-            return LessonPointViewModel;
+            return ActivityPointViewModel;
         })();
-        var LessonViewModel = (function () {
-            function LessonViewModel(lesson) {
+        var ActivityViewModel = (function () {
+            function ActivityViewModel(activity) {
                 var _this = this;
                 this.isExpanded = ko.observable();
-                this.id = lesson.id;
-                this.name = lesson.name;
-                this.totalPoints = lesson.totalPoints;
-                this.points = ko.observableArray(ko.utils.arrayMap(lesson.points, function (p) { return new LessonPointViewModel(p); }));
-                this.houseNames = ko.utils.arrayMap(lesson.points, function (p) { return p.houseName; }).join(', ');
+                this.id = activity.id;
+                this.name = activity.name;
+                this.totalPoints = activity.totalPoints;
+                this.points = ko.observableArray(ko.utils.arrayMap(activity.points, function (p) { return new ActivityPointViewModel(p); }));
+                this.houseNames = ko.utils.arrayMap(activity.points, function (p) { return p.houseName; }).join(', ');
                 this.sum = ko.computed(function () {
                     var sum = 0;
                     ko.utils.arrayForEach(_this.points(), function (p) {
@@ -29,12 +29,12 @@ var Lesson;
                 });
                 this.isValid = ko.computed(function () { return (_this.totalPoints === _this.sum()); });
             }
-            LessonViewModel.prototype.toggleExpanded = function () {
+            ActivityViewModel.prototype.toggleExpanded = function () {
                 this.isExpanded(!this.isExpanded());
             };
-            LessonViewModel.prototype.sendUpdate = function (lesson) {
+            ActivityViewModel.prototype.sendUpdate = function (activity) {
                 $.ajax({
-                    url: '/Api/Lesson/' + this.id,
+                    url: '/Api/Activity/' + this.id,
                     type: 'PUT',
                     data: {
                         id: this.id,
@@ -52,73 +52,73 @@ var Lesson;
                 });
                 this.isExpanded(false);
             };
-            LessonViewModel.prototype.sendDelete = function () {
+            ActivityViewModel.prototype.sendDelete = function () {
                 if (!confirm("Er du sikker på du vil slette begivenheden?"))
                     return;
                 $.ajax({
-                    url: '/Api/Lesson/' + this.id,
+                    url: '/Api/Activity/' + this.id,
                     type: 'DELETE'
                 });
             };
-            return LessonViewModel;
+            return ActivityViewModel;
         })();
-        var CreateLessonViewModel = (function () {
-            function CreateLessonViewModel() {
+        var CreateActivityViewModel = (function () {
+            function CreateActivityViewModel() {
                 var _this = this;
                 this.name = ko.observable();
                 this.totalPoints = ko.observable();
                 this.houseIds = ko.observableArray();
                 this.isValid = ko.computed(function () { return (_this.name() && _this.totalPoints() && _this.houseIds().length > 0); });
             }
-            return CreateLessonViewModel;
+            return CreateActivityViewModel;
         })();
         var App = (function () {
             function App() {
                 var _this = this;
-                this.newLesson = ko.observable(new CreateLessonViewModel());
+                this.newActivity = ko.observable(new CreateActivityViewModel());
                 this.houses = ko.observableArray();
-                this.lessons = ko.observableArray();
-                var hub = $.connection.lessonHub;
-                hub.client.add = function (lesson) {
-                    _this.add(lesson);
+                this.activities = ko.observableArray();
+                var hub = $.connection.activityHub;
+                hub.client.add = function (activity) {
+                    _this.add(activity);
                 };
-                hub.client.update = function (lesson) {
-                    _this.update(lesson);
+                hub.client.update = function (activity) {
+                    _this.update(activity);
                 };
                 hub.client.remove = function (id) {
                     _this.remove(id);
                 };
                 $.connection.hub.start();
-                $.get('/Api/Lesson', function (lessons) {
-                    ko.utils.arrayForEach(lessons, function (lesson) {
-                        _this.add(lesson);
+                $.get('/Api/Activity', function (activities) {
+                    ko.utils.arrayForEach(activities, function (activity) {
+                        _this.add(activity);
                     });
                 }, 'json');
                 $.get('/Api/House', function (houses) {
                     _this.houses(houses);
                 }, 'json');
             }
-            App.prototype.add = function (lesson) {
-                this.lessons.push(new LessonViewModel(lesson));
+            App.prototype.add = function (activity) {
+                this.activities.push(new ActivityViewModel(activity));
             };
             App.prototype.remove = function (id) {
-                this.lessons.remove(function (e) { return (e.id === id); });
+                this.activities.remove(function (e) { return (e.id === id); });
             };
-            App.prototype.update = function (lesson) {
-                var old = ko.utils.arrayFirst(this.lessons(), function (l) { return (l.id === lesson.id); });
+            App.prototype.update = function (activity) {
+                var old = ko.utils.arrayFirst(this.activities(), function (l) { return (l.id === activity.id); });
                 if (old) {
-                    old.points(ko.utils.arrayMap(lesson.points, function (p) { return new LessonPointViewModel(p); }));
+                    old.points(ko.utils.arrayMap(activity.points, function (p) { return new ActivityPointViewModel(p); }));
                 }
             };
             App.prototype.sendCreate = function () {
-                var lesson = this.newLesson();
+                var activity = this.newActivity();
                 $.ajax({
-                    url: '/Api/Lesson',
+                    url: '/Api/Activity',
                     type: 'POST',
                     data: {
-                        name: lesson.name(),
-                        totalPoints: lesson.totalPoints(),
-                        points: ko.utils.arrayMap(lesson.houseIds(), function (id) {
+                        name: activity.name(),
+                        totalPoints: activity.totalPoints(),
+                        points: ko.utils.arrayMap(activity.houseIds(), function (id) {
                             return {
                                 houseId: id,
                                 amount: 0
@@ -126,13 +126,13 @@ var Lesson;
                         })
                     }
                 });
-                this.newLesson(new CreateLessonViewModel());
+                this.newActivity(new CreateActivityViewModel());
             };
             return App;
         })();
         Index.App = App;
-    })(Index = Lesson.Index || (Lesson.Index = {}));
-})(Lesson || (Lesson = {}));
+    })(Index = Activity.Index || (Activity.Index = {}));
+})(Activity || (Activity = {}));
 var MagicGames;
 (function (MagicGames) {
     var Setup;

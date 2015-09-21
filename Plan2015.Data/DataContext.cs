@@ -18,8 +18,8 @@ namespace Plan2015.Data
         public DbSet<House> Houses { get; set; }
         public DbSet<School> Schools { get; set; }
 
-        public DbSet<Lesson> Lessons { get; set; }
-        public DbSet<LessonPoint> LessonPoints { get; set; }
+        public DbSet<Activity> Activities { get; set; }
+        public DbSet<ActivityPoint> ActivityPoints { get; set; }
         
         public DbSet<TurnoutPoint> TurnoutPoints { get; set; }
         
