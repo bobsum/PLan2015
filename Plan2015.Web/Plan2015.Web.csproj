@@ -163,10 +163,12 @@
     <Compile Include="Controllers\Api\ApiControllerWithDB.cs" />
     <Compile Include="Controllers\Api\ApiControllerWithHub.cs" />
     <Compile Include="Controllers\Api\ActivityController.cs" />
+    <Compile Include="Controllers\Api\TurnoutSwipeController.cs" />
     <Compile Include="Hubs\IPunctualityClient.cs" />
     <Compile Include="Controllers\Api\MagicGamesSetupController.cs" />
     <Compile Include="Controllers\Api\MagicGamesScoreController.cs" />
     <Compile Include="Controllers\Api\PunctualityController.cs" />
+    <Compile Include="Hubs\ITurnoutPointClient.cs" />
     <Compile Include="Hubs\PunctualityHub.cs" />
     <Compile Include="Controllers\Api\PunctualitySwipeController.cs" />
     <Compile Include="Hubs\IActivityClient.cs" />
@@ -177,6 +179,7 @@
     <Compile Include="Controllers\Api\HouseController.cs" />
     <Compile Include="Filters\InvalidModelStateFilterAttribute.cs" />
     <Compile Include="Hubs\ActivityHub.cs" />
+    <Compile Include="Hubs\TurnoutPointHub.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
   </ItemGroup>

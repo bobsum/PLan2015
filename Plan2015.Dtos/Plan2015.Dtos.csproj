@@ -40,8 +40,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="LessonDto.cs" />
-    <Compile Include="LessonPointDto.cs" />
+    <Compile Include="ActivityDto.cs" />
+    <Compile Include="ActivityPointDto.cs" />
     <Compile Include="HouseDto.cs" />
     <Compile Include="MagicGamesSetupDto.cs" />
     <Compile Include="MagicGamesIntervalDto.cs" />
@@ -49,6 +49,8 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="PunctualityDto.cs" />
     <Compile Include="PunctualitySwipeDto.cs" />
+    <Compile Include="TurnoutPointDto.cs" />
+    <Compile Include="TurnoutSwipeDto.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

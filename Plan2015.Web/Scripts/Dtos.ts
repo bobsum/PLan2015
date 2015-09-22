@@ -35,3 +35,14 @@ interface IMagicGamesScoreDto {
     timePoints: number;
     marker: number;
 }
+
+interface ITurnoutSwipeDto {
+    name: string;
+    data: string;
+}
+
+interface ITurnoutPointDto {
+    amount: number;
+    houseId: number;
+    teamMemberId?: number;
+}

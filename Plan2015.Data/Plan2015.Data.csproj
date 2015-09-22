@@ -46,9 +46,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Entities\Lesson.cs" />
+    <Compile Include="Entities\Activity.cs" />
     <Compile Include="DataContext.cs" />
-    <Compile Include="Entities\LessonPoint.cs" />
+    <Compile Include="Entities\ActivityPoint.cs" />
     <Compile Include="Entities\House.cs" />
     <Compile Include="Entities\MagicGamesInterval.cs" />
     <Compile Include="Entities\MagicGamesTimePoint.cs" />

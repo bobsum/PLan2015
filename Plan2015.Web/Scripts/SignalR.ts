@@ -1,6 +1,7 @@
 interface SignalR {
     activityHub: IActivityHubProxy;
     magicGamesSetupHub: IMagicGamesSetupProxy;
+    turnoutPointHub: ITurnoutPointProxy;
 }
 
 interface IActivityHubProxy {
@@ -23,4 +24,12 @@ interface IMagicGamesSetupProxy {
 
 interface IMagicGamesSetupClient {
     update: (house: IMagicGamesSetupDto) => void;
+}
+
+interface ITurnoutPointProxy {
+    client: ITurnoutPointClient;
+}
+
+interface ITurnoutPointClient {
+    add: (turnoutPoint: ITurnoutPointDto) => void;
 }

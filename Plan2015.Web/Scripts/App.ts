@@ -47,12 +47,12 @@
             $.ajax({
                 url: '/Api/Activity/' + this.id,
                 type: 'PUT',
-                data: {
+                data: <IActivityDto> {
                     id: this.id,
                     name: this.name,
                     totalPoints: this.totalPoints,
                     points: ko.utils.arrayMap(this.points(), p => {
-                        return {
+                        return <IActivityPointDto> {
                             id: p.id,
                             houseId: p.houseId,
                             houseName: p.houseName,
@@ -112,11 +112,11 @@
             $.ajax({
                 url: '/Api/Activity',
                 type: 'POST',
-                data: {
+                data: <IActivityDto>{
                     name: activity.name(),
                     totalPoints: activity.totalPoints(),
                     points: ko.utils.arrayMap(activity.houseIds(), id => {
-                        return {
+                        return <IActivityPointDto> {
                             houseId: id,
                             amount: 0
                         }
@@ -158,20 +158,6 @@
 }
 
 module MagicGames.Setup {
-    function compare(a: any, b: any): number {
-        return (a - b);
-    }
-
-    function getIntervals(quantity): number[] {
-        var priority = [5, 10, 15, 20, 30];
-        var intervals = [];
-        for (var i = 0; i < quantity; i++) {
-            intervals.push(priority[i % priority.length]);
-        }
-        intervals.sort(compare);
-        return intervals;
-    }
-
     class IntervalViewModel {
         scoutId: number;
         scoutName: string;
@@ -201,7 +187,7 @@ module MagicGames.Setup {
 
         availableIntervals = ko.computed<number[]>(() => {
             var intervals = this.intervals();
-            var unused = getIntervals(intervals.length);
+            var unused = this.getIntervals(intervals.length);
 
             ko.utils.arrayForEach(intervals, i => {
                 var index = unused.indexOf(i.amount());
@@ -230,11 +216,11 @@ module MagicGames.Setup {
             $.ajax({
                 url: '/Api/MagicGamesSetup/' + this.houseId,
                 type: 'PUT',
-                data: {
+                data: <IMagicGamesSetupDto>{
                     houseId: this.houseId,
                     houseName: this.houseName,
                     intervals: ko.utils.arrayMap(this.intervals(), i => {
-                        return {
+                        return <IMagicGamesIntervalDto> {
                             scoutId: i.scoutId,
                             scoutName: i.scoutName,
                             amount: i.amount()
@@ -258,6 +244,16 @@ module MagicGames.Setup {
         }
 
         distribution = ko.computed(() => ko.utils.arrayMap(this.intervals(), i => '(' + i.scoutName + ' = ' + (i.amount() || '?') + ' min)').join(', '));
+
+        private getIntervals(quantity): number[] {
+            var priority = [5, 10, 15, 20, 30];
+            var intervals = [];
+            for (var i = 0; i < quantity; i++) {
+                intervals.push(priority[i % priority.length]);
+            }
+            intervals.sort(Helpers.compare);
+            return intervals;
+        }
     }
 
     export class App {
@@ -283,11 +279,11 @@ module MagicGames.Setup {
 
 module MagicGames.Score {
     export class App {
-        houses = ko.observableArray<IMagicGamesScoreDto>();
+        scores = ko.observableArray<IMagicGamesScoreDto>();
 
         constructor() {
-            $.get('/Api/MagicGamesScore', houses => {
-                this.houses(houses);
+            $.get('/Api/MagicGamesScore', scores => {
+                this.scores(scores);
             }, 'json');
         }
     }
@@ -295,11 +291,51 @@ module MagicGames.Score {
 
 module Turnout.Index {
     export class App {
-        selectFile = (a: App, e: Event) => {
+        files = ko.observableArray<File>();
+        
+        selectFile = (a: App, e) => {
+            var fileList: FileList = e.target.files;
+            var files: File[] = [];
+            for (var i = 0; i < fileList.length; i++) {
+                files.push(fileList[i]);
+            }
+            this.files(files);
         }
 
-        sendUplaod() { }
-        isValid = true;
-        
+        sendUplaod() {
+            ko.utils.arrayForEach(this.files(), file => {
+                Helpers.readText(file).done(d => {
+                    $.ajax({
+                        url: '/Api/TurnoutSwipe',
+                        type: 'POST',
+                        data: <ITurnoutSwipeDto> {
+                            name: file.name,
+                            data: d
+                        }
+                    });
+                });
+            });
+            this.files(null);
+        }
+
+        isValid = ko.computed(() => !!this.files());
+    }
+}
+
+module Helpers {
+    export function readText(file: File): JQueryPromise<string> {
+        var reader = new FileReader();
+        var deferred: JQueryDeferred<string> = $.Deferred<string>();
+
+        reader.onload = e => deferred.resolve((<FileReader>e.target).result);
+        reader.onprogress = (e: ProgressEvent) => deferred.notify(e.loaded * 100 / e.total);
+        reader.onerror = e => deferred.reject(e);
+        reader.readAsText(file);
+
+        return deferred.promise();
+    }
+
+    export function compare(a: any, b: any): number {
+        return (a - b);
     }
 }
