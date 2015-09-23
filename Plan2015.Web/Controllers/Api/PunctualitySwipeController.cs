@@ -1,7 +1,6 @@
-﻿using System.Linq;
+﻿using System.Data.Entity;
+using System.Linq;
 using System.Net;
-using System.Security.AccessControl;
-using System.Text;
 using System.Threading.Tasks;
 using System.Web.Http;
 using Plan2015.Data.Entities;
@@ -27,6 +26,30 @@ namespace Plan2015.Web.Controllers.Api
 
             Db.PunctualitySwipes.Add(entity);
             await Db.SaveChangesAsync();
+
+            if (!Db.PunctualityPoints.Any(pp => pp.HouseId == scout.HouseId && pp.PunctualityId == punctuality.Id))
+            {
+                if (!punctuality.All && dto.Time < punctuality.Deadline || !await Db.Scouts
+                    .Where(s => s.HouseId == scout.HouseId)
+                    .Except(Db.PunctualitySwipes
+                        .Where(ps =>
+                            ps.Scout.HouseId == scout.HouseId &&
+                            ps.PunctualityId == punctuality.Id &&
+                            ps.Time < punctuality.Deadline)
+                        .Select(ps => ps.Scout)
+                        .Distinct())
+                    .AnyAsync())
+                {
+                    var point = new PunctualityPoint
+                    {
+                        House = scout.House,
+                        Punctuality = punctuality
+                    };
+                    Db.PunctualityPoints.Add(point);
+                    await Db.SaveChangesAsync();
+                    //todo Call Hub
+                }
+            }
             return Ok();
         }
     }

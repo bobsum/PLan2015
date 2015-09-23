@@ -54,6 +54,7 @@
     <Compile Include="Entities\MagicGamesTimePoint.cs" />
     <Compile Include="Entities\MagicGamesMarkerPoint.cs" />
     <Compile Include="Entities\Punctuality.cs" />
+    <Compile Include="Entities\PunctualityPoint.cs" />
     <Compile Include="Entities\PunctualitySwipe.cs" />
     <Compile Include="Entities\School.cs" />
     <Compile Include="Entities\Scout.cs" />
@@ -91,6 +92,10 @@
     <Compile Include="Migrations\201509211707218_RenameLesson2Activities.Designer.cs">
       <DependentUpon>201509211707218_RenameLesson2Activities.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201509231756212_PunctualityPoint.cs" />
+    <Compile Include="Migrations\201509231756212_PunctualityPoint.Designer.cs">
+      <DependentUpon>201509231756212_PunctualityPoint.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -122,6 +127,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201509211707218_RenameLesson2Activities.resx">
       <DependentUpon>201509211707218_RenameLesson2Activities.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201509231756212_PunctualityPoint.resx">
+      <DependentUpon>201509231756212_PunctualityPoint.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
