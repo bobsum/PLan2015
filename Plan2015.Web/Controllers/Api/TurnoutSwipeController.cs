@@ -62,7 +62,7 @@ namespace Plan2015.Web.Controllers.Api
                 Db.TurnoutPoints.Add(point);
                 await Db.SaveChangesAsync();
             }
-
+            //Todo Call Hub
             return Ok();
         }
     }

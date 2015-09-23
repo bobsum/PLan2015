@@ -260,8 +260,8 @@ var Turnout;
 (function (Turnout) {
     var Index;
     (function (Index) {
-        var App = (function () {
-            function App() {
+        var UploadViewModel = (function () {
+            function UploadViewModel() {
                 var _this = this;
                 this.files = ko.observableArray();
                 this.selectFile = function (a, e) {
@@ -274,7 +274,7 @@ var Turnout;
                 };
                 this.isValid = ko.computed(function () { return !!_this.files(); });
             }
-            App.prototype.sendUplaod = function () {
+            UploadViewModel.prototype.sendUplaod = function () {
                 ko.utils.arrayForEach(this.files(), function (file) {
                     Helpers.readText(file).done(function (d) {
                         $.ajax({
@@ -289,6 +289,12 @@ var Turnout;
                 });
                 this.files(null);
             };
+            return UploadViewModel;
+        })();
+        var App = (function () {
+            function App() {
+                this.upload = ko.observable(new UploadViewModel());
+            }
             return App;
         })();
         Index.App = App;

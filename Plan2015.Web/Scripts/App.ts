@@ -290,7 +290,7 @@ module MagicGames.Score {
 }
 
 module Turnout.Index {
-    export class App {
+    class UploadViewModel {
         files = ko.observableArray<File>();
         
         selectFile = (a: App, e) => {
@@ -319,6 +319,10 @@ module Turnout.Index {
         }
 
         isValid = ko.computed(() => !!this.files());
+    }
+
+    export class App {
+        upload = ko.observable(new UploadViewModel());
     }
 }
 
