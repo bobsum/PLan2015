@@ -79,11 +79,7 @@
         name = ko.observable<string>();
         totalPoints = ko.observable<number>();
         houseIds = ko.observableArray<number>();
-        isValid: KnockoutComputed<boolean>;
-
-        constructor() {
-            this.isValid = ko.computed(() => (this.name() && this.totalPoints() && this.houseIds().length > 0));
-        }
+        isValid = ko.computed<boolean>(() => (this.name() && this.totalPoints() && this.houseIds().length > 0));
     }
 
     export class App {
@@ -323,6 +319,39 @@ module Turnout.Index {
 
     export class App {
         upload = ko.observable(new UploadViewModel());
+    }
+}
+
+module Punctuality.Index {
+    class CreatePunctualityViewModel {
+        name = ko.observable<string>();
+        deadlineDate = ko.observable<string>();
+        deadlineTime = ko.observable<string>();
+        deadline = ko.computed<Date>(() => {
+            var date = Date.parse(this.deadlineDate() + ' ' + this.deadlineTime());
+            return !isNaN(date) ? new Date(date) : null;
+        });
+        all = ko.observable<boolean>();
+        isValid = ko.computed<boolean>(() => !!this.name() && !!this.deadline());
+    }
+
+    export class App {
+        newPunctuality = ko.observable(new CreatePunctualityViewModel());
+
+        sendCreate() {
+            var punctuality = this.newPunctuality();
+            $.ajax({
+                url: '/Api/Punctuality',
+                type: 'POST',
+                data: <IPunctualityDto>{
+                    name: punctuality.name(),
+                    deadline: punctuality.deadline(),
+                    all: punctuality.all()
+                }
+            });
+
+            this.newPunctuality(new CreatePunctualityViewModel());
+        }
     }
 }
 

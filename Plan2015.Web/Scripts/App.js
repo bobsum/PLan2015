@@ -300,6 +300,47 @@ var Turnout;
         Index.App = App;
     })(Index = Turnout.Index || (Turnout.Index = {}));
 })(Turnout || (Turnout = {}));
+var Punctuality;
+(function (Punctuality) {
+    var Index;
+    (function (Index) {
+        var CreatePunctualityViewModel = (function () {
+            function CreatePunctualityViewModel() {
+                var _this = this;
+                this.name = ko.observable();
+                this.deadlineDate = ko.observable();
+                this.deadlineTime = ko.observable();
+                this.deadline = ko.computed(function () {
+                    var date = Date.parse(_this.deadlineDate() + ' ' + _this.deadlineTime());
+                    return !isNaN(date) ? new Date(date) : null;
+                });
+                this.all = ko.observable();
+                this.isValid = ko.computed(function () { return !!_this.name() && !!_this.deadline(); });
+            }
+            return CreatePunctualityViewModel;
+        })();
+        var App = (function () {
+            function App() {
+                this.newPunctuality = ko.observable(new CreatePunctualityViewModel());
+            }
+            App.prototype.sendCreate = function () {
+                var punctuality = this.newPunctuality();
+                $.ajax({
+                    url: '/Api/Punctuality',
+                    type: 'POST',
+                    data: {
+                        name: punctuality.name(),
+                        deadline: punctuality.deadline(),
+                        all: punctuality.all()
+                    }
+                });
+                this.newPunctuality(new CreatePunctualityViewModel());
+            };
+            return App;
+        })();
+        Index.App = App;
+    })(Index = Punctuality.Index || (Punctuality.Index = {}));
+})(Punctuality || (Punctuality = {}));
 var Helpers;
 (function (Helpers) {
     function readText(file) {

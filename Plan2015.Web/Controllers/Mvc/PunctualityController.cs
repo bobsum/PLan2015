@@ -1,12 +1,12 @@
-﻿using System.Web.Mvc;
+using System.Web.Mvc;
 
 namespace Plan2015.Web.Controllers.Mvc
 {
-    public class ActivityController : Controller
+    public class PunctualityController : Controller
     {
         public ActionResult Index()
         {
-            ViewBag.Title = "Begivenheder";
+            ViewBag.Title = "Punktlighed";
 
             return View();
         }

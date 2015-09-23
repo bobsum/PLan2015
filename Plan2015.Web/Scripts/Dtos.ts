@@ -36,6 +36,13 @@ interface IMagicGamesScoreDto {
     marker: number;
 }
 
+interface IPunctualityDto {
+    id: number;
+    name: string;
+    deadline: Date;
+    all: boolean;
+}
+
 interface ITurnoutSwipeDto {
     name: string;
     data: string;
