@@ -304,6 +304,23 @@ var Punctuality;
 (function (Punctuality) {
     var Index;
     (function (Index) {
+        var PunctualityViewModel = (function () {
+            function PunctualityViewModel(punctuality) {
+                this.id = punctuality.id;
+                this.name = punctuality.name;
+                this.deadline = new Date(punctuality.deadline.replace('T', ' '));
+                this.all = punctuality.all;
+            }
+            PunctualityViewModel.prototype.sendDelete = function () {
+                if (!confirm("Er du sikker på du vil slette punktlighed?"))
+                    return;
+                $.ajax({
+                    url: '/Api/Activity/' + this.id,
+                    type: 'DELETE'
+                });
+            };
+            return PunctualityViewModel;
+        })();
         var CreatePunctualityViewModel = (function () {
             function CreatePunctualityViewModel() {
                 var _this = this;
@@ -311,17 +328,23 @@ var Punctuality;
                 this.deadlineDate = ko.observable();
                 this.deadlineTime = ko.observable();
                 this.deadline = ko.computed(function () {
-                    var date = Date.parse(_this.deadlineDate() + ' ' + _this.deadlineTime());
-                    return !isNaN(date) ? new Date(date) : null;
+                    return _this.deadlineDate() + 'T' + _this.deadlineTime();
                 });
-                this.all = ko.observable();
-                this.isValid = ko.computed(function () { return !!_this.name() && !!_this.deadline(); });
+                this.all = ko.observable(false);
+                this.isValid = ko.computed(function () { return true || !!_this.name() && !!_this.deadline(); });
             }
             return CreatePunctualityViewModel;
         })();
         var App = (function () {
             function App() {
+                var _this = this;
                 this.newPunctuality = ko.observable(new CreatePunctualityViewModel());
+                this.punctualities = ko.observableArray();
+                $.get('/Api/Punctuality', function (punctualities) {
+                    ko.utils.arrayForEach(punctualities, function (punctuality) {
+                        _this.add(punctuality);
+                    });
+                }, 'json');
             }
             App.prototype.sendCreate = function () {
                 var punctuality = this.newPunctuality();
@@ -335,6 +358,12 @@ var Punctuality;
                     }
                 });
                 this.newPunctuality(new CreatePunctualityViewModel());
+            };
+            App.prototype.add = function (punctuality) {
+                this.punctualities.push(new PunctualityViewModel(punctuality));
+                this.punctualities.sort(function (a, b) {
+                    return a.deadline.getTime() - b.deadline.getTime();
+                });
             };
             return App;
         })();

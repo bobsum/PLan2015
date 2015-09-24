@@ -87,6 +87,34 @@
         houses = ko.observableArray<IHouseDto>();
         activities = ko.observableArray<ActivityViewModel>();
 
+        constructor() {
+            var hub = $.connection.activityHub;
+            
+            hub.client.add = activity => {
+                this.add(activity);
+            };
+
+            hub.client.update = activity => {
+                this.update(activity);
+            };
+
+            hub.client.remove = id => {
+                this.remove(id);
+            };
+
+            $.connection.hub.start();
+
+            $.get('/Api/Activity', activities => {
+                ko.utils.arrayForEach(activities, activity => {
+                    this.add(<IActivityDto>activity);
+                });
+            }, 'json');
+
+            $.get('/Api/House', houses => {
+                this.houses(houses);
+            }, 'json');
+        }
+
         add(activity: IActivityDto) {
             this.activities.push(new ActivityViewModel(activity));
         }
@@ -121,34 +149,6 @@
             });
 
             this.newActivity(new CreateActivityViewModel());
-        }
-
-        constructor() {
-            var hub = $.connection.activityHub;
-            
-            hub.client.add = activity => {
-                this.add(activity);
-            };
-
-            hub.client.update = activity => {
-                this.update(activity);
-            };
-
-            hub.client.remove = id => {
-                this.remove(id);
-            };
-
-            $.connection.hub.start();
-
-            $.get('/Api/Activity', activities => {
-                ko.utils.arrayForEach(activities, activity => {
-                    this.add(<IActivityDto>activity);
-                });
-            }, 'json');
-
-            $.get('/Api/House', houses => {
-                this.houses(houses);
-            }, 'json');
         }
     }
 }
@@ -323,23 +323,48 @@ module Turnout.Index {
 }
 
 module Punctuality.Index {
+    class PunctualityViewModel {
+        id: number;
+        name: string;
+        deadline: Date;
+        all: boolean;
+
+        constructor(punctuality: IPunctualityDto) {
+            this.id = punctuality.id;
+            this.name = punctuality.name;
+            this.deadline = new Date(punctuality.deadline.replace('T', ' '));
+            this.all = punctuality.all;
+        }
+
+        sendDelete() {
+            if (!confirm("Er du sikker på du vil slette punktlighed?")) return;
+
+            $.ajax({
+                url: '/Api/Activity/' + this.id,
+                type: 'DELETE'
+            });
+        }
+    }
+
     class CreatePunctualityViewModel {
         name = ko.observable<string>();
         deadlineDate = ko.observable<string>();
         deadlineTime = ko.observable<string>();
-        deadline = ko.computed<Date>(() => {
-            var date = Date.parse(this.deadlineDate() + ' ' + this.deadlineTime());
-            return !isNaN(date) ? new Date(date) : null;
+        deadline = ko.computed<string>(() => {
+            return this.deadlineDate() + 'T' + this.deadlineTime();
         });
-        all = ko.observable<boolean>();
-        isValid = ko.computed<boolean>(() => !!this.name() && !!this.deadline());
+        all = ko.observable<boolean>(false);
+        isValid = ko.computed<boolean>(() => true || !!this.name() && !!this.deadline());
     }
 
     export class App {
         newPunctuality = ko.observable(new CreatePunctualityViewModel());
 
+        punctualities = ko.observableArray<PunctualityViewModel>();
+
         sendCreate() {
             var punctuality = this.newPunctuality();
+
             $.ajax({
                 url: '/Api/Punctuality',
                 type: 'POST',
@@ -349,8 +374,22 @@ module Punctuality.Index {
                     all: punctuality.all()
                 }
             });
-
             this.newPunctuality(new CreatePunctualityViewModel());
+        }
+
+        constructor() {
+            $.get('/Api/Punctuality', punctualities => {
+                ko.utils.arrayForEach(punctualities, punctuality => {
+                    this.add(<IPunctualityDto>punctuality);
+                });
+            }, 'json');
+        }
+
+        add(punctuality: IPunctualityDto) {
+            this.punctualities.push(new PunctualityViewModel(punctuality));
+            this.punctualities.sort((a: PunctualityViewModel, b: PunctualityViewModel) => {
+                return a.deadline.getTime() - b.deadline.getTime();
+            });
         }
     }
 }

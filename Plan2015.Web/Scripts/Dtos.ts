@@ -39,7 +39,7 @@ interface IMagicGamesScoreDto {
 interface IPunctualityDto {
     id: number;
     name: string;
-    deadline: Date;
+    deadline: string;
     all: boolean;
 }
 

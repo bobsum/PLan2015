@@ -29,7 +29,7 @@ namespace Plan2015.Web.Controllers.Api
             Db.Punctualities.Add(entity);
             await Db.SaveChangesAsync();
 
-            dto = await Db.Punctualities.Select(ToDto()).SingleAsync(p => p.Id == dto.Id);
+            dto = await Db.Punctualities.Select(ToDto()).SingleAsync(p => p.Id == entity.Id);
             
             Hub.Clients.All.Add(dto);
             
