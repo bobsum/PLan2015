@@ -137,10 +137,18 @@ var MagicGames;
 (function (MagicGames) {
     var Marker;
     (function (Marker) {
+        var StatusViewModel = (function () {
+            function StatusViewModel(name) {
+                this.name = name;
+                this.progress = ko.observable(0);
+            }
+            return StatusViewModel;
+        })();
         var UploadViewModel = (function () {
             function UploadViewModel() {
                 var _this = this;
                 this.files = ko.observableArray();
+                this.status = ko.observableArray();
                 this.selectFile = function (a, e) {
                     var fileList = e.target.files;
                     var files = [];
@@ -148,12 +156,16 @@ var MagicGames;
                         files.push(fileList[i]);
                     }
                     _this.files(files);
+                    _this.status([]);
                 };
                 this.isValid = ko.computed(function () { return !!_this.files(); });
             }
             UploadViewModel.prototype.sendUplaod = function () {
-                ko.utils.arrayForEach(this.files(), function (file) {
-                    Helpers.readText(file).done(function (d) {
+                this.status(ko.utils.arrayMap(this.files(), function (file) {
+                    var status = new StatusViewModel(file.name);
+                    Helpers.readText(file)
+                        .progress(function (p) { return status.progress(p / 2); })
+                        .done(function (d) {
                         $.ajax({
                             url: '/Api/MagicGamesMarkerSwipe',
                             type: 'POST',
@@ -161,9 +173,10 @@ var MagicGames;
                                 name: file.name,
                                 data: d
                             }
-                        });
+                        }).done(function () { return status.progress(100); });
                     });
-                });
+                    return status;
+                }));
                 this.files(null);
             };
             return UploadViewModel;
@@ -304,10 +317,18 @@ var Turnout;
 (function (Turnout) {
     var Index;
     (function (Index) {
+        var StatusViewModel = (function () {
+            function StatusViewModel(name) {
+                this.name = name;
+                this.progress = ko.observable(0);
+            }
+            return StatusViewModel;
+        })();
         var UploadViewModel = (function () {
             function UploadViewModel() {
                 var _this = this;
                 this.files = ko.observableArray();
+                this.status = ko.observableArray();
                 this.selectFile = function (a, e) {
                     var fileList = e.target.files;
                     var files = [];
@@ -315,12 +336,16 @@ var Turnout;
                         files.push(fileList[i]);
                     }
                     _this.files(files);
+                    _this.status([]);
                 };
                 this.isValid = ko.computed(function () { return !!_this.files(); });
             }
             UploadViewModel.prototype.sendUplaod = function () {
-                ko.utils.arrayForEach(this.files(), function (file) {
-                    Helpers.readText(file).done(function (d) {
+                this.status(ko.utils.arrayMap(this.files(), function (file) {
+                    var status = new StatusViewModel(file.name);
+                    Helpers.readText(file)
+                        .progress(function (p) { return status.progress(p / 2); })
+                        .done(function (d) {
                         $.ajax({
                             url: '/Api/TurnoutSwipe',
                             type: 'POST',
@@ -328,9 +353,10 @@ var Turnout;
                                 name: file.name,
                                 data: d
                             }
-                        });
+                        }).done(function () { return status.progress(100); });
                     });
-                });
+                    return status;
+                }));
                 this.files(null);
             };
             return UploadViewModel;

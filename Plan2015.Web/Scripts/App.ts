@@ -154,8 +154,14 @@
 }
 
 module MagicGames.Marker {
+    class StatusViewModel {
+        progress = ko.observable<number>(0);
+        constructor(public name: string) { }
+    }
+
     class UploadViewModel {
         files = ko.observableArray<File>();
+        status = ko.observableArray<StatusViewModel>();
 
         selectFile = (a: App, e) => {
             var fileList: FileList = e.target.files;
@@ -164,21 +170,26 @@ module MagicGames.Marker {
                 files.push(fileList[i]);
             }
             this.files(files);
+            this.status([]);
         }
 
         sendUplaod() {
-            ko.utils.arrayForEach(this.files(), file => {
-                Helpers.readText(file).done(d => {
-                    $.ajax({
-                        url: '/Api/MagicGamesMarkerSwipe',
-                        type: 'POST',
-                        data: <IMagicGamesMarkerSwipeDto>{
-                            name: file.name,
-                            data: d
-                        }
+            this.status(ko.utils.arrayMap(this.files(), file => {
+                var status = new StatusViewModel(file.name);
+                Helpers.readText(file)
+                    .progress(p => status.progress(p / 2))
+                    .done(d => {
+                        $.ajax({
+                            url: '/Api/MagicGamesMarkerSwipe',
+                            type: 'POST',
+                            data: <ITurnoutSwipeDto>{
+                                name: file.name,
+                                data: d
+                            }
+                        }).done(() => status.progress(100));
                     });
-                });
-            });
+                return status;
+            }));
             this.files(null);
         }
 
@@ -323,8 +334,14 @@ module MagicGames.Score {
 }
 
 module Turnout.Index {
+    class StatusViewModel {
+        progress = ko.observable<number>(0);
+        constructor(public name: string) {}
+    }
+
     class UploadViewModel {
         files = ko.observableArray<File>();
+        status = ko.observableArray<StatusViewModel>();
         
         selectFile = (a: App, e) => {
             var fileList: FileList = e.target.files;
@@ -333,21 +350,26 @@ module Turnout.Index {
                 files.push(fileList[i]);
             }
             this.files(files);
+            this.status([]);
         }
 
         sendUplaod() {
-            ko.utils.arrayForEach(this.files(), file => {
-                Helpers.readText(file).done(d => {
-                    $.ajax({
-                        url: '/Api/TurnoutSwipe',
-                        type: 'POST',
-                        data: <ITurnoutSwipeDto> {
-                            name: file.name,
-                            data: d
-                        }
+            this.status(ko.utils.arrayMap(this.files(), file => {
+                var status = new StatusViewModel(file.name);
+                Helpers.readText(file)
+                    .progress(p => status.progress(p / 2))
+                    .done(d => {
+                        $.ajax({
+                            url: '/Api/TurnoutSwipe',
+                            type: 'POST',
+                            data: <ITurnoutSwipeDto> {
+                                name: file.name,
+                                data: d
+                            }
+                        }).done(() => status.progress(100));
                     });
-                });
-            });
+                return status;
+            }));
             this.files(null);
         }
 

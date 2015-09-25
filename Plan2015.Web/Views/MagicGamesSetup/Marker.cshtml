@@ -15,6 +15,13 @@
                     </div>
                 </div>
             </form>
+            <div data-bind="foreach: status">
+                <div class="progress">
+                    <div class="progress-bar progress-bar-success  progress-bar-striped" style="width: 45%" data-bind="css: {active : progress() < 100}, style: {width:progress() + '%'}">
+                        <span data-bind="text: name"></span>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 </div>
