@@ -102,7 +102,7 @@ var Activity;
                 this.activities.push(new ActivityViewModel(activity));
             };
             App.prototype.remove = function (id) {
-                this.activities.remove(function (e) { return (e.id === id); });
+                this.activities.remove(function (a) { return (a.id === id); });
             };
             App.prototype.update = function (activity) {
                 var old = ko.utils.arrayFirst(this.activities(), function (l) { return (l.id === activity.id); });
@@ -133,6 +133,50 @@ var Activity;
         Index.App = App;
     })(Index = Activity.Index || (Activity.Index = {}));
 })(Activity || (Activity = {}));
+var MagicGames;
+(function (MagicGames) {
+    var Marker;
+    (function (Marker) {
+        var UploadViewModel = (function () {
+            function UploadViewModel() {
+                var _this = this;
+                this.files = ko.observableArray();
+                this.selectFile = function (a, e) {
+                    var fileList = e.target.files;
+                    var files = [];
+                    for (var i = 0; i < fileList.length; i++) {
+                        files.push(fileList[i]);
+                    }
+                    _this.files(files);
+                };
+                this.isValid = ko.computed(function () { return !!_this.files(); });
+            }
+            UploadViewModel.prototype.sendUplaod = function () {
+                ko.utils.arrayForEach(this.files(), function (file) {
+                    Helpers.readText(file).done(function (d) {
+                        $.ajax({
+                            url: '/Api/MagicGamesMarkerSwipe',
+                            type: 'POST',
+                            data: {
+                                name: file.name,
+                                data: d
+                            }
+                        });
+                    });
+                });
+                this.files(null);
+            };
+            return UploadViewModel;
+        })();
+        var App = (function () {
+            function App() {
+                this.upload = ko.observable(new UploadViewModel());
+            }
+            return App;
+        })();
+        Marker.App = App;
+    })(Marker = MagicGames.Marker || (MagicGames.Marker = {}));
+})(MagicGames || (MagicGames = {}));
 var MagicGames;
 (function (MagicGames) {
     var Setup;
@@ -312,10 +356,10 @@ var Punctuality;
                 this.all = punctuality.all;
             }
             PunctualityViewModel.prototype.sendDelete = function () {
-                if (!confirm("Er du sikker på du vil slette punktlighed?"))
+                if (!confirm("Er du sikker på du vil slette punktlighed? Alle evt. points slettes også."))
                     return;
                 $.ajax({
-                    url: '/Api/Activity/' + this.id,
+                    url: '/Api/Punctuality/' + this.id,
                     type: 'DELETE'
                 });
             };
@@ -340,6 +384,14 @@ var Punctuality;
                 var _this = this;
                 this.newPunctuality = ko.observable(new CreatePunctualityViewModel());
                 this.punctualities = ko.observableArray();
+                var hub = $.connection.punctualityHub;
+                hub.client.add = function (activity) {
+                    _this.add(activity);
+                };
+                hub.client.remove = function (id) {
+                    _this.remove(id);
+                };
+                $.connection.hub.start();
                 $.get('/Api/Punctuality', function (punctualities) {
                     ko.utils.arrayForEach(punctualities, function (punctuality) {
                         _this.add(punctuality);
@@ -364,6 +416,9 @@ var Punctuality;
                 this.punctualities.sort(function (a, b) {
                     return a.deadline.getTime() - b.deadline.getTime();
                 });
+            };
+            App.prototype.remove = function (id) {
+                this.punctualities.remove(function (p) { return (p.id === id); });
             };
             return App;
         })();

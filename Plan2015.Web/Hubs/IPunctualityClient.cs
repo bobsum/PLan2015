@@ -5,5 +5,6 @@ namespace Plan2015.Web.Controllers.Api
     public interface IPunctualityClient
     {
         void Add(PunctualityDto punctuality);
+        void Remove(int id);
     }
 }

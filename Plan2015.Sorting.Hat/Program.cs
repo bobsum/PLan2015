@@ -2,7 +2,6 @@
 using System.Data.Entity;
 using System.Linq;
 using Plan2015.Data;
-using Plan2015.Helpers;
 
 namespace Plan2015.Sorting.Hat
 {
@@ -14,7 +13,7 @@ namespace Plan2015.Sorting.Hat
             {
                 using (var db = new DataContext())
                 {
-                    var rfid = UsbRfid.Parse(Console.ReadLine());
+                    var rfid = Console.ReadLine();
                     Console.Clear();
                     if (rfid == null) continue;
                     

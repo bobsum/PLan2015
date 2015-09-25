@@ -3,7 +3,6 @@ using System.Data.Entity;
 using System.Linq;
 using Plan2015.Data;
 using Plan2015.Data.Entities;
-using Plan2015.Helpers;
 
 namespace Plan2015.MagicGames.TimeSwiper
 {
@@ -21,7 +20,7 @@ namespace Plan2015.MagicGames.TimeSwiper
                 using (var db = new DataContext())
                 {
                     Console.WriteLine("Svirp tryllestav");
-                    var rfid = UsbRfid.Parse(Console.ReadLine());
+                    var rfid = Console.ReadLine();
                     var now = DateTime.Now;
                     Console.Clear();
                     if (start.AddMinutes(61) < now)

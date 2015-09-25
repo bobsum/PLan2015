@@ -6,7 +6,6 @@ using System.Net.Http.Headers;
 using System.Threading;
 using System.Threading.Tasks;
 using Plan2015.Dtos;
-using Plan2015.Helpers;
 
 namespace Plan2015.Punctuality.Swiper
 {
@@ -58,9 +57,8 @@ namespace Plan2015.Punctuality.Swiper
                 {
                     Console.Clear();
                     Console.WriteLine("Svirp tryllestav");
-                    var line = Console.ReadLine();
-                    if(line != null && line.Equals("q",StringComparison.InvariantCultureIgnoreCase)) break;
-                    var rfid = UsbRfid.Parse(line);
+                    var rfid = Console.ReadLine();
+                    if (rfid != null && rfid.Equals("q", StringComparison.InvariantCultureIgnoreCase)) break;
                     Console.Clear();
                     if (punctuality.Deadline < DateTime.Now)
                     {

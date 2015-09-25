@@ -63,10 +63,6 @@
       <Project>{848AA55E-0C27-4447-95AE-647032864390}</Project>
       <Name>Plan2015.Dtos</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Plan2015.Helpers\Plan2015.Helpers.csproj">
-      <Project>{A23E84C6-9062-4BB4-AAC5-B0A6E06E35F7}</Project>
-      <Name>Plan2015.Helpers</Name>
-    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

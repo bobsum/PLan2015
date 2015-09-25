@@ -4,9 +4,16 @@ namespace Plan2015.Web.Controllers.Mvc
 {
     public class MagicGamesSetupController : Controller
     {
+        public ActionResult Marker()
+        {
+            ViewBag.Title = "De magiske lege - O-Løb";
+
+            return View();
+        }
+
         public ActionResult Setup()
         {
-            ViewBag.Title = "De magiske lege";
+            ViewBag.Title = "De magiske lege - Setup";
 
             return View();
         }

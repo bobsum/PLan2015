@@ -36,6 +36,18 @@ namespace Plan2015.Web.Controllers.Api
             return CreatedAtRoute("DefaultApi", new { id = dto.Id }, dto);
         }
 
+        public async Task<IHttpActionResult> DeletePunctuality(int id)
+        {
+            var entity = await Db.Punctualities.SingleAsync(l => l.Id == id);
+            Db.Punctualities.Remove(entity);
+
+            await Db.SaveChangesAsync();
+
+            Hub.Clients.All.Remove(id);
+
+            return Ok();
+        }
+
         private Expression<Func<Punctuality, PunctualityDto>> ToDto()
         {
             return p => new PunctualityDto
@@ -45,35 +57,6 @@ namespace Plan2015.Web.Controllers.Api
                 Deadline = p.Deadline,
                 All = p.All
             };
-        }
-
-        private void CalcPunctualityPoint()
-        {
-            //todo Håndtere At det kun er bestemt kolegier
-            //Evt. kun tildele +points da dette nemmere kan gøres automatisk 
-            var houses = Db.Houses.Where(h => h.Scouts.Any()).ToList();
-            var scouts = Db.Scouts.ToList();
-
-            var puns = Db.Punctualities
-            .Where(p => p.Deadline < DateTime.Now)
-            .Select(p => new { p, Scouts = p.Swipes.Where(s => s.Time < p.Deadline).Select(s => s.Scout).Distinct() })
-            .ToList();
-
-            foreach (var pun in puns)
-            {
-                var ss = pun.Scouts;
-                if (pun.p.All)
-                {
-                    //ok
-                    var h1 = scouts.Except(ss).Select(s => s.House).Distinct(); //.Dump("All Missing");
-                    houses.Except(h1); //.Dump("All Ok");
-                }
-                else
-                {
-                    var h2 = ss.Select(s => s.House).Distinct(); //.Dump("Single Ok");
-                    houses.Except(h2); //.Dump("Single Missing");
-                }
-            }
         }
     }
 }

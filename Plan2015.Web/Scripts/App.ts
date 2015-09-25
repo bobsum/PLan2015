@@ -120,7 +120,7 @@
         }
 
         remove(id: number) {
-            this.activities.remove(e => (e.id === id));
+            this.activities.remove(a => (a.id === id));
         }
 
         update(activity: IActivityDto) {
@@ -150,6 +150,43 @@
 
             this.newActivity(new CreateActivityViewModel());
         }
+    }
+}
+
+module MagicGames.Marker {
+    class UploadViewModel {
+        files = ko.observableArray<File>();
+
+        selectFile = (a: App, e) => {
+            var fileList: FileList = e.target.files;
+            var files: File[] = [];
+            for (var i = 0; i < fileList.length; i++) {
+                files.push(fileList[i]);
+            }
+            this.files(files);
+        }
+
+        sendUplaod() {
+            ko.utils.arrayForEach(this.files(), file => {
+                Helpers.readText(file).done(d => {
+                    $.ajax({
+                        url: '/Api/MagicGamesMarkerSwipe',
+                        type: 'POST',
+                        data: <IMagicGamesMarkerSwipeDto>{
+                            name: file.name,
+                            data: d
+                        }
+                    });
+                });
+            });
+            this.files(null);
+        }
+
+        isValid = ko.computed(() => !!this.files());
+    }
+
+    export class App {
+        upload = ko.observable(new UploadViewModel());
     }
 }
 
@@ -337,10 +374,10 @@ module Punctuality.Index {
         }
 
         sendDelete() {
-            if (!confirm("Er du sikker på du vil slette punktlighed?")) return;
+            if (!confirm("Er du sikker på du vil slette punktlighed? Alle evt. points slettes også.")) return;
 
             $.ajax({
-                url: '/Api/Activity/' + this.id,
+                url: '/Api/Punctuality/' + this.id,
                 type: 'DELETE'
             });
         }
@@ -378,6 +415,18 @@ module Punctuality.Index {
         }
 
         constructor() {
+            var hub = $.connection.punctualityHub;
+
+            hub.client.add = activity => {
+                this.add(activity);
+            };
+
+            hub.client.remove = id => {
+                this.remove(id);
+            };
+
+            $.connection.hub.start();
+
             $.get('/Api/Punctuality', punctualities => {
                 ko.utils.arrayForEach(punctualities, punctuality => {
                     this.add(<IPunctualityDto>punctuality);
@@ -390,6 +439,10 @@ module Punctuality.Index {
             this.punctualities.sort((a: PunctualityViewModel, b: PunctualityViewModel) => {
                 return a.deadline.getTime() - b.deadline.getTime();
             });
+        }
+
+        remove(id: number) {
+            this.punctualities.remove(p => (p.id === id));
         }
     }
 }

@@ -23,6 +23,11 @@ interface IMagicGamesIntervalDto {
     amount: number;
 }
 
+interface IMagicGamesMarkerSwipeDto {
+    name: string;
+    data: string;
+}
+
 interface IMagicGamesSetupDto {
     houseId: number;
     houseName: string;
