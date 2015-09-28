@@ -1,0 +1,62 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<XnaContent xmlns:Animations="Bismuth.Framework.Assets.Animations" xmlns:EasingFunctions="Bismuth.Framework.Animations.EasingFunctions">
+  <Asset Type="Animations:AnimationAsset">
+    <NodeAssetName>Actors\School</NodeAssetName>
+    <Mode>Loop</Mode>
+    <Direction>Forward</Direction>
+    <Fps>10</Fps>
+    <FrameCount>60</FrameCount>
+    <Timelines>
+      <Item>
+        <TargetName>DrawGroup</TargetName>
+        <PropertyTimelineType>Bismuth.Framework.Animations.Timelines.PositionYTimeline, Bismuth.Framework</PropertyTimelineType>
+        <BeginTime>0</BeginTime>
+        <EndTime>60</EndTime>
+        <Duration>60</Duration>
+        <KeyFrames>
+          <Item>
+            <FillBehavior>HoldEnd</FillBehavior>
+            <EasingFunction Type="EasingFunctions:SineEase">
+              <EasingMode>EaseInOut</EasingMode>
+            </EasingFunction>
+            <Time>0</Time>
+            <Value Type="float">13</Value>
+          </Item>
+          <Item>
+            <FillBehavior>ReverseAndRepeat</FillBehavior>
+            <EasingFunction Type="EasingFunctions:SineEase">
+              <EasingMode>EaseInOut</EasingMode>
+            </EasingFunction>
+            <Time>10</Time>
+            <Value Type="float">0</Value>
+          </Item>
+        </KeyFrames>
+      </Item>
+      <Item>
+        <TargetName>DrawGroup</TargetName>
+        <PropertyTimelineType>Bismuth.Framework.Animations.Timelines.PositionXTimeline, Bismuth.Framework</PropertyTimelineType>
+        <BeginTime>0</BeginTime>
+        <EndTime>60</EndTime>
+        <Duration>60</Duration>
+        <KeyFrames>
+          <Item>
+            <FillBehavior>HoldEnd</FillBehavior>
+            <EasingFunction Type="EasingFunctions:SineEase">
+              <EasingMode>EaseInOut</EasingMode>
+            </EasingFunction>
+            <Time>0</Time>
+            <Value Type="float">-6</Value>
+          </Item>
+          <Item>
+            <FillBehavior>ReverseAndRepeat</FillBehavior>
+            <EasingFunction Type="EasingFunctions:LinearEase">
+              <EasingMode>EaseIn</EasingMode>
+            </EasingFunction>
+            <Time>30</Time>
+            <Value Type="float">5</Value>
+          </Item>
+        </KeyFrames>
+      </Item>
+    </Timelines>
+  </Asset>
+</XnaContent>

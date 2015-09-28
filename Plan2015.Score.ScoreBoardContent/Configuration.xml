@@ -1,0 +1,17 @@
+<?xml version="1.0"?>
+<Configuration xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <Video>
+    <IsFullScreen>false</IsFullScreen>
+    <AutoDetectResolution>false</AutoDetectResolution>
+    <Width>1280</Width>
+    <Height>720</Height>
+  </Video>
+  <Audio>
+    <IsMusicEnabled>true</IsMusicEnabled>
+  </Audio>
+  <Network>
+    <ServerName>MeServer</ServerName>
+    <IP>0.0.0.0</IP>
+    <Port>55555</Port>
+  </Network>
+</Configuration>

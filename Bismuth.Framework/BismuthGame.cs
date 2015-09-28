@@ -1,32 +1,37 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text;
 using Microsoft.Xna.Framework;
-using Microsoft.Xna.Framework.Audio;
-using Microsoft.Xna.Framework.Content;
-using Microsoft.Xna.Framework.GamerServices;
 using Microsoft.Xna.Framework.Graphics;
-using Microsoft.Xna.Framework.Input;
-using Microsoft.Xna.Framework.Media;
-using Bismuth.Framework;
-using Plan2015.Score.ScoreBoard.Settings;
-using Bismuth.Framework.Particles;
-using Plan2015.Score.ScoreBoard.Scenes;
+using Bismuth.Framework.Content;
+using Bismuth.Framework.Input;
+using Bismuth.Framework.Scenes;
+using Bismuth.Framework.Sprites;
+using Bismuth.Framework.Primitives;
 
-namespace Plan2015.Score.ScoreBoard
+namespace Bismuth.Framework
 {
-    /// <summary>
-    /// This is the main type for your game
-    /// </summary>
-    public class MainGame : BismuthGame
+    public class BismuthGame : Game
     {
-        public Configuration Configuration { get; set; }
-        public Pool<Particle> Pool { get; private set; }
+        public GraphicsDeviceManager Graphics { get; private set; }
+        public SpriteBatch SpriteBatch { get; private set; }
+        public ISpriteBatch XnaSpriteBatch { get; private set; }
+        public PrimitiveBatch PrimitiveBatch { get; private set; }
 
-        public MainScene MainScene { get; private set; }
+        public ResolutionManager ResolutionManager { get; private set; }
+        public BismuthContentManager ContentManager { get; private set; }
+        public SceneManager SceneManager { get; private set; }
 
-        public MainGame()
+        public BismuthGame()
         {
+            Graphics = new GraphicsDeviceManager(this);
+            ResolutionManager = new ResolutionManager(Graphics);
+
+            Content.RootDirectory = "Content";
+
+            ContentManager = new BismuthContentManager(Services);
+            ContentManager.RootDirectory = "Content";
         }
 
         /// <summary>
@@ -37,24 +42,7 @@ namespace Plan2015.Score.ScoreBoard
         /// </summary>
         protected override void Initialize()
         {
-            IsMouseVisible = false;
-
-            Configuration = Configuration.Load();
-
-            VideoSettings display = Configuration.Video;
-
-            if (display.AutoDetectResolution)
-            {
-                DisplayMode displayMode = GraphicsDevice.Adapter.CurrentDisplayMode;
-                display.Width = displayMode.Width;
-                display.Height = displayMode.Height;
-            }
-
-            ResolutionManager.SetDisplayResolution(display.Width, display.Height, display.IsFullScreen);
-            //ResolutionManager.SetVirtualResolution(1280, 720);
-            ResolutionManager.SetVirtualResolution(1600, 900);
-            ResolutionManager.ApplyChanges();
-
+            // TODO: Add your initialization logic here
             base.Initialize();
         }
 
@@ -64,15 +52,13 @@ namespace Plan2015.Score.ScoreBoard
         /// </summary>
         protected override void LoadContent()
         {
-            base.LoadContent();
+            // Create a new SpriteBatch, which can be used to draw textures,
+            // and a new PrimitiveBatch, which can be used to draw primitives.
+            SpriteBatch = new SpriteBatch(GraphicsDevice);
+            XnaSpriteBatch = new XnaSpriteBatch(SpriteBatch);
+            PrimitiveBatch = new PrimitiveBatch(GraphicsDevice, Services);
 
-            Pool = new Pool<Particle>();
-
-            SceneManager.AddScene("Main", MainScene = new MainScene(this));
-            MainScene.LoadContent();
-            MainScene.Initialize();
-
-            SceneManager.ChangeScene("Main");
+            SceneManager = new SceneManager(this);
         }
 
         /// <summary>
@@ -91,6 +77,11 @@ namespace Plan2015.Score.ScoreBoard
         /// <param name="gameTime">Provides a snapshot of timing values.</param>
         protected override void Update(GameTime gameTime)
         {
+            // Updates the input state to the new state of the mouse, keyboard and controllers.
+            InputState.Update(gameTime);
+
+            SceneManager.Update(gameTime);
+
             base.Update(gameTime);
         }
 
@@ -100,6 +91,8 @@ namespace Plan2015.Score.ScoreBoard
         /// <param name="gameTime">Provides a snapshot of timing values.</param>
         protected override void Draw(GameTime gameTime)
         {
+            SceneManager.Draw(gameTime);
+
             base.Draw(gameTime);
         }
     }

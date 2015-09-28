@@ -1,0 +1,72 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<XnaContent xmlns:GameObjects="Bismuth.Framework.Assets.GameObjects" xmlns:Sprites="Bismuth.Framework.Assets.Sprites">
+  <Asset Type="GameObjects:ActorAsset">
+    <Name>Root</Name>
+    <Class>Plan2015.Score.ScoreBoard.Actors.School, Plan2015.Score.ScoreBoard</Class>
+    <Position>0 0</Position>
+    <Rotation>0</Rotation>
+    <ScaleX>1</ScaleX>
+    <ScaleY>1</ScaleY>
+    <SkewX>0</SkewX>
+    <SkewY>0</SkewY>
+    <FlipX>false</FlipX>
+    <FlipY>false</FlipY>
+    <Opacity>1</Opacity>
+    <IsVisible>true</IsVisible>
+    <ZIndex>0</ZIndex>
+    <Children>
+      <Item Type="Sprites:SpriteDrawGroupAsset">
+        <Name>DrawGroup</Name>
+        <Position>0 0</Position>
+        <Rotation>0</Rotation>
+        <ScaleX>1</ScaleX>
+        <ScaleY>1</ScaleY>
+        <SkewX>0</SkewX>
+        <SkewY>0</SkewY>
+        <FlipX>false</FlipX>
+        <FlipY>false</FlipY>
+        <Opacity>1</Opacity>
+        <IsVisible>true</IsVisible>
+        <ZIndex>0</ZIndex>
+        <Children>
+          <Item Type="Sprites:SpriteUsingTextureAsset">
+            <Name>Logo</Name>
+            <Position>397 -1</Position>
+            <Rotation>0</Rotation>
+            <ScaleX>1</ScaleX>
+            <ScaleY>1</ScaleY>
+            <SkewX>0</SkewX>
+            <SkewY>0</SkewY>
+            <FlipX>false</FlipX>
+            <FlipY>false</FlipY>
+            <Opacity>1</Opacity>
+            <IsVisible>true</IsVisible>
+            <ZIndex>0</ZIndex>
+            <Children />
+            <TextureAssetName>Textures\Agernholdt</TextureAssetName>
+            <Rectangle>0 0 256 256</Rectangle>
+            <Origin>0 0</Origin>
+            <Color>FFFFFFFF</Color>
+          </Item>
+          <Item>
+            <Name>Score</Name>
+            <Position>92 -174</Position>
+            <Rotation>0</Rotation>
+            <ScaleX>1</ScaleX>
+            <ScaleY>1</ScaleY>
+            <SkewX>0</SkewX>
+            <SkewY>0</SkewY>
+            <FlipX>false</FlipX>
+            <FlipY>false</FlipY>
+            <Opacity>1</Opacity>
+            <IsVisible>true</IsVisible>
+            <ZIndex>0</ZIndex>
+            <Children />
+          </Item>
+        </Children>
+        <IsScissorTestEnabled>false</IsScissorTestEnabled>
+        <ScissorRectangle>0 0 0 0</ScissorRectangle>
+      </Item>
+    </Children>
+  </Asset>
+</XnaContent>

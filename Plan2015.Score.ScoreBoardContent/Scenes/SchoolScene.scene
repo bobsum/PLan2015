@@ -1,0 +1,87 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<XnaContent xmlns:GameObjects="Bismuth.Framework.Assets.GameObjects" xmlns:Sprites="Bismuth.Framework.Assets.Sprites" xmlns:Composite="Bismuth.Framework.Assets.Composite">
+  <Asset Type="GameObjects:SceneAsset">
+    <Name>Root</Name>
+    <Class>Plan2015.Score.ScoreBoard.Scenes.SchoolScene, Plan2015.Score.ScoreBoard</Class>
+    <Position>0 0</Position>
+    <Rotation>0</Rotation>
+    <ScaleX>1</ScaleX>
+    <ScaleY>1</ScaleY>
+    <SkewX>0</SkewX>
+    <SkewY>0</SkewY>
+    <FlipX>false</FlipX>
+    <FlipY>false</FlipY>
+    <Opacity>1</Opacity>
+    <IsVisible>true</IsVisible>
+    <ZIndex>0</ZIndex>
+    <Children>
+      <Item Type="Sprites:SpriteUsingTextureAsset">
+        <Name>Background</Name>
+        <Position>0 0</Position>
+        <Rotation>0</Rotation>
+        <ScaleX>1</ScaleX>
+        <ScaleY>1</ScaleY>
+        <SkewX>0</SkewX>
+        <SkewY>0</SkewY>
+        <FlipX>false</FlipX>
+        <FlipY>false</FlipY>
+        <Opacity>1</Opacity>
+        <IsVisible>true</IsVisible>
+        <ZIndex>0</ZIndex>
+        <Children />
+        <TextureAssetName>Textures\Background</TextureAssetName>
+        <Rectangle>0 0 1600 900</Rectangle>
+        <Origin>0 0</Origin>
+        <Color>FF797979</Color>
+      </Item>
+      <Item Type="Composite:NodeReferenceAsset">
+        <Name>SchoolAgernholdt</Name>
+        <Position>64.26053 35.9858856</Position>
+        <Rotation>0</Rotation>
+        <ScaleX>1</ScaleX>
+        <ScaleY>1</ScaleY>
+        <SkewX>0</SkewX>
+        <SkewY>0</SkewY>
+        <FlipX>false</FlipX>
+        <FlipY>false</FlipY>
+        <Opacity>1</Opacity>
+        <IsVisible>true</IsVisible>
+        <ZIndex>0</ZIndex>
+        <Children />
+        <NodeAssetName>Actors\School</NodeAssetName>
+      </Item>
+      <Item Type="Composite:NodeReferenceAsset">
+        <Name>SchoolHardenberg</Name>
+        <Position>65.54573 317.447</Position>
+        <Rotation>0</Rotation>
+        <ScaleX>1</ScaleX>
+        <ScaleY>1</ScaleY>
+        <SkewX>0</SkewX>
+        <SkewY>0</SkewY>
+        <FlipX>false</FlipX>
+        <FlipY>false</FlipY>
+        <Opacity>1</Opacity>
+        <IsVisible>true</IsVisible>
+        <ZIndex>0</ZIndex>
+        <Children />
+        <NodeAssetName>Actors\School</NodeAssetName>
+      </Item>
+      <Item Type="Composite:NodeReferenceAsset">
+        <Name>SchoolRavnsborg</Name>
+        <Position>66.83095 602.7638</Position>
+        <Rotation>0</Rotation>
+        <ScaleX>1</ScaleX>
+        <ScaleY>1</ScaleY>
+        <SkewX>0</SkewX>
+        <SkewY>0</SkewY>
+        <FlipX>false</FlipX>
+        <FlipY>false</FlipY>
+        <Opacity>1</Opacity>
+        <IsVisible>true</IsVisible>
+        <ZIndex>0</ZIndex>
+        <Children />
+        <NodeAssetName>Actors\School</NodeAssetName>
+      </Item>
+    </Children>
+  </Asset>
+</XnaContent>
