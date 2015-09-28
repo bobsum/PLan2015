@@ -37,20 +37,20 @@ namespace Plan2015.Data.Migrations
             context.Houses.AddOrUpdate(h => h.Name, houses);
 
             context.Scouts.AddOrUpdate(s => s.Name,
-                new Scout { Name = "Spejder 1", Rfid = "5B00338152BA", House = houses[0]},
-                new Scout { Name = "Spejder 2", Rfid = "5B00338152BB", House = houses[0]},
-                new Scout { Name = "Spejder 3", Rfid = "5B00338152BC", House = houses[0]},
-                new Scout { Name = "Spejder 4", Rfid = "5B00338152BD", House = houses[0]},
-                new Scout { Name = "Spejder 5", Rfid = "5B00338152BE", House = houses[0]},
-                new Scout { Name = "Spejder 6", Rfid = "5B00338152BF", House = houses[0]},
-                new Scout { Name = "Spejder 7", Rfid = "5B00338152CA", House = houses[0]},
-                new Scout { Name = "Spejder 8", Rfid = "5B00338152CB", House = houses[1]},
-                new Scout { Name = "Spejder 9", Rfid = "5B00338152CC", House = houses[1]},
+                new Scout { Name = "Spejder 1", Rfid = "0003375441", House = houses[0]},
+                new Scout { Name = "Spejder 2", Rfid = "0003375442", House = houses[0]},
+                new Scout { Name = "Spejder 3", Rfid = "0003375443", House = houses[0]},
+                new Scout { Name = "Spejder 4", Rfid = "0003375444", House = houses[0]},
+                new Scout { Name = "Spejder 5", Rfid = "0003375445", House = houses[0]},
+                new Scout { Name = "Spejder 6", Rfid = "0003375446", House = houses[0]},
+                new Scout { Name = "Spejder 7", Rfid = "0003375447", House = houses[0]},
+                new Scout { Name = "Spejder 8", Rfid = "0003375448", House = houses[1]},
+                new Scout { Name = "Spejder 9", Rfid = "0003375449", House = houses[1]},
                 );
 
             context.TeamMembers.AddOrUpdate(t => t.Name,
-                new TeamMember { Name = "TeamMember 1", Rfid = "3B00338152BB" },
-                new TeamMember { Name = "TeamMember 2", Rfid = "4B00338152BB" }
+                new TeamMember { Name = "TeamMember 1", Rfid = "0003375431" },
+                new TeamMember { Name = "TeamMember 2", Rfid = "0003375432" }
                 );
         }*/
     }

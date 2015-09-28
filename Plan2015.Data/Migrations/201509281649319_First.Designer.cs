@@ -7,13 +7,13 @@ namespace Plan2015.Data.Migrations
     using System.Resources;
     
     [GeneratedCode("EntityFramework.Migrations", "6.1.3-40302")]
-    public sealed partial class RenameLesson2Activities : IMigrationMetadata
+    public sealed partial class First : IMigrationMetadata
     {
-        private readonly ResourceManager Resources = new ResourceManager(typeof(RenameLesson2Activities));
+        private readonly ResourceManager Resources = new ResourceManager(typeof(First));
         
         string IMigrationMetadata.Id
         {
-            get { return "201509211707218_RenameLesson2Activities"; }
+            get { return "201509281649319_First"; }
         }
         
         string IMigrationMetadata.Source
