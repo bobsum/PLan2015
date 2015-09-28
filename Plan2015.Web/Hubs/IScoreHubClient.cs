@@ -1,7 +1,10 @@
-﻿namespace Plan2015.Web.Hubs
+﻿using System.Collections.Generic;
+using Plan2015.Dtos;
+
+namespace Plan2015.Web.Hubs
 {
     public interface IScoreHubClient
     {
-        void Updated();
+        void Updated(IEnumerable<SchoolScoreDto> getScore);
     }
 }

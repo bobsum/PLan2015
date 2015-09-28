@@ -186,14 +186,13 @@
     <Compile Include="Controllers\Api\HouseController.cs" />
     <Compile Include="Filters\InvalidModelStateFilterAttribute.cs" />
     <Compile Include="Hubs\ActivityHub.cs" />
+    <Compile Include="ScoreCalculator.cs" />
     <Compile Include="Hubs\ScoreHub.cs" />
     <Compile Include="Hubs\TurnoutPointHub.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Styles\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <ProjectReference Include="..\Plan2015.Data\Plan2015.Data.csproj">
       <Project>{FBB32C73-A98F-4CE1-8E99-1F86FB443F8A}</Project>

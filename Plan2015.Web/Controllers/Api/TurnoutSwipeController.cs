@@ -57,14 +57,13 @@ namespace Plan2015.Web.Controllers.Api
                         House = scout.House,
                         TeamMember = teamMember
                     };
-                    //Todo call hub
-                    //builder.AppendLine(string.Format("{0}/{1} har fået {2} points", scout.House.Name, scout.Name, point.Amount));
                     Db.TurnoutPoints.Add(point);
                     await Db.SaveChangesAsync();
-                    //todo Call Score Hub
+                    //Todo call hub
+                    //builder.AppendLine(string.Format("{0}/{1} har fået {2} points", scout.House.Name, scout.Name, point.Amount));
                 }
-            //Todo Call Hub
-            return Ok();
+                ScoreHub.Clients.All.Updated(Calculator.GetScore(Db));
+                return Ok();
             }
         }
     }

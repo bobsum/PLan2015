@@ -10,7 +10,7 @@ using Plan2015.Dtos;
 
 namespace Plan2015.Web.Controllers.Api
 {
-    public class PunctualityController : ApiControllerWithHub<PunctualityHub>
+    public class PunctualityController : ApiControllerWithHub<PunctualityHub, IPunctualityClient>
     {
         public async Task<IEnumerable<PunctualityDto>> GetPunctualities()
         {
@@ -44,7 +44,7 @@ namespace Plan2015.Web.Controllers.Api
             await Db.SaveChangesAsync();
 
             Hub.Clients.All.Remove(id);
-            //todo Call Score Hub
+            ScoreHub.Clients.All.Updated(Calculator.GetScore(Db));
             return Ok();
         }
 

@@ -10,7 +10,7 @@ using Plan2015.Web.Hubs;
 
 namespace Plan2015.Web.Controllers.Api
 {
-    public class MagicGamesSetupController : ApiControllerWithHub<MagicGamesSetupHub>
+    public class MagicGamesSetupController : ApiControllerWithHub<MagicGamesSetupHub, IMagicGamesSetupClient>
     {
         public async Task<IEnumerable<MagicGamesSetupDto>> GetMagicGames()
         {

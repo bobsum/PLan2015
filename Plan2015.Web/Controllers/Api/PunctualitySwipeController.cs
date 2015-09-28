@@ -47,7 +47,7 @@ namespace Plan2015.Web.Controllers.Api
                     };
                     Db.PunctualityPoints.Add(point);
                     await Db.SaveChangesAsync();
-                    //todo Call Score Hub
+                    ScoreHub.Clients.All.Updated(Calculator.GetScore(Db));
                 }
             }
             return Ok();

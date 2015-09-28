@@ -42,8 +42,6 @@ namespace Plan2015.Web.Controllers.Api
                     await Db.SaveChangesAsync();
                     //Todo call hub
                 }
-
-                //Todo Call Hub
                 return Ok();
             }
         }

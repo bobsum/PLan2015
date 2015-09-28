@@ -1,8 +1,8 @@
 ﻿using System;
 using System.Web.Http;
+using Microsoft.AspNet.SignalR;
 using Plan2015.Data;
 using Plan2015.Web.Filters;
-using Microsoft.AspNet.SignalR;
 using Plan2015.Web.Hubs;
 
 namespace Plan2015.Web.Controllers.Api
@@ -10,12 +10,14 @@ namespace Plan2015.Web.Controllers.Api
     [InvalidModelStateFilter]
     public abstract class ApiControllerWithDB : ApiController
     {
+        protected readonly ScoreCalculator Calculator = new ScoreCalculator();
+
         private readonly Lazy<DataContext> _db = new Lazy<DataContext>(
             () => new DataContext()
             );
 
-        private readonly Lazy<IHubContext> _hub = new Lazy<IHubContext>(
-            () => GlobalHost.ConnectionManager.GetHubContext<ScoreHub>()
+        private readonly Lazy<IHubContext<IScoreHubClient>> _scoreHub = new Lazy<IHubContext<IScoreHubClient>>(
+            () => GlobalHost.ConnectionManager.GetHubContext<ScoreHub, IScoreHubClient>()
         );
 
         protected DataContext Db
@@ -23,9 +25,9 @@ namespace Plan2015.Web.Controllers.Api
             get { return _db.Value; }
         }
 
-        protected IHubContext ScoreHub
+        protected IHubContext<IScoreHubClient>ScoreHub
         {
-            get { return _hub.Value; }
+            get { return _scoreHub.Value; }
         }
     }
 }

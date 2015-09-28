@@ -45,7 +45,7 @@ namespace Plan2015.Data.Migrations
                 new Scout { Name = "Spejder 6", Rfid = "0003375446", House = houses[0]},
                 new Scout { Name = "Spejder 7", Rfid = "0003375447", House = houses[0]},
                 new Scout { Name = "Spejder 8", Rfid = "0003375448", House = houses[1]},
-                new Scout { Name = "Spejder 9", Rfid = "0003375449", House = houses[1]},
+                new Scout { Name = "Spejder 9", Rfid = "0003375449", House = houses[1]}
                 );
 
             context.TeamMembers.AddOrUpdate(t => t.Name,
