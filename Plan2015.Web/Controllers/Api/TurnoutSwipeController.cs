@@ -61,6 +61,7 @@ namespace Plan2015.Web.Controllers.Api
                     //builder.AppendLine(string.Format("{0}/{1} har fået {2} points", scout.House.Name, scout.Name, point.Amount));
                     Db.TurnoutPoints.Add(point);
                     await Db.SaveChangesAsync();
+                    //todo Call Score Hub
                 }
             //Todo Call Hub
             return Ok();

@@ -43,6 +43,7 @@
     <Compile Include="ActivityDto.cs" />
     <Compile Include="ActivityPointDto.cs" />
     <Compile Include="HouseDto.cs" />
+    <Compile Include="HouseScoreDto.cs" />
     <Compile Include="MagicGamesMarkerSwipeDto.cs" />
     <Compile Include="MagicGamesSetupDto.cs" />
     <Compile Include="MagicGamesIntervalDto.cs" />
@@ -50,6 +51,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="PunctualityDto.cs" />
     <Compile Include="PunctualitySwipeDto.cs" />
+    <Compile Include="SchoolScoreDto.cs" />
     <Compile Include="TurnoutPointDto.cs" />
     <Compile Include="TurnoutSwipeDto.cs" />
   </ItemGroup>

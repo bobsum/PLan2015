@@ -43,7 +43,7 @@ namespace Plan2015.Web.Controllers.Api
             {
                 HouseId = s.Id,
                 HouseName = s.Name,
-                Intervals = s.Scouts.Select(si => new MagicGamesIntervalDto
+                Intervals = s.Scouts.Where(si => !si.Home).Select(si => new MagicGamesIntervalDto
                 {
                     ScoutId = si.Id,
                     ScoutName = si.Name,

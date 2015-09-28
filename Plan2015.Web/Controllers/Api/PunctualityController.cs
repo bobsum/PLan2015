@@ -44,7 +44,7 @@ namespace Plan2015.Web.Controllers.Api
             await Db.SaveChangesAsync();
 
             Hub.Clients.All.Remove(id);
-
+            //todo Call Score Hub
             return Ok();
         }
 

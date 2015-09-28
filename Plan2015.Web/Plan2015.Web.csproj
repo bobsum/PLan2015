@@ -173,6 +173,7 @@
     <Compile Include="Controllers\Api\MagicGamesSetupController.cs" />
     <Compile Include="Controllers\Api\MagicGamesScoreController.cs" />
     <Compile Include="Controllers\Api\PunctualityController.cs" />
+    <Compile Include="Hubs\IScoreHubClient.cs" />
     <Compile Include="Hubs\ITurnoutPointClient.cs" />
     <Compile Include="Hubs\PunctualityHub.cs" />
     <Compile Include="Controllers\Api\PunctualitySwipeController.cs" />
@@ -184,6 +185,7 @@
     <Compile Include="Controllers\Api\HouseController.cs" />
     <Compile Include="Filters\InvalidModelStateFilterAttribute.cs" />
     <Compile Include="Hubs\ActivityHub.cs" />
+    <Compile Include="Hubs\ScoreHub.cs" />
     <Compile Include="Hubs\TurnoutPointHub.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
@@ -199,6 +201,10 @@
     <ProjectReference Include="..\Plan2015.Dtos\Plan2015.Dtos.csproj">
       <Project>{848AA55E-0C27-4447-95AE-647032864390}</Project>
       <Name>Plan2015.Dtos</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Plan2015.Score.MockServer\Plan2015.Score.MockServer.csproj">
+      <Project>{F2C4C5DD-9861-418A-BD1D-3035B5278A6A}</Project>
+      <Name>Plan2015.Score.MockServer</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
