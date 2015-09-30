@@ -10,9 +10,9 @@ namespace Plan2015.Score.Client
     {
         private readonly IDictionary<int, SchoolScore> _schoolScores = new Dictionary<int, SchoolScore>();
 
-        public ScoreClient()
+        public ScoreClient(string url = "http://localhost:2015/")
         {
-            var connection = new HubConnection("http://localhost:2015/");
+            var connection = new HubConnection(url);
 
             var hub = connection.CreateHubProxy("ScoreHub");
 
