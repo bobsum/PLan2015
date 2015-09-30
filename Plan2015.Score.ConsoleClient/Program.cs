@@ -1,4 +1,5 @@
 ﻿using System;
+using Plan2015.Score.Client;
 
 namespace Plan2015.Score.ConsoleClient
 {
