@@ -46,21 +46,10 @@
       <Importer>XmlImporter</Importer>
       <Processor>PassThroughProcessor</Processor>
     </Compile>
-    <Compile Include="Fonts\CurlzMT.spritefont">
-      <Name>CurlzMT</Name>
-      <Importer>FontDescriptionImporter</Importer>
-      <Processor>FontDescriptionProcessor</Processor>
-    </Compile>
     <Compile Include="Fonts\Gabriola.spritefont">
       <Name>Gabriola</Name>
       <Importer>FontDescriptionImporter</Importer>
       <Processor>FontDescriptionProcessor</Processor>
-    </Compile>
-    <Compile Include="Fonts\HighTowerText.spritefont">
-      <Name>HighTowerText</Name>
-      <Importer>FontDescriptionImporter</Importer>
-      <Processor>FontDescriptionProcessor</Processor>
-      <SubType>Designer</SubType>
     </Compile>
     <Compile Include="Scenes\SchoolScene.scene">
       <Name>SchoolScene</Name>
