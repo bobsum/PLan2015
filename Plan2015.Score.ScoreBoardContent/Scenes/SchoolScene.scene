@@ -34,9 +34,10 @@
         <Origin>0 0</Origin>
         <Color>FF797979</Color>
       </Item>
-      <Item Type="Composite:NodeReferenceAsset">
-        <Name>SchoolAgernholdt</Name>
-        <Position>64.26053 35.9858856</Position>
+      <Item>
+        <Name>SchoolsLayer</Name>
+        <Class>Plan2015.Score.ScoreBoard.Actors.SortByScoreList, Plan2015.Score.ScoreBoard</Class>
+        <Position>0 0</Position>
         <Rotation>0</Rotation>
         <ScaleX>1</ScaleX>
         <ScaleY>1</ScaleY>
@@ -47,40 +48,56 @@
         <Opacity>1</Opacity>
         <IsVisible>true</IsVisible>
         <ZIndex>0</ZIndex>
-        <Children />
-        <NodeAssetName>Actors\School</NodeAssetName>
-      </Item>
-      <Item Type="Composite:NodeReferenceAsset">
-        <Name>SchoolHardenberg</Name>
-        <Position>65.54573 317.447</Position>
-        <Rotation>0</Rotation>
-        <ScaleX>1</ScaleX>
-        <ScaleY>1</ScaleY>
-        <SkewX>0</SkewX>
-        <SkewY>0</SkewY>
-        <FlipX>false</FlipX>
-        <FlipY>false</FlipY>
-        <Opacity>1</Opacity>
-        <IsVisible>true</IsVisible>
-        <ZIndex>0</ZIndex>
-        <Children />
-        <NodeAssetName>Actors\School</NodeAssetName>
-      </Item>
-      <Item Type="Composite:NodeReferenceAsset">
-        <Name>SchoolRavnsborg</Name>
-        <Position>66.83095 602.7638</Position>
-        <Rotation>0</Rotation>
-        <ScaleX>1</ScaleX>
-        <ScaleY>1</ScaleY>
-        <SkewX>0</SkewX>
-        <SkewY>0</SkewY>
-        <FlipX>false</FlipX>
-        <FlipY>false</FlipY>
-        <Opacity>1</Opacity>
-        <IsVisible>true</IsVisible>
-        <ZIndex>0</ZIndex>
-        <Children />
-        <NodeAssetName>Actors\School</NodeAssetName>
+        <Children>
+          <Item Type="Composite:NodeReferenceAsset">
+            <Name>SchoolAgernholdt</Name>
+            <Position>800 150</Position>
+            <Rotation>0</Rotation>
+            <ScaleX>1</ScaleX>
+            <ScaleY>1</ScaleY>
+            <SkewX>0</SkewX>
+            <SkewY>0</SkewY>
+            <FlipX>false</FlipX>
+            <FlipY>false</FlipY>
+            <Opacity>1</Opacity>
+            <IsVisible>true</IsVisible>
+            <ZIndex>0</ZIndex>
+            <Children />
+            <NodeAssetName>Actors\School</NodeAssetName>
+          </Item>
+          <Item Type="Composite:NodeReferenceAsset">
+            <Name>SchoolHardenberg</Name>
+            <Position>800 450</Position>
+            <Rotation>0</Rotation>
+            <ScaleX>1</ScaleX>
+            <ScaleY>1</ScaleY>
+            <SkewX>0</SkewX>
+            <SkewY>0</SkewY>
+            <FlipX>false</FlipX>
+            <FlipY>false</FlipY>
+            <Opacity>1</Opacity>
+            <IsVisible>true</IsVisible>
+            <ZIndex>0</ZIndex>
+            <Children />
+            <NodeAssetName>Actors\School</NodeAssetName>
+          </Item>
+          <Item Type="Composite:NodeReferenceAsset">
+            <Name>SchoolRavnsborg</Name>
+            <Position>800 750</Position>
+            <Rotation>0</Rotation>
+            <ScaleX>1</ScaleX>
+            <ScaleY>1</ScaleY>
+            <SkewX>0</SkewX>
+            <SkewY>0</SkewY>
+            <FlipX>false</FlipX>
+            <FlipY>false</FlipY>
+            <Opacity>1</Opacity>
+            <IsVisible>true</IsVisible>
+            <ZIndex>0</ZIndex>
+            <Children />
+            <NodeAssetName>Actors\School</NodeAssetName>
+          </Item>
+        </Children>
       </Item>
     </Children>
   </Asset>

@@ -3,6 +3,8 @@ using Bismuth.Framework.Scenes;
 using Bismuth.Framework.Sprites;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using Plan2015.Score.Client;
+using Plan2015.Score.ScoreBoard.Mocks;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -21,9 +23,11 @@ namespace Plan2015.Score.ScoreBoard.Scenes
 
         public INode Root { get; private set; }
 
+        public IScoreClient ScoreClient { get; private set; }
+
         public override void Initialize()
         {
-            
+            ScoreClient = new ScoreClientMock();
         }
 
         public override void LoadContent()
@@ -33,6 +37,9 @@ namespace Plan2015.Score.ScoreBoard.Scenes
 
         public override void Update(GameTime gameTime)
         {
+            ScoreClientMock scoreClientMock = ScoreClient as ScoreClientMock;
+            if (scoreClientMock != null) scoreClientMock.Update(gameTime);
+
             NodeTree.Update(Root, gameTime);
         }
 

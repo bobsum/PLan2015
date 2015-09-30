@@ -19,6 +19,8 @@ namespace Plan2015.Score.ScoreBoard.Actors
         public SpriteFont Font { get; private set; }
         public Animation Hover { get; private set; }
 
+        public int Score { get; set; }
+
         public INode ScorePosition { get; set; }
 
         public string LogoTexture { get; set; }
@@ -42,7 +44,12 @@ namespace Plan2015.Score.ScoreBoard.Actors
 
         public virtual void Draw(ISpriteBatch spriteBatch)
         {
-            spriteBatch.DrawString(Font, "123", ScorePosition.WorldPosition, Color.White);
+            string scoreString = Score.ToString();
+
+            Vector2 measure = Font.MeasureString(scoreString);
+            Vector2 worldPosition = ScorePosition.WorldPosition - new Vector2(measure.X, measure.Y * 0.5f);
+
+            spriteBatch.DrawString(Font, scoreString.ToString(), worldPosition, Color.White);
         }
 
         public virtual void Draw(PrimitiveBatch primitiveBatch)

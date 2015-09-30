@@ -31,7 +31,7 @@
         <Children>
           <Item Type="Sprites:SpriteUsingTextureAsset">
             <Name>Logo</Name>
-            <Position>397 -1</Position>
+            <Position>-180 0</Position>
             <Rotation>0</Rotation>
             <ScaleX>1</ScaleX>
             <ScaleY>1</ScaleY>
@@ -45,12 +45,12 @@
             <Children />
             <TextureAssetName>Textures\Agernholdt</TextureAssetName>
             <Rectangle>0 0 256 256</Rectangle>
-            <Origin>0 0</Origin>
+            <Origin>128 128</Origin>
             <Color>FFFFFFFF</Color>
           </Item>
           <Item>
             <Name>Score</Name>
-            <Position>92 -174</Position>
+            <Position>-430 0</Position>
             <Rotation>0</Rotation>
             <ScaleX>1</ScaleX>
             <ScaleY>1</ScaleY>

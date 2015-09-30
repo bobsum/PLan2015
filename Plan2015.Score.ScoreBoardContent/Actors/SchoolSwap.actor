@@ -1,0 +1,50 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<XnaContent xmlns:GameObjects="Bismuth.Framework.Assets.GameObjects">
+  <Asset Type="GameObjects:ActorAsset">
+    <Name>Root</Name>
+    <Class>Plan2015.Score.ScoreBoard.Actors.Swap, Plan2015.Score.ScoreBoard</Class>
+    <Position>0 0</Position>
+    <Rotation>0</Rotation>
+    <ScaleX>1</ScaleX>
+    <ScaleY>1</ScaleY>
+    <SkewX>0</SkewX>
+    <SkewY>0</SkewY>
+    <FlipX>false</FlipX>
+    <FlipY>false</FlipY>
+    <Opacity>1</Opacity>
+    <IsVisible>true</IsVisible>
+    <ZIndex>0</ZIndex>
+    <Children>
+      <Item>
+        <Name>A</Name>
+        <Position>0 -150</Position>
+        <Rotation>0</Rotation>
+        <ScaleX>1</ScaleX>
+        <ScaleY>1</ScaleY>
+        <SkewX>0</SkewX>
+        <SkewY>0</SkewY>
+        <FlipX>false</FlipX>
+        <FlipY>false</FlipY>
+        <Opacity>1</Opacity>
+        <IsVisible>true</IsVisible>
+        <ZIndex>0</ZIndex>
+        <Children />
+      </Item>
+      <Item>
+        <Name>B</Name>
+        <Position>0 150</Position>
+        <Rotation>0</Rotation>
+        <ScaleX>1</ScaleX>
+        <ScaleY>1</ScaleY>
+        <SkewX>0</SkewX>
+        <SkewY>0</SkewY>
+        <FlipX>false</FlipX>
+        <FlipY>false</FlipY>
+        <Opacity>1</Opacity>
+        <IsVisible>true</IsVisible>
+        <ZIndex>0</ZIndex>
+        <Children />
+      </Item>
+    </Children>
+  </Asset>
+</XnaContent>

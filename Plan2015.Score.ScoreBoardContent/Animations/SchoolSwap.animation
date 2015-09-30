@@ -1,0 +1,105 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<XnaContent xmlns:Animations="Bismuth.Framework.Assets.Animations" xmlns:EasingFunctions="Bismuth.Framework.Animations.EasingFunctions">
+  <Asset Type="Animations:AnimationAsset">
+    <NodeAssetName>Actors\SchoolSwap</NodeAssetName>
+    <Mode>Once</Mode>
+    <Direction>Forward</Direction>
+    <Fps>60</Fps>
+    <FrameCount>60</FrameCount>
+    <Timelines>
+      <Item>
+        <TargetName>B</TargetName>
+        <PropertyTimelineType>Bismuth.Framework.Animations.Timelines.ScaleTimeline, Bismuth.Framework</PropertyTimelineType>
+        <BeginTime>0</BeginTime>
+        <EndTime>60</EndTime>
+        <Duration>60</Duration>
+        <KeyFrames>
+          <Item>
+            <FillBehavior>HoldEnd</FillBehavior>
+            <EasingFunction Type="EasingFunctions:LinearEase">
+              <EasingMode>EaseIn</EasingMode>
+            </EasingFunction>
+            <Time>0</Time>
+            <Value Type="float">1</Value>
+          </Item>
+          <Item>
+            <FillBehavior>HoldEnd</FillBehavior>
+            <EasingFunction Type="EasingFunctions:LinearEase">
+              <EasingMode>EaseIn</EasingMode>
+            </EasingFunction>
+            <Time>30</Time>
+            <Value Type="float">1.5</Value>
+          </Item>
+          <Item>
+            <FillBehavior>HoldEnd</FillBehavior>
+            <EasingFunction Type="EasingFunctions:LinearEase">
+              <EasingMode>EaseIn</EasingMode>
+            </EasingFunction>
+            <Time>60</Time>
+            <Value Type="float">1</Value>
+          </Item>
+        </KeyFrames>
+      </Item>
+      <Item>
+        <TargetName>A</TargetName>
+        <PropertyTimelineType>Bismuth.Framework.Animations.Timelines.PositionYTimeline, Bismuth.Framework</PropertyTimelineType>
+        <BeginTime>0</BeginTime>
+        <EndTime>60</EndTime>
+        <Duration>60</Duration>
+        <KeyFrames>
+          <Item>
+            <FillBehavior>HoldEnd</FillBehavior>
+            <EasingFunction Type="EasingFunctions:LinearEase">
+              <EasingMode>EaseIn</EasingMode>
+            </EasingFunction>
+            <Time>0</Time>
+            <Value Type="float">-150</Value>
+          </Item>
+          <Item>
+            <FillBehavior>HoldEnd</FillBehavior>
+            <EasingFunction Type="EasingFunctions:BounceEase">
+              <EasingMode>EaseOut</EasingMode>
+              <Bounces>2</Bounces>
+              <Bounciness>4</Bounciness>
+            </EasingFunction>
+            <Time>4</Time>
+            <Value Type="float">-150</Value>
+          </Item>
+          <Item>
+            <FillBehavior>HoldEnd</FillBehavior>
+            <EasingFunction Type="EasingFunctions:LinearEase">
+              <EasingMode>EaseIn</EasingMode>
+            </EasingFunction>
+            <Time>60</Time>
+            <Value Type="float">150</Value>
+          </Item>
+        </KeyFrames>
+      </Item>
+      <Item>
+        <TargetName>B</TargetName>
+        <PropertyTimelineType>Bismuth.Framework.Animations.Timelines.PositionYTimeline, Bismuth.Framework</PropertyTimelineType>
+        <BeginTime>0</BeginTime>
+        <EndTime>60</EndTime>
+        <Duration>60</Duration>
+        <KeyFrames>
+          <Item>
+            <FillBehavior>HoldEnd</FillBehavior>
+            <EasingFunction Type="EasingFunctions:LinearEase">
+              <EasingMode>EaseIn</EasingMode>
+            </EasingFunction>
+            <Time>0</Time>
+            <Value Type="float">150</Value>
+          </Item>
+          <Item>
+            <FillBehavior>HoldEnd</FillBehavior>
+            <EasingFunction Type="EasingFunctions:LinearEase">
+              <EasingMode>EaseIn</EasingMode>
+            </EasingFunction>
+            <Time>60</Time>
+            <Value Type="float">-150</Value>
+          </Item>
+        </KeyFrames>
+      </Item>
+    </Timelines>
+  </Asset>
+</XnaContent>

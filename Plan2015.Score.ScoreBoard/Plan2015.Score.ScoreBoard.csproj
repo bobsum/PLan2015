@@ -9,8 +9,7 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>Plan2015.Score.ScoreBoard</RootNamespace>
     <AssemblyName>Plan2015.Score.ScoreBoard</AssemblyName>
-    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
-    <TargetFrameworkProfile>Client</TargetFrameworkProfile>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <XnaFrameworkVersion>v4.0</XnaFrameworkVersion>
     <XnaPlatform>Windows</XnaPlatform>
     <XnaProfile>Reach</XnaProfile>
@@ -75,9 +74,14 @@
     <Reference Include="System.Net" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Actors\House.cs" />
     <Compile Include="Actors\School.cs" />
+    <Compile Include="Actors\SortByScoreList.cs" />
+    <Compile Include="Actors\SortedList.cs" />
+    <Compile Include="Actors\Swap.cs" />
     <Compile Include="Common\FileHelper.cs" />
     <Compile Include="Common\Timer.cs" />
+    <Compile Include="Mocks\ScoreClientMock.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="MainGame.cs" />
@@ -99,6 +103,14 @@
     <ProjectReference Include="..\Bismuth.Framework\Bismuth.Framework.csproj">
       <Project>{a899e855-f83f-4213-89d7-4e4c411b5137}</Project>
       <Name>Bismuth.Framework</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Plan2015.Dtos\Plan2015.Dtos.csproj">
+      <Project>{848aa55e-0c27-4447-95ae-647032864390}</Project>
+      <Name>Plan2015.Dtos</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Plan2015.Score.Client\Plan2015.Score.Client.csproj">
+      <Project>{1a8ae396-944c-4e6c-99ed-254fec82aedf}</Project>
+      <Name>Plan2015.Score.Client</Name>
     </ProjectReference>
     <ProjectReference Include="..\Plan2015.Score.ScoreBoardContent\Plan2015.Score.ScoreBoardContent.contentproj">
       <Name>Plan2015.Score.ScoreBoardContent</Name>
