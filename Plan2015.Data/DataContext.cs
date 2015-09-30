@@ -10,7 +10,7 @@ namespace Plan2015.Data
         public DataContext() : base("Plan2015")
         {
             //Configuration.ProxyCreationEnabled = false;
-            Database.Log = s => Debug.WriteLine(s);
+            //Database.Log = s => Debug.WriteLine(s);
         }
 
         public DbSet<TeamMember> TeamMembers { get; set; }
