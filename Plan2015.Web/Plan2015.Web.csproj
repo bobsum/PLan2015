@@ -202,10 +202,6 @@
       <Project>{848AA55E-0C27-4447-95AE-647032864390}</Project>
       <Name>Plan2015.Dtos</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Plan2015.Score.MockServer\Plan2015.Score.MockServer.csproj">
-      <Project>{F2C4C5DD-9861-418A-BD1D-3035B5278A6A}</Project>
-      <Name>Plan2015.Score.MockServer</Name>
-    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <TypeScriptCompile Include="Scripts\App.ts" />
