@@ -43,16 +43,6 @@ namespace Plan2015.Score.Client
                 }
                 score.UpdateHouseScores(school.Houses);
             }
-
-            Console.Clear();
-            foreach (var schoolScore in SchoolScores)
-            {
-                Console.WriteLine("{0} : {1}", schoolScore.Name, schoolScore.Amount);
-                foreach (var houseScore in schoolScore.HouseScores)
-                {
-                    Console.WriteLine("{0} : {1}", houseScore.Name, houseScore.Amount);
-                }
-            }
         }
 
         public IEnumerable<SchoolScore> SchoolScores
