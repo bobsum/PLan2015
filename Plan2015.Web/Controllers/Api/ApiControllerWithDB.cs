@@ -10,7 +10,7 @@ namespace Plan2015.Web.Controllers.Api
     [InvalidModelStateFilter]
     public abstract class ApiControllerWithDB : ApiController
     {
-        protected readonly ScoreCalculator Calculator = new ScoreCalculator();
+        protected readonly Repository Repository = new Repository();
 
         private readonly Lazy<DataContext> _db = new Lazy<DataContext>(
             () => new DataContext()

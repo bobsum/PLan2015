@@ -1,6 +1,4 @@
-﻿using System;
-using System.Diagnostics;
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
 using Microsoft.AspNet.SignalR;
 using Plan2015.Data;
 
@@ -10,11 +8,10 @@ namespace Plan2015.Web.Hubs
     {
         public override Task OnConnected()
         {
-            var calculator = new ScoreCalculator();
+            var repository = new Repository();
             using (var db = new DataContext())
             {
-                Clients.Caller.Updated(calculator.GetScore(db));
-                Debug.WriteLine("Hello");
+                Clients.Caller.Updated(repository.GetScore(db));
             }
             return base.OnConnected();
         }

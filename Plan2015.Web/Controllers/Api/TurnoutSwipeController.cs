@@ -62,7 +62,7 @@ namespace Plan2015.Web.Controllers.Api
                     //Todo call hub
                     //builder.AppendLine(string.Format("{0}/{1} har fået {2} points", scout.House.Name, scout.Name, point.Amount));
                 }
-                ScoreHub.Clients.All.Updated(Calculator.GetScore(Db));
+                ScoreHub.Clients.All.Updated(Repository.GetScore(Db));
                 return Ok();
             }
         }

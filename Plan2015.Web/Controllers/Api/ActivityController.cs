@@ -61,7 +61,7 @@ namespace Plan2015.Web.Controllers.Api
             dto = await Db.Activities.Select(ToDto()).SingleAsync(l => l.Id == dto.Id);
             
             Hub.Clients.All.Update(dto);
-            ScoreHub.Clients.All.Updated(Calculator.GetScore(Db));
+            ScoreHub.Clients.All.Updated(Repository.GetScore(Db));
             return dto;
         }
 
@@ -73,7 +73,7 @@ namespace Plan2015.Web.Controllers.Api
             await Db.SaveChangesAsync();
             
             Hub.Clients.All.Remove(id);
-            ScoreHub.Clients.All.Updated(Calculator.GetScore(Db));
+            ScoreHub.Clients.All.Updated(Repository.GetScore(Db));
             return Ok();
         }
 

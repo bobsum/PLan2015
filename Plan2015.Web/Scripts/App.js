@@ -451,6 +451,27 @@ var Punctuality;
         Index.App = App;
     })(Index = Punctuality.Index || (Punctuality.Index = {}));
 })(Punctuality || (Punctuality = {}));
+var Punctuality;
+(function (Punctuality) {
+    var Status;
+    (function (Status) {
+        var App = (function () {
+            function App(id) {
+                var _this = this;
+                this.status = ko.observableArray();
+                var hub = $.connection.punctualityStatusHub;
+                hub.client.updated = function (status) {
+                    _this.status(status);
+                };
+                $.connection.hub.start().done(function () {
+                    hub.server.setId(id);
+                });
+            }
+            return App;
+        })();
+        Status.App = App;
+    })(Status = Punctuality.Status || (Punctuality.Status = {}));
+})(Punctuality || (Punctuality = {}));
 var Helpers;
 (function (Helpers) {
     function readText(file) {

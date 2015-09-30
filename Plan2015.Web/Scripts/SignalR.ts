@@ -2,12 +2,13 @@ interface SignalR {
     activityHub: IActivityHubProxy;
     magicGamesSetupHub: IMagicGamesSetupProxy;
     punctualityHub: IPunctualityProxy;
+    punctualityStatusHub: IPunctualityStatusProxy;
+    scoreHub: IScoreProxy;
     turnoutPointHub: ITurnoutPointProxy;
 }
 
 interface IActivityHubProxy {
     client: IActivityClient;
-    //server: IActivityServer;
 }
 
 interface IActivityClient {
@@ -15,9 +16,6 @@ interface IActivityClient {
     update: (activity: IActivityDto) => void;
     remove: (id: number) => void;
 }
-
-/*interface IActivityServer {
-}*/
 
 interface IMagicGamesSetupProxy {
     client: IMagicGamesSetupClient;
@@ -34,6 +32,27 @@ interface IPunctualityProxy {
 interface IPunctualityClient {
     add: (punctuality: IPunctualityDto) => void;
     remove: (id: number) => void;
+}
+
+interface IPunctualityStatusServer {
+    setId: (id: number) => void
+}
+
+interface IPunctualityStatusProxy {
+    client: IPunctualityStatusClient;
+    server: IPunctualityStatusServer;
+}
+
+interface IPunctualityStatusClient {
+    updated: (status: IPunctualityStatusDto[]) => void
+}
+
+interface IScoreProxy {
+    client: IScoreClient;
+}
+
+interface IScoreClient {
+    updated: (status: ISchoolScoreDto[]) => void
 }
 
 interface ITurnoutPointProxy {

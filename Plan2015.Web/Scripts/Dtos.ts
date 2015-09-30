@@ -1,6 +1,8 @@
-﻿interface IHouseDto {
+﻿interface IActivityDto {
     id: number;
     name: string;
+    totalPoints: number;
+    points: Array<IActivityPointDto>;
 }
 
 interface IActivityPointDto {
@@ -10,11 +12,15 @@ interface IActivityPointDto {
     amount: number;
 }
 
-interface IActivityDto {
+interface IHouseDto {
     id: number;
     name: string;
-    totalPoints: number;
-    points: Array<IActivityPointDto>;
+}
+
+interface IHouseScoreDto {
+    id: number;
+    name: string;
+    amount: number;
 }
 
 interface IMagicGamesIntervalDto {
@@ -46,6 +52,24 @@ interface IPunctualityDto {
     name: string;
     deadline: string;
     all: boolean;
+}
+
+interface IPunctualityStatusDto {
+    houseId: number;
+    houseName: string;
+    arrived: IScoutDto[];
+    missing: IScoutDto[];
+}
+
+interface ISchoolScoreDto {
+    id: number;
+    name: string;
+    houses: IHouseScoreDto[];
+}
+
+interface IScoutDto {
+    id: number;
+    name: string;
 }
 
 interface ITurnoutSwipeDto {

@@ -469,6 +469,23 @@ module Punctuality.Index {
     }
 }
 
+module Punctuality.Status {
+    export class App {
+        status = ko.observableArray<IPunctualityStatusDto>();
+
+        constructor(id: number) {
+            var hub = $.connection.punctualityStatusHub;
+
+            hub.client.updated = status => {
+                this.status(status);
+            };
+            $.connection.hub.start().done(() => {
+                hub.server.setId(id);
+            });
+        }
+    }
+}
+
 module Helpers {
     export function readText(file: File): JQueryPromise<string> {
         var reader = new FileReader();

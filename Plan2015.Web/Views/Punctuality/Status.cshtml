@@ -1,0 +1,25 @@
+﻿@model int
+
+<!-- ko foreach: status -->
+<div class="col-xs-12 col-sm-6 col-md-3">
+    <div class="panel panel-default">
+        <div class="panel-body">
+            <span data-bind="text: houseName"></span>
+            <!-- ko foreach: arrived -->
+            <span data-bind="text : name"></span>
+            <!-- /ko -->
+            <!-- ko foreach: missing -->
+            <span data-bind="text : name"></span>
+            <!-- /ko -->
+        </div>
+    </div>
+</div>
+<!-- /ko -->
+@section Scripts
+{
+    <script type="text/javascript">
+        $(function() {
+            ko.applyBindings(new Punctuality.Status.App(@Model));
+        });
+    </script>
+}

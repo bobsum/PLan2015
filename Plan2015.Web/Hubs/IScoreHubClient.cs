@@ -5,6 +5,6 @@ namespace Plan2015.Web.Hubs
 {
     public interface IScoreHubClient
     {
-        void Updated(IEnumerable<SchoolScoreDto> getScore);
+        void Updated(IEnumerable<SchoolScoreDto> score);
     }
 }

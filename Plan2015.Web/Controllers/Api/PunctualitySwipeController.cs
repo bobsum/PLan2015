@@ -5,10 +5,11 @@ using System.Threading.Tasks;
 using System.Web.Http;
 using Plan2015.Data.Entities;
 using Plan2015.Dtos;
+using Plan2015.Web.Hubs;
 
 namespace Plan2015.Web.Controllers.Api
 {
-    public class PunctualitySwipeController : ApiControllerWithDB
+    public class PunctualitySwipeController : ApiControllerWithHub<PunctualityStatusHub,IPunctualityStatusHubClient>
     {
         public async Task<IHttpActionResult> PostPunctualitySwipe(PunctualitySwipeDto dto)
         {
@@ -26,6 +27,8 @@ namespace Plan2015.Web.Controllers.Api
 
             Db.PunctualitySwipes.Add(entity);
             await Db.SaveChangesAsync();
+
+            Hub.Clients.Group(punctuality.Id.ToString()).Updated(Repository.GetPunctualityStatus(Db, punctuality.Id));
 
             if (!Db.PunctualityPoints.Any(pp => pp.HouseId == scout.HouseId && pp.PunctualityId == punctuality.Id))
             {
@@ -47,7 +50,7 @@ namespace Plan2015.Web.Controllers.Api
                     };
                     Db.PunctualityPoints.Add(point);
                     await Db.SaveChangesAsync();
-                    ScoreHub.Clients.All.Updated(Calculator.GetScore(Db));
+                    ScoreHub.Clients.All.Updated(Repository.GetScore(Db));
                 }
             }
             return Ok();

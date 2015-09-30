@@ -44,7 +44,7 @@ namespace Plan2015.Web.Controllers.Api
             await Db.SaveChangesAsync();
 
             Hub.Clients.All.Remove(id);
-            ScoreHub.Clients.All.Updated(Calculator.GetScore(Db));
+            ScoreHub.Clients.All.Updated(Repository.GetScore(Db));
             return Ok();
         }
 
