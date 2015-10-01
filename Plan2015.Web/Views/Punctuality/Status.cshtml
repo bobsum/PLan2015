@@ -1,19 +1,15 @@
 ﻿@model int
-
-<!-- ko foreach: status -->
+<!-- ko with: status -->
+<!-- ko foreach: houses -->
 <div class="col-xs-12 col-sm-6 col-md-3">
-    <div class="panel panel-default">
-        <div class="panel-body">
-            <span data-bind="text: houseName"></span>
-            <!-- ko foreach: arrived -->
-            <span data-bind="text : name"></span>
-            <!-- /ko -->
-            <!-- ko foreach: missing -->
-            <span data-bind="text : name"></span>
-            <!-- /ko -->
-        </div>
+    <div class="panel panel-default" data-bind="css: true ? 'panel-success':'panel-danger' ">
+        <div class="panel-heading" data-bind="text: name"></div>
+        <ul class="list-group" data-bind="foreach: scouts">
+            <li class="list-group-item"><span data-bind="text: name"></span> <span class="glyphicon glyphicon-ok" data-bind="visible: arrived"></span></li>
+        </ul>
     </div>
 </div>
+<!-- /ko -->
 <!-- /ko -->
 @section Scripts
 {

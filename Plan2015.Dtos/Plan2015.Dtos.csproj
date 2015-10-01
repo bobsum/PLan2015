@@ -50,10 +50,11 @@
     <Compile Include="MagicGamesScoreDto.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="PunctualityDto.cs" />
+    <Compile Include="PunctualityStatusHouseDto.cs" />
     <Compile Include="PunctualityStatusDto.cs" />
     <Compile Include="PunctualitySwipeDto.cs" />
     <Compile Include="SchoolScoreDto.cs" />
-    <Compile Include="ScoutDto.cs" />
+    <Compile Include="PunctualityStatusScoutDto.cs" />
     <Compile Include="TurnoutPointDto.cs" />
     <Compile Include="TurnoutSwipeDto.cs" />
   </ItemGroup>

@@ -5,6 +5,6 @@ namespace Plan2015.Web.Hubs
 {
     public interface IPunctualityStatusHubClient
     {
-        void Updated(IEnumerable<PunctualityStatusDto> status);
+        void Updated(PunctualityStatusDto status);
     }
 }

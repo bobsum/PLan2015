@@ -458,7 +458,7 @@ var Punctuality;
         var App = (function () {
             function App(id) {
                 var _this = this;
-                this.status = ko.observableArray();
+                this.status = ko.observable();
                 var hub = $.connection.punctualityStatusHub;
                 hub.client.updated = function (status) {
                     _this.status(status);

@@ -44,7 +44,7 @@ interface IPunctualityStatusProxy {
 }
 
 interface IPunctualityStatusClient {
-    updated: (status: IPunctualityStatusDto[]) => void
+    updated: (status: IPunctualityStatusDto) => void
 }
 
 interface IScoreProxy {

@@ -55,10 +55,16 @@ interface IPunctualityDto {
 }
 
 interface IPunctualityStatusDto {
-    houseId: number;
-    houseName: string;
-    arrived: IScoutDto[];
-    missing: IScoutDto[];
+    id: number;
+    name: string;
+    all: boolean;
+    houses: IPunctualityStatusHouseDto[];
+}
+
+interface IPunctualityStatusHouseDto {
+    id: number;
+    name: string;
+    scouts: IPunctualityStatusScoutDto[];
 }
 
 interface ISchoolScoreDto {
@@ -67,9 +73,10 @@ interface ISchoolScoreDto {
     houses: IHouseScoreDto[];
 }
 
-interface IScoutDto {
+interface IPunctualityStatusScoutDto {
     id: number;
     name: string;
+    arrived: boolean;
 }
 
 interface ITurnoutSwipeDto {

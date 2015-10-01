@@ -5,12 +5,12 @@ namespace Plan2015.Dtos
 {
     public class PunctualityStatusDto
     {
-        public int HouseId { get; set; }
+        public int Id { get; set; }
         [Required]
-        public string HouseName { get; set; }
+        public string Name { get; set; }
         [Required]
-        public IEnumerable<ScoutDto> Arrived { get; set; }
+        public bool All { get; set; }
         [Required]
-        public IEnumerable<ScoutDto> Missing { get; set; }
+        public IEnumerable<PunctualityStatusHouseDto> Houses { get; set; }
     }
 }

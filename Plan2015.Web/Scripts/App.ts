@@ -471,7 +471,7 @@ module Punctuality.Index {
 
 module Punctuality.Status {
     export class App {
-        status = ko.observableArray<IPunctualityStatusDto>();
+        status = ko.observable<IPunctualityStatusDto>();
 
         constructor(id: number) {
             var hub = $.connection.punctualityStatusHub;

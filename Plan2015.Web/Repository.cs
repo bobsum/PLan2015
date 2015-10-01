@@ -55,30 +55,33 @@ namespace Plan2015.Web
                 }).ToList();
         }
 
-        public IEnumerable<PunctualityStatusDto> GetPunctualityStatus(DataContext db, int id)
+        public PunctualityStatusDto GetPunctualityStatus(DataContext db, int id)
         {
-            var scouts = db.Punctualities.Where(p => p.Id == id)
-                .SelectMany(p => p.Swipes.Where(s => s.Time < p.Deadline))
-                .Select(s => s.Scout)
-                .Distinct();
-
-            return db.Houses
-                .Select(h => new PunctualityStatusDto
+            return db.Punctualities
+                .Select(p => new
                 {
-                    HouseId = h.Id,
-                    HouseName = h.Name,
-                    Arrived = h.Scouts.Intersect(scouts).Select(s => new ScoutDto
-                    {
-                        Id = s.Id,
-                        Name = s.Name
-                    }),
-                    Missing = h.Scouts.Except(scouts).Select(s => new ScoutDto
-                    {
-                        Id = s.Id,
-                        Name = s.Name
-                    })
+                    Punctuality = p,
+                    Scouts = p.Swipes.Where(s => s.Time < p.Deadline).Select(s => s.Scout).Distinct()
                 })
-                .ToList();
+                .Select(p => new PunctualityStatusDto
+                {
+                    Id = p.Punctuality.Id,
+                    All = p.Punctuality.All,
+                    Name = p.Punctuality.Name,
+                    Houses = db.Houses
+                        .Select(h => new PunctualityStatusHouseDto
+                        {
+                            Id = h.Id,
+                            Name = h.Name,
+                            Scouts = h.Scouts.Select(s => new PunctualityStatusScoutDto
+                            {
+                                Id = s.Id,
+                                Name = s.Name,
+                                Arrived = p.Scouts.Contains(s)
+                            })
+                        })
+                }
+                ).FirstOrDefault(p => p.Id == id);
         }
     }
 }
