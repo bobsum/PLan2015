@@ -470,13 +470,32 @@ module Punctuality.Index {
 }
 
 module Punctuality.Status {
+    class HouseStatusViewModel {
+        name: string;
+        scouts: IPunctualityStatusScoutDto[];
+        arrived: number;
+
+        constructor(house: IPunctualityStatusHouseDto) {
+            this.name = house.name;
+            this.scouts = house.scouts;
+            this.arrived = ko.utils.arrayFilter(house.scouts, s => s.arrived).length;
+        }
+    }
+
     export class App {
         status = ko.observable<IPunctualityStatusDto>();
+        name = ko.observable<string>();
+        all = ko.observable<boolean>();
+        houses = ko.observableArray<HouseStatusViewModel>();
 
         constructor(id: number) {
             var hub = $.connection.punctualityStatusHub;
 
             hub.client.updated = status => {
+                this.name(status.name);
+                this.all(status.all);
+                this.houses(ko.utils.arrayMap(status.houses, h => new HouseStatusViewModel(h)));
+
                 this.status(status);
             };
             $.connection.hub.start().done(() => {

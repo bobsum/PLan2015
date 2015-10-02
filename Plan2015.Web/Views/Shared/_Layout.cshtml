@@ -6,6 +6,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
 </head>
 <body>
+@if (ViewBag.HideMenu == null)
+{
     <header class="navbar navbar-static-top">
         <div class="container">
             <ul class="nav navbar-nav">
@@ -21,8 +23,9 @@
             </ul>
         </div>
     </header>
+}
 <div class="container">
-    <h1>@ViewBag.Title</h1>
+    <h1>@if (ViewBag.HideMenu == null) {@ViewBag.Title}</h1>
     <div class="row">
         @RenderBody()
     </div>

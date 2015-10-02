@@ -455,12 +455,26 @@ var Punctuality;
 (function (Punctuality) {
     var Status;
     (function (Status) {
+        var HouseStatusViewModel = (function () {
+            function HouseStatusViewModel(house) {
+                this.name = house.name;
+                this.scouts = house.scouts;
+                this.arrived = ko.utils.arrayFilter(house.scouts, function (s) { return s.arrived; }).length;
+            }
+            return HouseStatusViewModel;
+        })();
         var App = (function () {
             function App(id) {
                 var _this = this;
                 this.status = ko.observable();
+                this.name = ko.observable();
+                this.all = ko.observable();
+                this.houses = ko.observableArray();
                 var hub = $.connection.punctualityStatusHub;
                 hub.client.updated = function (status) {
+                    _this.name(status.name);
+                    _this.all(status.all);
+                    _this.houses(ko.utils.arrayMap(status.houses, function (h) { return new HouseStatusViewModel(h); }));
                     _this.status(status);
                 };
                 $.connection.hub.start().done(function () {

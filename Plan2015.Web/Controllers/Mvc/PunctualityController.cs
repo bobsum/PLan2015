@@ -14,6 +14,7 @@ namespace Plan2015.Web.Controllers.Mvc
         public ActionResult Status(int id)
         {
             ViewBag.Title = "Punktlighed - Status";
+            ViewBag.HideMenu = true;
 
             return View(id);
         }
