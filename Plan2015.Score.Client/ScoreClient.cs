@@ -40,6 +40,7 @@ namespace Plan2015.Score.Client
                         Name = school.Name
                     };
                     _schoolScores.Add(school.Id, score);
+                    if (SchoolScoreAdded != null) SchoolScoreAdded(score);
                 }
                 score.UpdateHouseScores(school.Houses);
             }
@@ -49,5 +50,7 @@ namespace Plan2015.Score.Client
         {
             get { return _schoolScores.Values; }
         }
+
+        public Action<SchoolScore> SchoolScoreAdded { get; set; }
     }
 }

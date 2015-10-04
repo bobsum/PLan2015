@@ -11,10 +11,10 @@ using System.Threading.Tasks;
 
 namespace Plan2015.Score.ScoreBoard.Actors
 {
-    public class SortedList : Actor
+    public class ListBox : Actor
     {
-        private readonly List<INode> _items = new List<INode>();
-        public List<INode> Items { get { return _items; } }
+        private readonly List<ListBoxItem> _items = new List<ListBoxItem>();
+        public List<ListBoxItem> Items { get { return _items; } }
 
         public BoundingBox2 Area { get; set; }
 
@@ -26,17 +26,18 @@ namespace Plan2015.Score.ScoreBoard.Actors
 
         public override void Update(GameTime gameTime)
         {
-            for (int i = 0; i < Children.Count; i++)
+            for (int i = 1; i < _items.Count; i++)
             {
+                ListBoxItem itemA = _items[i - 1];
+                ListBoxItem itemB = _items[i];
+                INode contentA = itemA.Content;
+                INode contentB = itemB.Content;
 
-            }
-
-            for (int i = 1; i < 3; i++)
-            {
-                INode a = Children[i - 1];
-                INode b = Children[i];
-                if (Comparer(a, b))
+                if (Comparer(contentA, contentB))
                 {
+                    itemA.Content = null;
+                    itemB.Content = null;
+
                     //_swap.Animation.Reset();
                     //_swap.Animation.Play();
 

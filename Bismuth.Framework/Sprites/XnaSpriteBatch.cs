@@ -91,5 +91,13 @@ namespace Bismuth.Framework.Sprites
 
             _spriteBatch.DrawString(font, text, position, color);
         }
+
+        public void DrawString(SpriteFont font, string text, Vector2 position, Color color, float rotation, Vector2 origin, float scale, SpriteEffects effects, float layerDepth)
+        {
+            if (_translationCount > 0)
+                position += _translationBuffer[_translationCount - 1];
+
+            _spriteBatch.DrawString(font, text, position, color, rotation, origin, scale, effects, layerDepth);
+        }
     }
 }

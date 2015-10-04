@@ -4,6 +4,7 @@ using Bismuth.Framework.Sprites;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Plan2015.Score.Client;
+using Plan2015.Score.ScoreBoard.Actors;
 using Plan2015.Score.ScoreBoard.Mocks;
 using System;
 using System.Collections.Generic;
@@ -21,18 +22,26 @@ namespace Plan2015.Score.ScoreBoard.Scenes
 
         public MainGame Game { get; private set; }
 
-        public INode Root { get; private set; }
+        public SchoolScene Root { get; private set; }
 
         public IScoreClient ScoreClient { get; private set; }
 
         public override void Initialize()
         {
             ScoreClient = new ScoreClientMock();
+            ScoreClient.SchoolScoreAdded = SchoolScoreAdded;
+        }
+
+        private void SchoolScoreAdded(SchoolScore schoolScore)
+        {
+            School school = Game.ContentManager.Load<School>("Actors/School", true);
+            school.SchoolScore = schoolScore;
+            // TODO: Added to list box of ScoreScene.
         }
 
         public override void LoadContent()
         {
-            Root = Game.ContentManager.Load<INode>("Scenes/SchoolScene");
+            Root = Game.ContentManager.Load<SchoolScene>("Scenes/SchoolScene");
         }
 
         public override void Update(GameTime gameTime)

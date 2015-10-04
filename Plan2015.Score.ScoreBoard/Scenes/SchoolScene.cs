@@ -24,6 +24,8 @@ namespace Plan2015.Score.ScoreBoard.Scenes
 
         private bool _isSwapping = false;
 
+        public ListBox SchoolListBox { get; private set; }
+
         public override void LoadContent(IContentManager contentManager)
         {
             this.FindAll<School>(_schools);

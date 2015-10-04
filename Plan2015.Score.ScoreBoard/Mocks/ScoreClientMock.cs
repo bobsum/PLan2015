@@ -27,5 +27,7 @@ namespace Plan2015.Score.ScoreBoard.Mocks
         {
             KeyboardState ks = Keyboard.GetState();
         }
+
+        public Action<SchoolScore> SchoolScoreAdded { get; set; }
     }
 }

@@ -7,6 +7,7 @@ using Bismuth.Framework.Primitives;
 using Bismuth.Framework.Sprites;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using Plan2015.Score.Client;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -24,6 +25,8 @@ namespace Plan2015.Score.ScoreBoard.Actors
         public INode ScorePosition { get; set; }
 
         public string LogoTexture { get; set; }
+
+        public SchoolScore SchoolScore { get; set; }
 
         public override void LoadContent(IContentManager contentManager)
         {
@@ -47,9 +50,9 @@ namespace Plan2015.Score.ScoreBoard.Actors
             string scoreString = Score.ToString();
 
             Vector2 measure = Font.MeasureString(scoreString);
-            Vector2 worldPosition = ScorePosition.WorldPosition - new Vector2(measure.X, measure.Y * 0.5f);
+            Vector2 origin = new Vector2(measure.X, measure.Y * 0.5f);
 
-            spriteBatch.DrawString(Font, scoreString.ToString(), worldPosition, Color.White);
+            spriteBatch.DrawString(Font, scoreString.ToString(), ScorePosition.WorldPosition, Color.White, WorldRotation, origin, WorldScale, SpriteEffects.None, 0);
         }
 
         public virtual void Draw(PrimitiveBatch primitiveBatch)
