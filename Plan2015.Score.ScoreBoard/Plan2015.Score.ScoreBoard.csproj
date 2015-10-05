@@ -81,6 +81,10 @@
     <Compile Include="Actors\Swap.cs" />
     <Compile Include="Common\FileHelper.cs" />
     <Compile Include="Common\Timer.cs" />
+    <Compile Include="Earthquakes\EarthquakeManager.cs" />
+    <Compile Include="Earthquakes\EarthquakeX.cs" />
+    <Compile Include="Earthquakes\EarthquakeY.cs" />
+    <Compile Include="Earthquakes\IEarthquake.cs" />
     <Compile Include="Mocks\ScoreClientMock.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Program.cs" />

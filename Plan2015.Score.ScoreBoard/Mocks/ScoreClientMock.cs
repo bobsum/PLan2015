@@ -20,6 +20,10 @@ namespace Plan2015.Score.ScoreBoard.Mocks
 
         }
 
+        public void Start()
+        {
+        }
+
         public IEnumerable<SchoolScore> SchoolScores
         {
             get { return _schoolScores; }
@@ -33,6 +37,7 @@ namespace Plan2015.Score.ScoreBoard.Mocks
                 AddSchool("Agernholdt", "Rasmus", "Mads", "Peter", "Jergen");
                 AddSchool("Hardenberg", "Blablabla", "Mads", "Peter", "Jergen");
                 AddSchool("Ravnsborg", "Blumensaat", "Mads", "Peter", "Jergen");
+                Initialized();
             }
 
             if (ks.IsKeyDown(Keys.Q))
@@ -63,7 +68,7 @@ namespace Plan2015.Score.ScoreBoard.Mocks
             if (ks.IsKeyPressedOnce(Keys.D4)) school.HouseScores.ToArray()[3].Amount++;
         }
 
-        public Action<SchoolScore> SchoolScoreAdded { get; set; }
+        public Action Initialized { get; set; }
 
         private void AddSchool(string schoolName, params string[] houseNames)
         {
@@ -75,7 +80,6 @@ namespace Plan2015.Score.ScoreBoard.Mocks
             }
 
             _schoolScores.Add(school);
-            SchoolScoreAdded(school);
         }
 
         private void AddHouse(SchoolScore school, string houseName, int id)

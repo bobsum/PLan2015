@@ -5,7 +5,8 @@ namespace Plan2015.Score.Client
 {
     public interface IScoreClient
     {
-        Action<SchoolScore> SchoolScoreAdded { get; set; }
+        void Start();
+        Action Initialized { get; set; }
         IEnumerable<SchoolScore> SchoolScores { get; }
     }
 }

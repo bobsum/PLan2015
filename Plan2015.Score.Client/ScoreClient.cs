@@ -9,16 +9,21 @@ namespace Plan2015.Score.Client
     public class ScoreClient : IScoreClient
     {
         private readonly IDictionary<int, SchoolScore> _schoolScores = new Dictionary<int, SchoolScore>();
+        private readonly HubConnection _connection;
+        private bool _isInitialized;
 
         public ScoreClient(string url = "http://localhost:2015/")
         {
-            var connection = new HubConnection(url);
+            _connection = new HubConnection(url);
 
-            var hub = connection.CreateHubProxy("ScoreHub");
+            var hub = _connection.CreateHubProxy("ScoreHub");
 
             hub.On<IEnumerable<SchoolScoreDto>>("Updated", UpdateSchoolScores);
+        }
 
-            connection.Start().ContinueWith(task =>
+        public void Start()
+        {
+            _connection.Start().ContinueWith(task =>
             {
                 if (task.IsFaulted)
                 {
@@ -34,15 +39,17 @@ namespace Plan2015.Score.Client
                 SchoolScore score;
                 if (!_schoolScores.TryGetValue(school.Id, out score))
                 {
-                    score = new SchoolScore
-                    {
-                        Id = school.Id,
-                        Name = school.Name
-                    };
+                    score = new SchoolScore { Id = school.Id };
                     _schoolScores.Add(school.Id, score);
-                    if (SchoolScoreAdded != null) SchoolScoreAdded(score);
                 }
+                score.Name = school.Name;
                 score.UpdateHouseScores(school.Houses);
+            }
+
+            if (!_isInitialized)
+            {
+                if (Initialized != null) Initialized();
+                _isInitialized = true;
             }
         }
 
@@ -51,6 +58,6 @@ namespace Plan2015.Score.Client
             get { return _schoolScores.Values; }
         }
 
-        public Action<SchoolScore> SchoolScoreAdded { get; set; }
+        public Action Initialized { get; set; }
     }
 }

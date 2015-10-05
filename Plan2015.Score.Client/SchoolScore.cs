@@ -25,13 +25,10 @@ namespace Plan2015.Score.Client
                 HouseScore score;
                 if (!_houseScores.TryGetValue(house.Id, out score))
                 {
-                    score = new HouseScore
-                    {
-                        Id = house.Id,
-                        Name = house.Name
-                    };
+                    score = new HouseScore { Id = house.Id };
                     _houseScores.Add(house.Id, score);
                 }
+                score.Name = house.Name;
                 score.Amount = house.Amount;
                 amount += house.Amount;
             }

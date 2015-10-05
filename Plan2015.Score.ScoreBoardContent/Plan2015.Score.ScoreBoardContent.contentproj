@@ -76,8 +76,8 @@
       <Importer>XmlImporter</Importer>
       <Processor>PassThroughProcessor</Processor>
     </Compile>
-    <Compile Include="Fonts\Gabriola.spritefont">
-      <Name>Gabriola</Name>
+    <Compile Include="Fonts\Gabriola54.spritefont">
+      <Name>Gabriola54</Name>
       <Importer>FontDescriptionImporter</Importer>
       <Processor>FontDescriptionProcessor</Processor>
     </Compile>

@@ -4,7 +4,7 @@
     <NodeAssetName>Actors\SwapPlaceholder</NodeAssetName>
     <Mode>Once</Mode>
     <Direction>Forward</Direction>
-    <Fps>60</Fps>
+    <Fps>80</Fps>
     <FrameCount>60</FrameCount>
     <Timelines>
       <Item>
@@ -16,8 +16,10 @@
         <KeyFrames>
           <Item>
             <FillBehavior>HoldEnd</FillBehavior>
-            <EasingFunction Type="EasingFunctions:LinearEase">
-              <EasingMode>EaseIn</EasingMode>
+            <EasingFunction Type="EasingFunctions:BounceEase">
+              <EasingMode>EaseOut</EasingMode>
+              <Bounces>1</Bounces>
+              <Bounciness>3</Bounciness>
             </EasingFunction>
             <Time>0</Time>
             <Value Type="float">-30</Value>
@@ -27,7 +29,7 @@
             <EasingFunction Type="EasingFunctions:LinearEase">
               <EasingMode>EaseIn</EasingMode>
             </EasingFunction>
-            <Time>50</Time>
+            <Time>60</Time>
             <Value Type="float">30</Value>
           </Item>
         </KeyFrames>
@@ -41,8 +43,9 @@
         <KeyFrames>
           <Item>
             <FillBehavior>HoldEnd</FillBehavior>
-            <EasingFunction Type="EasingFunctions:LinearEase">
-              <EasingMode>EaseIn</EasingMode>
+            <EasingFunction Type="EasingFunctions:BackEase">
+              <EasingMode>EaseOut</EasingMode>
+              <Amplitude>0.5</Amplitude>
             </EasingFunction>
             <Time>0</Time>
             <Value Type="float">30</Value>
@@ -52,8 +55,41 @@
             <EasingFunction Type="EasingFunctions:LinearEase">
               <EasingMode>EaseIn</EasingMode>
             </EasingFunction>
-            <Time>50</Time>
+            <Time>60</Time>
             <Value Type="float">-30</Value>
+          </Item>
+        </KeyFrames>
+      </Item>
+      <Item>
+        <TargetName>B</TargetName>
+        <PropertyTimelineType>Bismuth.Framework.Animations.Timelines.ScaleTimeline, Bismuth.Framework</PropertyTimelineType>
+        <BeginTime>0</BeginTime>
+        <EndTime>60</EndTime>
+        <Duration>60</Duration>
+        <KeyFrames>
+          <Item>
+            <FillBehavior>HoldEnd</FillBehavior>
+            <EasingFunction Type="EasingFunctions:SineEase">
+              <EasingMode>EaseOut</EasingMode>
+            </EasingFunction>
+            <Time>0</Time>
+            <Value Type="float">1</Value>
+          </Item>
+          <Item>
+            <FillBehavior>HoldEnd</FillBehavior>
+            <EasingFunction Type="EasingFunctions:SineEase">
+              <EasingMode>EaseIn</EasingMode>
+            </EasingFunction>
+            <Time>10</Time>
+            <Value Type="float">1.2</Value>
+          </Item>
+          <Item>
+            <FillBehavior>HoldEnd</FillBehavior>
+            <EasingFunction Type="EasingFunctions:LinearEase">
+              <EasingMode>EaseIn</EasingMode>
+            </EasingFunction>
+            <Time>60</Time>
+            <Value Type="float">1</Value>
           </Item>
         </KeyFrames>
       </Item>

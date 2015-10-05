@@ -18,6 +18,7 @@ namespace Plan2015.Score.ScoreBoard.Actors
         public List<ListBoxItem> Items { get { return _items; } }
 
         public Func<INode, INode, bool> Comparer { get; set; }
+        public Action Swapped { get; set; }
 
         private INode _swapRoot;
         private ListBoxItem _swapA;
@@ -76,6 +77,8 @@ namespace Plan2015.Score.ScoreBoard.Actors
                 Children.Remove(_swapRoot);
 
                 _swapAnimation.Reset();
+
+                if (Swapped != null) Swapped();
             }
             else
             {

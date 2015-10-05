@@ -26,7 +26,7 @@ namespace Plan2015.Score.ScoreBoard.Actors
             NamePosition = this.Find("Name");
             ScorePosition = this.Find("Score");
 
-            Font = contentManager.Load<SpriteFont>("Fonts/Gabriola");
+            Font = contentManager.Load<SpriteFont>("Fonts/Gabriola54");
         }
 
         public void Draw(ISpriteBatch spriteBatch)

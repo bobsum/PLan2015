@@ -28,29 +28,35 @@ namespace Plan2015.Score.ScoreBoard.Scenes
 
         public override void Initialize()
         {
-            ScoreClient = new ScoreClientMock();
-            ScoreClient.SchoolScoreAdded = SchoolScoreAdded;
         }
 
-        private void SchoolScoreAdded(SchoolScore schoolScore)
+        private void Initialized()
         {
-            School school = Game.ContentManager.Load<School>("Actors/School", true);
-            school.Score = schoolScore;
-            school.Find<Sprite>("Logo").Texture = Game.ContentManager.Load<Texture2D>("Textures/" + schoolScore.Name);
-
-            foreach (HouseScore houseScore in schoolScore.HouseScores)
+            foreach (SchoolScore schoolScore in ScoreClient.SchoolScores)
             {
-                House house = Game.ContentManager.Load<House>("Actors/House", true);
-                house.Score = houseScore;
-                school.HouseListBox.Add(house);
-            }
+                School school = Game.ContentManager.Load<School>("Actors/School", true);
+                school.Score = schoolScore;
+                school.Find<Sprite>("Logo").Texture = Game.ContentManager.Load<Texture2D>("Textures/" + schoolScore.Name);
 
-            Root.SchoolListBox.Add(school);
+                foreach (HouseScore houseScore in schoolScore.HouseScores)
+                {
+                    House house = Game.ContentManager.Load<House>("Actors/House", true);
+                    house.Score = houseScore;
+                    school.HouseListBox.Add(house);
+                }
+
+                Root.SchoolListBox.Add(school);
+            }
         }
 
         public override void LoadContent()
         {
+            ScoreClient = new ScoreClient("http://192.168.1.78");
+            //ScoreClient = new ScoreClientMock();
+            ScoreClient.Initialized = Initialized;
+
             Root = Game.ContentManager.Load<SchoolScene>("Scenes/SchoolScene");
+            ScoreClient.Start();
         }
 
         public override void Update(GameTime gameTime)
@@ -63,9 +69,9 @@ namespace Plan2015.Score.ScoreBoard.Scenes
 
         public override void Draw(GameTime gameTime)
         {
-            Game.GraphicsDevice.Clear(Color.CornflowerBlue);
+            Game.GraphicsDevice.Clear(Color.Black);
 
-            Game.SpriteBatch.Begin(SpriteSortMode.Deferred, null, null, null, null, null, Game.ResolutionManager.TransformMatrix);
+            Game.SpriteBatch.Begin(SpriteSortMode.Deferred, null, null, null, null, null, Root.EarthquakeManager.Matrix * Game.ResolutionManager.TransformMatrix);
 
             SpriteTree.Draw(Root, Game.XnaSpriteBatch);
 
