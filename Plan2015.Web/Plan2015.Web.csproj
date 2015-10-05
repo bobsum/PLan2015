@@ -230,7 +230,7 @@
           <AutoAssignPort>True</AutoAssignPort>
           <DevelopmentServerPort>52082</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
-          <IISUrl>http://localhost:2015/</IISUrl>
+          <IISUrl>http://localhost:2015</IISUrl>
           <NTLMAuthentication>False</NTLMAuthentication>
           <UseCustomServer>False</UseCustomServer>
           <CustomServerUrl>

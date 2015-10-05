@@ -32,6 +32,19 @@ var Activity;
             ActivityViewModel.prototype.toggleExpanded = function () {
                 this.isExpanded(!this.isExpanded());
             };
+            ActivityViewModel.prototype.convertPoints = function () {
+                var sum = 0;
+                ko.utils.arrayForEach(this.points(), function (p) {
+                    sum += (+p.amount() || 0);
+                });
+                var total = this.totalPoints;
+                if (sum === 0)
+                    return;
+                var rate = total / sum;
+                ko.utils.arrayForEach(this.points(), function (p) {
+                    p.amount(Math.round(p.amount() * rate));
+                });
+            };
             ActivityViewModel.prototype.sendUpdate = function (activity) {
                 $.ajax({
                     url: '/Api/Activity/' + this.id,

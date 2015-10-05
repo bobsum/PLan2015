@@ -43,6 +43,21 @@
             this.isValid = ko.computed(() => (this.totalPoints === this.sum()));
         }
 
+        convertPoints() {
+            var sum = 0;
+            ko.utils.arrayForEach(this.points(), p => {
+                sum += (+p.amount() || 0);
+            });
+            var total = this.totalPoints;
+            if (sum === 0) return;
+            
+            var rate = total / sum;
+
+            ko.utils.arrayForEach(this.points(), p => {
+                p.amount(Math.round(p.amount() * rate));
+            });
+        }
+
         sendUpdate(activity: ActivityViewModel) {
             $.ajax({
                 url: '/Api/Activity/' + this.id,
