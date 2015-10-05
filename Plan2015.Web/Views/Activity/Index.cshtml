@@ -25,7 +25,7 @@
                     <div class="form-group form-group-sm">
                         <div class="col-xs-12 col-sm-offset-2 col-sm-10">
                             <button type="submit" class="btn btn-primary btn-xs" data-bind="enable: isValid">Gem</button>
-                            <button type="button" class="btn btn-default btn-xs" data-bind="click: convertPoints, enable: sum() !== 0">Omregn</button>
+                            <button type="button" class="btn btn-default btn-xs" data-bind="click: convertPoints, enable: sum() !== 0 && sum() !== totalPoints">Omregn</button>
                         </div>
                     </div>
                 </form>

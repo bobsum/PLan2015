@@ -10,7 +10,7 @@ namespace Plan2015.Data.Migrations
             AutomaticMigrationsEnabled = false;
         }
 
-        /*protected override void Seed(DataContext context)
+        protected override void Seed(DataContext context)
         {
             var schools = new[]
             {
@@ -52,6 +52,6 @@ namespace Plan2015.Data.Migrations
                 new TeamMember { Name = "TeamMember 1", Rfid = "0003375431" },
                 new TeamMember { Name = "TeamMember 2", Rfid = "0003375432" }
                 );
-        }*/
+        }
     }
 }
