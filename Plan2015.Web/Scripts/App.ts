@@ -510,7 +510,6 @@ module Punctuality.Status {
                 this.name(status.name);
                 this.all(status.all);
                 this.houses(ko.utils.arrayMap(status.houses, h => new HouseStatusViewModel(h)));
-
                 this.status(status);
             };
             $.connection.hub.start().done(() => {
