@@ -1,8 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<XnaContent xmlns:GameObjects="Bismuth.Framework.Assets.GameObjects" xmlns:Sprites="Bismuth.Framework.Assets.Sprites" xmlns:Composite="Bismuth.Framework.Assets.Composite">
+<XnaContent xmlns:GameObjects="Bismuth.Framework.Assets.GameObjects" xmlns:Sprites="Bismuth.Framework.Assets.Sprites">
   <Asset Type="GameObjects:ActorAsset">
     <Name>Root</Name>
-    <Class>Plan2015.Score.ScoreBoard.Actors.School, Plan2015.Score.ScoreBoard</Class>
     <Position>0 0</Position>
     <Rotation>0</Rotation>
     <ScaleX>1</ScaleX>
@@ -15,9 +14,9 @@
     <IsVisible>true</IsVisible>
     <ZIndex>0</ZIndex>
     <Children>
-      <Item Type="Sprites:SpriteDrawGroupAsset">
-        <Name>DrawGroup</Name>
-        <Position>0 0</Position>
+      <Item>
+        <Name>A</Name>
+        <Position>0 -30</Position>
         <Rotation>0</Rotation>
         <ScaleX>1</ScaleX>
         <ScaleY>1</ScaleY>
@@ -30,11 +29,11 @@
         <ZIndex>0</ZIndex>
         <Children>
           <Item Type="Sprites:SpriteUsingTextureAsset">
-            <Name>Logo</Name>
-            <Position>-100 0</Position>
+            <Name>Hardenberg</Name>
+            <Position>0 0</Position>
             <Rotation>0</Rotation>
-            <ScaleX>1</ScaleX>
-            <ScaleY>1</ScaleY>
+            <ScaleX>0.2</ScaleX>
+            <ScaleY>0.2</ScaleY>
             <SkewX>0</SkewX>
             <SkewY>0</SkewY>
             <FlipX>false</FlipX>
@@ -43,17 +42,33 @@
             <IsVisible>true</IsVisible>
             <ZIndex>0</ZIndex>
             <Children />
-            <TextureAssetName>Textures\Agernholdt</TextureAssetName>
+            <TextureAssetName>Textures\Hardenberg</TextureAssetName>
             <Rectangle>0 0 256 256</Rectangle>
             <Origin>128 128</Origin>
             <Color>FFFFFFFF</Color>
           </Item>
-          <Item>
-            <Name>Score</Name>
-            <Position>-300 0</Position>
+        </Children>
+      </Item>
+      <Item>
+        <Name>B</Name>
+        <Position>0 30</Position>
+        <Rotation>0</Rotation>
+        <ScaleX>1</ScaleX>
+        <ScaleY>1</ScaleY>
+        <SkewX>0</SkewX>
+        <SkewY>0</SkewY>
+        <FlipX>false</FlipX>
+        <FlipY>false</FlipY>
+        <Opacity>1</Opacity>
+        <IsVisible>true</IsVisible>
+        <ZIndex>0</ZIndex>
+        <Children>
+          <Item Type="Sprites:SpriteUsingTextureAsset">
+            <Name>Ravnsborg</Name>
+            <Position>0 0</Position>
             <Rotation>0</Rotation>
-            <ScaleX>1</ScaleX>
-            <ScaleY>1</ScaleY>
+            <ScaleX>0.2</ScaleX>
+            <ScaleY>0.2</ScaleY>
             <SkewX>0</SkewX>
             <SkewY>0</SkewY>
             <FlipX>false</FlipX>
@@ -62,26 +77,12 @@
             <IsVisible>true</IsVisible>
             <ZIndex>0</ZIndex>
             <Children />
-          </Item>
-          <Item Type="Composite:NodeReferenceAsset">
-            <Name>HouseListBox</Name>
-            <Position>100 0</Position>
-            <Rotation>0</Rotation>
-            <ScaleX>1</ScaleX>
-            <ScaleY>1</ScaleY>
-            <SkewX>0</SkewX>
-            <SkewY>0</SkewY>
-            <FlipX>false</FlipX>
-            <FlipY>false</FlipY>
-            <Opacity>1</Opacity>
-            <IsVisible>true</IsVisible>
-            <ZIndex>0</ZIndex>
-            <Children />
-            <NodeAssetName>Actors\HouseListBox</NodeAssetName>
+            <TextureAssetName>Textures\Ravnsborg</TextureAssetName>
+            <Rectangle>0 0 256 256</Rectangle>
+            <Origin>128 128</Origin>
+            <Color>FFFFFFFF</Color>
           </Item>
         </Children>
-        <IsScissorTestEnabled>false</IsScissorTestEnabled>
-        <ScissorRectangle>0 0 0 0</ScissorRectangle>
       </Item>
     </Children>
   </Asset>

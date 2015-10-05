@@ -8,39 +8,6 @@
     <FrameCount>60</FrameCount>
     <Timelines>
       <Item>
-        <TargetName>B</TargetName>
-        <PropertyTimelineType>Bismuth.Framework.Animations.Timelines.ScaleTimeline, Bismuth.Framework</PropertyTimelineType>
-        <BeginTime>0</BeginTime>
-        <EndTime>60</EndTime>
-        <Duration>60</Duration>
-        <KeyFrames>
-          <Item>
-            <FillBehavior>HoldEnd</FillBehavior>
-            <EasingFunction Type="EasingFunctions:SineEase">
-              <EasingMode>EaseOut</EasingMode>
-            </EasingFunction>
-            <Time>0</Time>
-            <Value Type="float">1</Value>
-          </Item>
-          <Item>
-            <FillBehavior>HoldEnd</FillBehavior>
-            <EasingFunction Type="EasingFunctions:SineEase">
-              <EasingMode>EaseIn</EasingMode>
-            </EasingFunction>
-            <Time>25</Time>
-            <Value Type="float">1.4</Value>
-          </Item>
-          <Item>
-            <FillBehavior>HoldEnd</FillBehavior>
-            <EasingFunction Type="EasingFunctions:LinearEase">
-              <EasingMode>EaseIn</EasingMode>
-            </EasingFunction>
-            <Time>50</Time>
-            <Value Type="float">1</Value>
-          </Item>
-        </KeyFrames>
-      </Item>
-      <Item>
         <TargetName>A</TargetName>
         <PropertyTimelineType>Bismuth.Framework.Animations.Timelines.PositionYTimeline, Bismuth.Framework</PropertyTimelineType>
         <BeginTime>0</BeginTime>
@@ -53,17 +20,7 @@
               <EasingMode>EaseIn</EasingMode>
             </EasingFunction>
             <Time>0</Time>
-            <Value Type="float">-150</Value>
-          </Item>
-          <Item>
-            <FillBehavior>HoldEnd</FillBehavior>
-            <EasingFunction Type="EasingFunctions:BounceEase">
-              <EasingMode>EaseOut</EasingMode>
-              <Bounces>2</Bounces>
-              <Bounciness>4</Bounciness>
-            </EasingFunction>
-            <Time>7</Time>
-            <Value Type="float">-150</Value>
+            <Value Type="float">-30</Value>
           </Item>
           <Item>
             <FillBehavior>HoldEnd</FillBehavior>
@@ -71,7 +28,7 @@
               <EasingMode>EaseIn</EasingMode>
             </EasingFunction>
             <Time>50</Time>
-            <Value Type="float">150</Value>
+            <Value Type="float">30</Value>
           </Item>
         </KeyFrames>
       </Item>
@@ -88,7 +45,7 @@
               <EasingMode>EaseIn</EasingMode>
             </EasingFunction>
             <Time>0</Time>
-            <Value Type="float">150</Value>
+            <Value Type="float">30</Value>
           </Item>
           <Item>
             <FillBehavior>HoldEnd</FillBehavior>
@@ -96,7 +53,7 @@
               <EasingMode>EaseIn</EasingMode>
             </EasingFunction>
             <Time>50</Time>
-            <Value Type="float">-150</Value>
+            <Value Type="float">-30</Value>
           </Item>
         </KeyFrames>
       </Item>

@@ -34,9 +34,8 @@
         <Origin>0 0</Origin>
         <Color>FF797979</Color>
       </Item>
-      <Item>
-        <Name>SchoolsLayer</Name>
-        <Class>Plan2015.Score.ScoreBoard.Actors.SortByScoreList, Plan2015.Score.ScoreBoard</Class>
+      <Item Type="Composite:NodeReferenceAsset">
+        <Name>SchoolListBox</Name>
         <Position>0 0</Position>
         <Rotation>0</Rotation>
         <ScaleX>1</ScaleX>
@@ -48,56 +47,8 @@
         <Opacity>1</Opacity>
         <IsVisible>true</IsVisible>
         <ZIndex>0</ZIndex>
-        <Children>
-          <Item Type="Composite:NodeReferenceAsset">
-            <Name>SchoolAgernholdt</Name>
-            <Position>800 150</Position>
-            <Rotation>0</Rotation>
-            <ScaleX>1</ScaleX>
-            <ScaleY>1</ScaleY>
-            <SkewX>0</SkewX>
-            <SkewY>0</SkewY>
-            <FlipX>false</FlipX>
-            <FlipY>false</FlipY>
-            <Opacity>1</Opacity>
-            <IsVisible>true</IsVisible>
-            <ZIndex>0</ZIndex>
-            <Children />
-            <NodeAssetName>Actors\School</NodeAssetName>
-          </Item>
-          <Item Type="Composite:NodeReferenceAsset">
-            <Name>SchoolHardenberg</Name>
-            <Position>800 450</Position>
-            <Rotation>0</Rotation>
-            <ScaleX>1</ScaleX>
-            <ScaleY>1</ScaleY>
-            <SkewX>0</SkewX>
-            <SkewY>0</SkewY>
-            <FlipX>false</FlipX>
-            <FlipY>false</FlipY>
-            <Opacity>1</Opacity>
-            <IsVisible>true</IsVisible>
-            <ZIndex>0</ZIndex>
-            <Children />
-            <NodeAssetName>Actors\School</NodeAssetName>
-          </Item>
-          <Item Type="Composite:NodeReferenceAsset">
-            <Name>SchoolRavnsborg</Name>
-            <Position>800 750</Position>
-            <Rotation>0</Rotation>
-            <ScaleX>1</ScaleX>
-            <ScaleY>1</ScaleY>
-            <SkewX>0</SkewX>
-            <SkewY>0</SkewY>
-            <FlipX>false</FlipX>
-            <FlipY>false</FlipY>
-            <Opacity>1</Opacity>
-            <IsVisible>true</IsVisible>
-            <ZIndex>0</ZIndex>
-            <Children />
-            <NodeAssetName>Actors\School</NodeAssetName>
-          </Item>
-        </Children>
+        <Children />
+        <NodeAssetName>Actors\SchoolListBox</NodeAssetName>
       </Item>
     </Children>
   </Asset>

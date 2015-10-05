@@ -1,0 +1,90 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<XnaContent xmlns:GameObjects="Bismuth.Framework.Assets.GameObjects">
+  <Asset Type="GameObjects:ActorAsset">
+    <Name>Root</Name>
+    <Class>Plan2015.Score.ScoreBoard.Actors.ListBox, Plan2015.Score.ScoreBoard</Class>
+    <CustomProperties>
+      <Item>
+        <Name>SwapAnimation</Name>
+        <Value>Animations/HouseSwap</Value>
+      </Item>
+    </CustomProperties>
+    <Position>0 0</Position>
+    <Rotation>0</Rotation>
+    <ScaleX>1</ScaleX>
+    <ScaleY>1</ScaleY>
+    <SkewX>0</SkewX>
+    <SkewY>0</SkewY>
+    <FlipX>false</FlipX>
+    <FlipY>false</FlipY>
+    <Opacity>1</Opacity>
+    <IsVisible>true</IsVisible>
+    <ZIndex>0</ZIndex>
+    <Children>
+      <Item>
+        <Name>Item1</Name>
+        <Class>Plan2015.Score.ScoreBoard.Actors.ListBoxItem, Plan2015.Score.ScoreBoard</Class>
+        <Position>0 -90</Position>
+        <Rotation>0</Rotation>
+        <ScaleX>1</ScaleX>
+        <ScaleY>1</ScaleY>
+        <SkewX>0</SkewX>
+        <SkewY>0</SkewY>
+        <FlipX>false</FlipX>
+        <FlipY>false</FlipY>
+        <Opacity>1</Opacity>
+        <IsVisible>true</IsVisible>
+        <ZIndex>0</ZIndex>
+        <Children />
+      </Item>
+      <Item>
+        <Name>Item2</Name>
+        <Class>Plan2015.Score.ScoreBoard.Actors.ListBoxItem, Plan2015.Score.ScoreBoard</Class>
+        <Position>0 -30</Position>
+        <Rotation>0</Rotation>
+        <ScaleX>1</ScaleX>
+        <ScaleY>1</ScaleY>
+        <SkewX>0</SkewX>
+        <SkewY>0</SkewY>
+        <FlipX>false</FlipX>
+        <FlipY>false</FlipY>
+        <Opacity>1</Opacity>
+        <IsVisible>true</IsVisible>
+        <ZIndex>0</ZIndex>
+        <Children />
+      </Item>
+      <Item>
+        <Name>Item3</Name>
+        <Class>Plan2015.Score.ScoreBoard.Actors.ListBoxItem, Plan2015.Score.ScoreBoard</Class>
+        <Position>0 30</Position>
+        <Rotation>0</Rotation>
+        <ScaleX>1</ScaleX>
+        <ScaleY>1</ScaleY>
+        <SkewX>0</SkewX>
+        <SkewY>0</SkewY>
+        <FlipX>false</FlipX>
+        <FlipY>false</FlipY>
+        <Opacity>1</Opacity>
+        <IsVisible>true</IsVisible>
+        <ZIndex>0</ZIndex>
+        <Children />
+      </Item>
+      <Item>
+        <Name>Item4</Name>
+        <Class>Plan2015.Score.ScoreBoard.Actors.ListBoxItem, Plan2015.Score.ScoreBoard</Class>
+        <Position>0 90</Position>
+        <Rotation>0</Rotation>
+        <ScaleX>1</ScaleX>
+        <ScaleY>1</ScaleY>
+        <SkewX>0</SkewX>
+        <SkewY>0</SkewY>
+        <FlipX>false</FlipX>
+        <FlipY>false</FlipY>
+        <Opacity>1</Opacity>
+        <IsVisible>true</IsVisible>
+        <ZIndex>0</ZIndex>
+        <Children />
+      </Item>
+    </Children>
+  </Asset>
+</XnaContent>

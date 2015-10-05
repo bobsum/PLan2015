@@ -35,8 +35,17 @@ namespace Plan2015.Score.ScoreBoard.Scenes
         private void SchoolScoreAdded(SchoolScore schoolScore)
         {
             School school = Game.ContentManager.Load<School>("Actors/School", true);
-            school.SchoolScore = schoolScore;
-            // TODO: Added to list box of ScoreScene.
+            school.Score = schoolScore;
+            school.Find<Sprite>("Logo").Texture = Game.ContentManager.Load<Texture2D>("Textures/" + schoolScore.Name);
+
+            foreach (HouseScore houseScore in schoolScore.HouseScores)
+            {
+                House house = Game.ContentManager.Load<House>("Actors/House", true);
+                house.Score = houseScore;
+                school.HouseListBox.Add(house);
+            }
+
+            Root.SchoolListBox.Add(school);
         }
 
         public override void LoadContent()

@@ -36,18 +36,38 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Actors\House.actor">
+      <Name>House</Name>
+      <Importer>XmlImporter</Importer>
+      <Processor>PassThroughProcessor</Processor>
+    </Compile>
+    <Compile Include="Actors\HouseListBox.actor">
+      <Name>HouseListBox</Name>
+      <Importer>XmlImporter</Importer>
+      <Processor>PassThroughProcessor</Processor>
+    </Compile>
     <Compile Include="Actors\School.actor">
       <Name>School</Name>
       <Importer>XmlImporter</Importer>
       <Processor>PassThroughProcessor</Processor>
     </Compile>
-    <Compile Include="Actors\SchoolSwap.actor">
-      <Name>SchoolSwap</Name>
+    <Compile Include="Actors\SchoolListBox.actor">
+      <Name>SchoolListBox</Name>
       <Importer>XmlImporter</Importer>
       <Processor>PassThroughProcessor</Processor>
     </Compile>
-    <Compile Include="Animations\Hover.animation">
-      <Name>Hover</Name>
+    <Compile Include="Actors\SwapPlaceholder.actor">
+      <Name>SwapPlaceholder</Name>
+      <Importer>XmlImporter</Importer>
+      <Processor>PassThroughProcessor</Processor>
+    </Compile>
+    <Compile Include="Animations\HouseSwap.animation">
+      <Name>HouseSwap</Name>
+      <Importer>XmlImporter</Importer>
+      <Processor>PassThroughProcessor</Processor>
+    </Compile>
+    <Compile Include="Animations\SchoolHover.animation">
+      <Name>SchoolHover</Name>
       <Importer>XmlImporter</Importer>
       <Processor>PassThroughProcessor</Processor>
     </Compile>
@@ -56,13 +76,13 @@
       <Importer>XmlImporter</Importer>
       <Processor>PassThroughProcessor</Processor>
     </Compile>
-    <Compile Include="Animations\SchoolSwapOld.animation">
-      <Name>SchoolSwapOld</Name>
-      <Importer>XmlImporter</Importer>
-      <Processor>PassThroughProcessor</Processor>
-    </Compile>
     <Compile Include="Fonts\Gabriola.spritefont">
       <Name>Gabriola</Name>
+      <Importer>FontDescriptionImporter</Importer>
+      <Processor>FontDescriptionProcessor</Processor>
+    </Compile>
+    <Compile Include="Fonts\Gabriola200.spritefont">
+      <Name>Gabriola200</Name>
       <Importer>FontDescriptionImporter</Importer>
       <Processor>FontDescriptionProcessor</Processor>
     </Compile>
