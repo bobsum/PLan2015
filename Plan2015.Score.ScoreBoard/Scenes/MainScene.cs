@@ -51,8 +51,8 @@ namespace Plan2015.Score.ScoreBoard.Scenes
 
         public override void LoadContent()
         {
-            ScoreClient = new ScoreClient("http://192.168.1.78");
-            //ScoreClient = new ScoreClientMock();
+            //ScoreClient = new ScoreClient("http://192.168.1.78");
+            ScoreClient = new ScoreClientMock();
             ScoreClient.Initialized = Initialized;
 
             Root = Game.ContentManager.Load<SchoolScene>("Scenes/SchoolScene");
