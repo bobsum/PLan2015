@@ -1,10 +1,7 @@
-using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Linq.Expressions;
 using Plan2015.Data;
 using Plan2015.Dtos;
-using Plan2015.Data.Entities;
 
 namespace Plan2015.Web
 {
@@ -25,7 +22,7 @@ namespace Plan2015.Web
                     Amount = 5
                 });
             var tp = db.TurnoutPoints
-                .Where(p => p.TeamMember != null)
+                .Where(p => !p.Discarded)
                 .Select(p => new
                 {
                     p.House,

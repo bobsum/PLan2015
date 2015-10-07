@@ -36,16 +36,7 @@ namespace Plan2015.Web.Controllers.Api
                         continue;
                     }
 
-                    if (teamMember != null)
-                    {
-                        var totalPoints = Db.TurnoutPoints
-                            .Where(tp => tp.TeamMemberId == teamMember.Id)
-                            .Select(tp => tp.Amount)
-                            .ToList()
-                            .Sum(a => Math.Abs(a));
-
-                        if (totalPoints >= MAX_POINTS) teamMember = null;
-                    }
+                    if(teamMember == null) continue;
 
                     var scout = await Db.Scouts.FirstOrDefaultAsync(s => s.Rfid == rfid);
 
@@ -55,12 +46,11 @@ namespace Plan2015.Web.Controllers.Api
                     {
                         Amount = sign == "+" ? 1 : -1,
                         House = scout.House,
-                        TeamMember = teamMember
+                        TeamMember = teamMember,
+                        Discarded = MAX_POINTS <= Db.TurnoutPoints.Count(tp => tp.TeamMemberId == teamMember.Id)
                     };
                     Db.TurnoutPoints.Add(point);
                     await Db.SaveChangesAsync();
-                    //Todo call hub
-                    //builder.AppendLine(string.Format("{0}/{1} har fået {2} points", scout.House.Name, scout.Name, point.Amount));
                 }
                 ScoreHub.Clients.All.Updated(Repository.GetScore(Db));
                 return Ok();
