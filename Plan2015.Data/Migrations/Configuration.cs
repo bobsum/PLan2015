@@ -46,18 +46,6 @@ namespace Plan2015.Data.Migrations
                 });
             }
 
-            /*context.Scouts.AddOrUpdate(s => s.Name,
-                new Scout { Name = "Spejder 1", Rfid = "0000000001", House = houses[0]},
-                new Scout { Name = "Spejder 2", Rfid = "0000000002", House = houses[0]},
-                new Scout { Name = "Spejder 3", Rfid = "0000000003", House = houses[0]},
-                new Scout { Name = "Spejder 4", Rfid = "0000000004", House = houses[4]},
-                new Scout { Name = "Spejder 5", Rfid = "0000000005", House = houses[4]},
-                new Scout { Name = "Spejder 6", Rfid = "0000000006", House = houses[4]},
-                new Scout { Name = "Spejder 7", Rfid = "0000000007", House = houses[8]},
-                new Scout { Name = "Spejder 8", Rfid = "0000000008", House = houses[8]},
-                new Scout { Name = "Spejder 9", Rfid = "0000000009", House = houses[8]}
-                );*/
-
             for (int i = 0; i < 21; i++)
             {
                 context.TeamMembers.AddOrUpdate(t => t.Name, new TeamMember
@@ -66,10 +54,6 @@ namespace Plan2015.Data.Migrations
                     Rfid = (i + 101).ToString("D10")
                 });
             }
-            /*context.TeamMembers.AddOrUpdate(t => t.Name,
-                new TeamMember { Name = "TeamMember 1", Rfid = "0000000101" },
-                new TeamMember { Name = "TeamMember 2", Rfid = "0003375432" }
-                );*/
         }
     }
 }
