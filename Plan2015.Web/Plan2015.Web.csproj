@@ -167,7 +167,6 @@
     <Compile Include="Controllers\Api\ApiControllerWithHub.cs" />
     <Compile Include="Controllers\Api\ActivityController.cs" />
     <Compile Include="Controllers\Api\MagicGamesMarkerSwipeController.cs" />
-    <Compile Include="Controllers\Api\ScoreController.cs" />
     <Compile Include="Controllers\Api\TurnoutSwipeController.cs" />
     <Compile Include="Controllers\Mvc\PunctualityController.cs" />
     <Compile Include="Controllers\Mvc\TurnoutController.cs" />

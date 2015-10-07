@@ -41,7 +41,7 @@ namespace Plan2015.Web.Controllers.Api
             Db.Activities.Add(entity);
             await Db.SaveChangesAsync();
 
-            dto = await Db.Activities.Select(ToDto()).SingleAsync(l => l.Id == entity.Id);
+            dto = await Db.Activities.Select(ToDto()).SingleAsync(a => a.Id == entity.Id);
 
             Hub.Clients.All.Add(dto);
 
@@ -52,13 +52,13 @@ namespace Plan2015.Web.Controllers.Api
         {
             foreach (var point in dto.Points)
             {
-                var ep = Db.ActivityPoints.Single(l => l.Id == point.Id);
+                var ep = Db.ActivityPoints.Single(p => p.Id == point.Id);
                 ep.Amount = point.Amount;
             }
 
             await Db.SaveChangesAsync();
 
-            dto = await Db.Activities.Select(ToDto()).SingleAsync(l => l.Id == dto.Id);
+            dto = await Db.Activities.Select(ToDto()).SingleAsync(a => a.Id == dto.Id);
             
             Hub.Clients.All.Update(dto);
             ScoreHub.Clients.All.Updated(Repository.GetScore(Db));
@@ -67,7 +67,7 @@ namespace Plan2015.Web.Controllers.Api
 
         public async Task<IHttpActionResult> DeleteActivity(int id)
         {
-            var entity = await Db.Activities.SingleAsync(l => l.Id == id);
+            var entity = await Db.Activities.SingleAsync(a => a.Id == id);
             Db.Activities.Remove(entity);
 
             await Db.SaveChangesAsync();
@@ -79,12 +79,12 @@ namespace Plan2015.Web.Controllers.Api
 
         private Expression<Func<Activity, ActivityDto>> ToDto()
         {
-            return l => new ActivityDto
+            return a => new ActivityDto
             {
-                Id = l.Id,
-                Name = l.Name,
-                TotalPoints = l.TotalPoints,
-                Points = l.Points.Select(p => new ActivityPointDto
+                Id = a.Id,
+                Name = a.Name,
+                TotalPoints = a.TotalPoints,
+                Points = a.Points.Select(p => new ActivityPointDto
                 {
                     Id = p.Id,
                     Amount = p.Amount,
