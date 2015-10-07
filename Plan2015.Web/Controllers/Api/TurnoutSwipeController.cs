@@ -51,8 +51,8 @@ namespace Plan2015.Web.Controllers.Api
                     };
                     Db.TurnoutPoints.Add(point);
                     await Db.SaveChangesAsync();
+                    ScoreHub.Clients.All.Updated(Repository.GetScore(Db));
                 }
-                ScoreHub.Clients.All.Updated(Repository.GetScore(Db));
                 return Ok();
             }
         }
