@@ -58,10 +58,18 @@ namespace Plan2015.Data.Migrations
                 new Scout { Name = "Spejder 9", Rfid = "0000000009", House = houses[8]}
                 );*/
 
-            context.TeamMembers.AddOrUpdate(t => t.Name,
-                new TeamMember { Name = "TeamMember 1", Rfid = "0003375431" },
+            for (int i = 0; i < 21; i++)
+            {
+                context.TeamMembers.AddOrUpdate(t => t.Name, new TeamMember
+                {
+                    Name = "TeamMember " + (i + 1),
+                    Rfid = (i + 101).ToString("D10")
+                });
+            }
+            /*context.TeamMembers.AddOrUpdate(t => t.Name,
+                new TeamMember { Name = "TeamMember 1", Rfid = "0000000101" },
                 new TeamMember { Name = "TeamMember 2", Rfid = "0003375432" }
-                );
+                );*/
         }
     }
 }
