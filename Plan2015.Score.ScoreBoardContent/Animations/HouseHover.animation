@@ -1,18 +1,18 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <XnaContent xmlns:Animations="Bismuth.Framework.Assets.Animations" xmlns:EasingFunctions="Bismuth.Framework.Animations.EasingFunctions">
   <Asset Type="Animations:AnimationAsset">
-    <NodeAssetName>Actors\School</NodeAssetName>
+    <NodeAssetName>Actors\House</NodeAssetName>
     <Mode>Loop</Mode>
     <Direction>Forward</Direction>
-    <Fps>10</Fps>
-    <FrameCount>120</FrameCount>
+    <Fps>60</Fps>
+    <FrameCount>60</FrameCount>
     <Timelines>
       <Item>
         <TargetName>DrawGroup</TargetName>
         <PropertyTimelineType>Bismuth.Framework.Animations.Timelines.PositionYTimeline, Bismuth.Framework</PropertyTimelineType>
         <BeginTime>0</BeginTime>
-        <EndTime>120</EndTime>
-        <Duration>120</Duration>
+        <EndTime>60</EndTime>
+        <Duration>60</Duration>
         <KeyFrames>
           <Item>
             <FillBehavior>HoldEnd</FillBehavior>
@@ -20,15 +20,15 @@
               <EasingMode>EaseInOut</EasingMode>
             </EasingFunction>
             <Time>0</Time>
-            <Value Type="float">8</Value>
+            <Value Type="float">-3</Value>
           </Item>
           <Item>
             <FillBehavior>ReverseAndRepeat</FillBehavior>
-            <EasingFunction Type="EasingFunctions:SineEase">
-              <EasingMode>EaseInOut</EasingMode>
+            <EasingFunction Type="EasingFunctions:LinearEase">
+              <EasingMode>EaseIn</EasingMode>
             </EasingFunction>
             <Time>10</Time>
-            <Value Type="float">-8</Value>
+            <Value Type="float">3</Value>
           </Item>
         </KeyFrames>
       </Item>
@@ -36,8 +36,8 @@
         <TargetName>DrawGroup</TargetName>
         <PropertyTimelineType>Bismuth.Framework.Animations.Timelines.PositionXTimeline, Bismuth.Framework</PropertyTimelineType>
         <BeginTime>0</BeginTime>
-        <EndTime>120</EndTime>
-        <Duration>120</Duration>
+        <EndTime>60</EndTime>
+        <Duration>60</Duration>
         <KeyFrames>
           <Item>
             <FillBehavior>HoldEnd</FillBehavior>
@@ -45,7 +45,7 @@
               <EasingMode>EaseInOut</EasingMode>
             </EasingFunction>
             <Time>0</Time>
-            <Value Type="float">-6</Value>
+            <Value Type="float">-2</Value>
           </Item>
           <Item>
             <FillBehavior>ReverseAndRepeat</FillBehavior>
@@ -53,7 +53,7 @@
               <EasingMode>EaseIn</EasingMode>
             </EasingFunction>
             <Time>30</Time>
-            <Value Type="float">6</Value>
+            <Value Type="float">2</Value>
           </Item>
         </KeyFrames>
       </Item>
@@ -61,8 +61,8 @@
         <TargetName>DrawGroup</TargetName>
         <PropertyTimelineType>Bismuth.Framework.Animations.Timelines.RotationTimeline, Bismuth.Framework</PropertyTimelineType>
         <BeginTime>0</BeginTime>
-        <EndTime>120</EndTime>
-        <Duration>120</Duration>
+        <EndTime>60</EndTime>
+        <Duration>60</Duration>
         <KeyFrames>
           <Item>
             <FillBehavior>HoldEnd</FillBehavior>
@@ -70,7 +70,7 @@
               <EasingMode>EaseInOut</EasingMode>
             </EasingFunction>
             <Time>0</Time>
-            <Value Type="float">0.02</Value>
+            <Value Type="float">-0.008726646</Value>
           </Item>
           <Item>
             <FillBehavior>ReverseAndRepeat</FillBehavior>
@@ -78,57 +78,7 @@
               <EasingMode>EaseIn</EasingMode>
             </EasingFunction>
             <Time>30</Time>
-            <Value Type="float">-0.02</Value>
-          </Item>
-        </KeyFrames>
-      </Item>
-      <Item>
-        <TargetName>Score</TargetName>
-        <PropertyTimelineType>Bismuth.Framework.Animations.Timelines.PositionXTimeline, Bismuth.Framework</PropertyTimelineType>
-        <BeginTime>0</BeginTime>
-        <EndTime>120</EndTime>
-        <Duration>120</Duration>
-        <KeyFrames>
-          <Item>
-            <FillBehavior>HoldEnd</FillBehavior>
-            <EasingFunction Type="EasingFunctions:SineEase">
-              <EasingMode>EaseInOut</EasingMode>
-            </EasingFunction>
-            <Time>0</Time>
-            <Value Type="float">-300</Value>
-          </Item>
-          <Item>
-            <FillBehavior>ReverseAndRepeat</FillBehavior>
-            <EasingFunction Type="EasingFunctions:LinearEase">
-              <EasingMode>EaseIn</EasingMode>
-            </EasingFunction>
-            <Time>60</Time>
-            <Value Type="float">-310</Value>
-          </Item>
-        </KeyFrames>
-      </Item>
-      <Item>
-        <TargetName>Score</TargetName>
-        <PropertyTimelineType>Bismuth.Framework.Animations.Timelines.PositionYTimeline, Bismuth.Framework</PropertyTimelineType>
-        <BeginTime>0</BeginTime>
-        <EndTime>120</EndTime>
-        <Duration>120</Duration>
-        <KeyFrames>
-          <Item>
-            <FillBehavior>HoldEnd</FillBehavior>
-            <EasingFunction Type="EasingFunctions:SineEase">
-              <EasingMode>EaseInOut</EasingMode>
-            </EasingFunction>
-            <Time>0</Time>
-            <Value Type="float">-4</Value>
-          </Item>
-          <Item>
-            <FillBehavior>ReverseAndRepeat</FillBehavior>
-            <EasingFunction Type="EasingFunctions:LinearEase">
-              <EasingMode>EaseIn</EasingMode>
-            </EasingFunction>
-            <Time>20</Time>
-            <Value Type="float">4</Value>
+            <Value Type="float">0.008726646</Value>
           </Item>
         </KeyFrames>
       </Item>

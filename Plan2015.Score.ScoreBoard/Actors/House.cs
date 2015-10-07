@@ -1,4 +1,6 @@
-﻿using Bismuth.Framework.Composite;
+﻿using Bismuth.Framework;
+using Bismuth.Framework.Animations;
+using Bismuth.Framework.Composite;
 using Bismuth.Framework.Content;
 using Bismuth.Framework.GameObjects;
 using Bismuth.Framework.Primitives;
@@ -16,6 +18,7 @@ namespace Plan2015.Score.ScoreBoard.Actors
     public class House : Actor, ISprite, IPrimitive
     {
         public SpriteFont Font { get; private set; }
+        public Animation Hover { get; private set; }
         public INode NamePosition { get; set; }
         public INode ScorePosition { get; set; }
 
@@ -27,6 +30,16 @@ namespace Plan2015.Score.ScoreBoard.Actors
             ScorePosition = this.Find("Score");
 
             Font = contentManager.Load<SpriteFont>("Fonts/Gabriola54");
+            Hover = contentManager.Load<Animation>("Animations/HouseHover", true);
+            Hover.Bind(this);
+            Hover.Play();
+            Hover.FrameTime = RandomHelper.Next(0f, 60f);
+            Hover.Fps = RandomHelper.Next(6f, 10f);
+        }
+
+        public override void Update(GameTime gameTime)
+        {
+            Hover.Update(gameTime);
         }
 
         public void Draw(ISpriteBatch spriteBatch)

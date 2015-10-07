@@ -42,7 +42,7 @@ namespace Plan2015.Score.ScoreBoard.Actors
             Hover.Bind(this);
             Hover.Play();
             Hover.FrameTime = RandomHelper.Next(0f, 60f);
-            Hover.Fps = RandomHelper.Next(9f, 11f);
+            Hover.Fps = RandomHelper.Next(6f, 10f);
 
             MagicExplosionEmitter = this.Find<ParticleEmitter>("MagicExplosionEmitter");
         }

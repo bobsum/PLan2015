@@ -1,8 +1,8 @@
 <?xml version="1.0"?>
 <Configuration xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
   <Video>
-    <IsFullScreen>true</IsFullScreen>
-    <AutoDetectResolution>true</AutoDetectResolution>
+    <IsFullScreen>false</IsFullScreen>
+    <AutoDetectResolution>false</AutoDetectResolution>
     <Width>1280</Width>
     <Height>720</Height>
   </Video>
