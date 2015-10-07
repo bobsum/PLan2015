@@ -31,7 +31,7 @@
         <Children>
           <Item Type="Sprites:SpriteUsingTextureAsset">
             <Name>Logo</Name>
-            <Position>-100 0</Position>
+            <Position>-90 0</Position>
             <Rotation>0</Rotation>
             <ScaleX>0.55</ScaleX>
             <ScaleY>0.55</ScaleY>
@@ -156,7 +156,7 @@
           </Item>
           <Item Type="Composite:NodeReferenceAsset">
             <Name>HouseListBox</Name>
-            <Position>100 0</Position>
+            <Position>380 0</Position>
             <Rotation>0</Rotation>
             <ScaleX>1</ScaleX>
             <ScaleY>1</ScaleY>

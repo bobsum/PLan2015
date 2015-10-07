@@ -31,7 +31,7 @@
         <Children>
           <Item>
             <Name>Name</Name>
-            <Position>40 0</Position>
+            <Position>-260 0</Position>
             <Rotation>0</Rotation>
             <ScaleX>1</ScaleX>
             <ScaleY>1</ScaleY>
@@ -46,7 +46,7 @@
           </Item>
           <Item>
             <Name>Score</Name>
-            <Position>600 0</Position>
+            <Position>260 0</Position>
             <Rotation>0</Rotation>
             <ScaleX>1</ScaleX>
             <ScaleY>1</ScaleY>
