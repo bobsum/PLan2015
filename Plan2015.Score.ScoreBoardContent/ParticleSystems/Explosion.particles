@@ -1,0 +1,154 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<XnaContent xmlns:Systems="Bismuth.Framework.Assets.Particles.Systems">
+  <Asset Type="Systems:CompositeParticleSystemAsset">
+    <ParticleSystems>
+      <Item Type="Systems:SpriteParticleSystemAsset">
+        <SpriteSheetAssetName>SpriteSheets\BlackSmoke</SpriteSheetAssetName>
+        <Colors>FFFFFFFF FFBC453A</Colors>
+        <AnimationMode>AnimatedOverDuration</AnimationMode>
+        <ColorMode>Animated</ColorMode>
+        <InitialVelocityMode>AwayFromCenter</InitialVelocityMode>
+        <RotationMode>Custom</RotationMode>
+        <EmitCount>
+          <Min>1</Min>
+          <Max>1</Max>
+        </EmitCount>
+        <EmitPosition>
+          <Min>0 0</Min>
+          <Max>0 0</Max>
+        </EmitPosition>
+        <EmitRadius>
+          <Min>0</Min>
+          <Max>0</Max>
+        </EmitRadius>
+        <EmitAngle>
+          <Min>-1.44035894E-05</Min>
+          <Max>1.528697E-05</Max>
+        </EmitAngle>
+        <InitialVelocity>
+          <Min>0</Min>
+          <Max>10</Max>
+        </InitialVelocity>
+        <InitialRotation>
+          <Min>-1.49919069E-05</Min>
+          <Max>1.44035894E-05</Max>
+        </InitialRotation>
+        <InitialAngularVelocity>
+          <Min>-1.619522E-08</Min>
+          <Max>1.619522E-08</Max>
+        </InitialAngularVelocity>
+        <InitialScale>
+          <Min>2</Min>
+          <Max>2</Max>
+        </InitialScale>
+        <Duration>
+          <Min>800</Min>
+          <Max>1000</Max>
+        </Duration>
+        <Gravity>0 0</Gravity>
+        <Damping>0</Damping>
+        <ScaleFactor>1</ScaleFactor>
+        <FadeInDuration>0</FadeInDuration>
+        <FadeOutDuration>0</FadeOutDuration>
+      </Item>
+      <Item Type="Systems:SpriteParticleSystemAsset">
+        <SpriteSheetAssetName>SpriteSheets\Explosion</SpriteSheetAssetName>
+        <Colors>88FFFFFF AAFF8644</Colors>
+        <AnimationMode>AnimatedOverDuration</AnimationMode>
+        <ColorMode>Animated</ColorMode>
+        <InitialVelocityMode>AwayFromCenter</InitialVelocityMode>
+        <RotationMode>Custom</RotationMode>
+        <EmitCount>
+          <Min>2</Min>
+          <Max>5</Max>
+        </EmitCount>
+        <EmitPosition>
+          <Min>-10 -10</Min>
+          <Max>10 10</Max>
+        </EmitPosition>
+        <EmitRadius>
+          <Min>0</Min>
+          <Max>0</Max>
+        </EmitRadius>
+        <EmitAngle>
+          <Min>-3.14159274</Min>
+          <Max>180</Max>
+        </EmitAngle>
+        <InitialVelocity>
+          <Min>20</Min>
+          <Max>40</Max>
+        </InitialVelocity>
+        <InitialRotation>
+          <Min>-3.14159274</Min>
+          <Max>3.14159274</Max>
+        </InitialRotation>
+        <InitialAngularVelocity>
+          <Min>-0.17453292</Min>
+          <Max>0.17453292</Max>
+        </InitialAngularVelocity>
+        <InitialScale>
+          <Min>1.5</Min>
+          <Max>2</Max>
+        </InitialScale>
+        <Duration>
+          <Min>600</Min>
+          <Max>800</Max>
+        </Duration>
+        <Gravity>0 0</Gravity>
+        <Damping>0</Damping>
+        <ScaleFactor>1.005</ScaleFactor>
+        <FadeInDuration>0</FadeInDuration>
+        <FadeOutDuration>0</FadeOutDuration>
+      </Item>
+      <Item Type="Systems:SpriteParticleSystemAsset">
+        <SpriteSheetAssetName>SpriteSheets\ExplosionFlash</SpriteSheetAssetName>
+        <Colors>00FFFFFF FFFFFFFF</Colors>
+        <AnimationMode>Animated</AnimationMode>
+        <ColorMode>Animated</ColorMode>
+        <InitialVelocityMode>Angle</InitialVelocityMode>
+        <RotationMode>Custom</RotationMode>
+        <EmitCount>
+          <Min>1</Min>
+          <Max>1</Max>
+        </EmitCount>
+        <EmitPosition>
+          <Min>0 0</Min>
+          <Max>0 0</Max>
+        </EmitPosition>
+        <EmitRadius>
+          <Min>0</Min>
+          <Max>0</Max>
+        </EmitRadius>
+        <EmitAngle>
+          <Min>0</Min>
+          <Max>0</Max>
+        </EmitAngle>
+        <InitialVelocity>
+          <Min>0</Min>
+          <Max>0</Max>
+        </InitialVelocity>
+        <InitialRotation>
+          <Min>0</Min>
+          <Max>0</Max>
+        </InitialRotation>
+        <InitialAngularVelocity>
+          <Min>0</Min>
+          <Max>0</Max>
+        </InitialAngularVelocity>
+        <InitialScale>
+          <Min>2</Min>
+          <Max>2</Max>
+        </InitialScale>
+        <Duration>
+          <Min>400</Min>
+          <Max>400</Max>
+        </Duration>
+        <Gravity>0 0</Gravity>
+        <Damping>0</Damping>
+        <ScaleFactor>1</ScaleFactor>
+        <FadeInDuration>50</FadeInDuration>
+        <FadeOutDuration>300</FadeOutDuration>
+      </Item>
+    </ParticleSystems>
+  </Asset>
+</XnaContent>

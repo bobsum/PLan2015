@@ -1,0 +1,56 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<XnaContent xmlns:Systems="Bismuth.Framework.Assets.Particles.Systems">
+  <Asset Type="Systems:CompositeParticleSystemAsset">
+    <ParticleSystems>
+      <Item Type="Systems:SpriteParticleSystemAsset">
+        <SpriteSheetAssetName>SpriteSheets\PlasmaSphere</SpriteSheetAssetName>
+        <Colors>44FFFFFF</Colors>
+        <AnimationMode>Animated</AnimationMode>
+        <ColorMode>Animated</ColorMode>
+        <InitialVelocityMode>Angle</InitialVelocityMode>
+        <RotationMode>Custom</RotationMode>
+        <EmitCount>
+          <Min>1</Min>
+          <Max>2</Max>
+        </EmitCount>
+        <EmitPosition>
+          <Min>-50 -50</Min>
+          <Max>50 50</Max>
+        </EmitPosition>
+        <EmitRadius>
+          <Min>0</Min>
+          <Max>0</Max>
+        </EmitRadius>
+        <EmitAngle>
+          <Min>0</Min>
+          <Max>0</Max>
+        </EmitAngle>
+        <InitialVelocity>
+          <Min>0</Min>
+          <Max>0</Max>
+        </InitialVelocity>
+        <InitialRotation>
+          <Min>-3.14159274</Min>
+          <Max>3.14159274</Max>
+        </InitialRotation>
+        <InitialAngularVelocity>
+          <Min>0.05235988</Min>
+          <Max>0</Max>
+        </InitialAngularVelocity>
+        <InitialScale>
+          <Min>6</Min>
+          <Max>6</Max>
+        </InitialScale>
+        <Duration>
+          <Min>1000</Min>
+          <Max>1000</Max>
+        </Duration>
+        <Gravity>0 0</Gravity>
+        <Damping>0</Damping>
+        <ScaleFactor>0.999</ScaleFactor>
+        <FadeInDuration>1000</FadeInDuration>
+        <FadeOutDuration>1000</FadeOutDuration>
+      </Item>
+    </ParticleSystems>
+  </Asset>
+</XnaContent>

@@ -3,6 +3,7 @@ using Bismuth.Framework.Animations;
 using Bismuth.Framework.Composite;
 using Bismuth.Framework.Content;
 using Bismuth.Framework.GameObjects;
+using Bismuth.Framework.Particles;
 using Bismuth.Framework.Primitives;
 using Bismuth.Framework.Sprites;
 using Microsoft.Xna.Framework;
@@ -28,11 +29,13 @@ namespace Plan2015.Score.ScoreBoard.Actors
 
         public ListBox HouseListBox { get; set; }
 
+        public ParticleEmitter MagicExplosionEmitter { get; private set; }
+
         public override void LoadContent(IContentManager contentManager)
         {
             ScorePosition = this.Find("Score");
             HouseListBox = this.Find<ListBox>("HouseListBox");
-            HouseListBox.Comparer = Compare;
+            HouseListBox.Comparer = HouseComparer;
 
             Font = contentManager.Load<SpriteFont>("Fonts/Gabriola200");
             Hover = contentManager.Load<Animation>("Animations/SchoolHover", true);
@@ -40,9 +43,11 @@ namespace Plan2015.Score.ScoreBoard.Actors
             Hover.Play();
             Hover.FrameTime = RandomHelper.Next(0f, 60f);
             Hover.Fps = RandomHelper.Next(9f, 11f);
+
+            MagicExplosionEmitter = this.Find<ParticleEmitter>("MagicExplosionEmitter");
         }
 
-        private bool Compare(INode a, INode b)
+        private bool HouseComparer(INode a, INode b)
         {
             return ((House)a).Score.Amount < ((House)b).Score.Amount;
         }

@@ -32,7 +32,29 @@
         <TextureAssetName>Textures\Background</TextureAssetName>
         <Rectangle>0 0 1600 900</Rectangle>
         <Origin>0 0</Origin>
-        <Color>FF797979</Color>
+        <Color>FF6B6076</Color>
+      </Item>
+      <Item>
+        <Name>GlowParticleLayer</Name>
+        <Class>Plan2015.Score.ScoreBoard.Layers.ParticleLayer, Plan2015.Score.ScoreBoard</Class>
+        <CustomProperties>
+          <Item>
+            <Name>ParticleSystemAssetName</Name>
+            <Value>ParticleSystems/Glow</Value>
+          </Item>
+        </CustomProperties>
+        <Position>0 0</Position>
+        <Rotation>0</Rotation>
+        <ScaleX>1</ScaleX>
+        <ScaleY>1</ScaleY>
+        <SkewX>0</SkewX>
+        <SkewY>0</SkewY>
+        <FlipX>false</FlipX>
+        <FlipY>false</FlipY>
+        <Opacity>1</Opacity>
+        <IsVisible>true</IsVisible>
+        <ZIndex>0</ZIndex>
+        <Children />
       </Item>
       <Item Type="Composite:NodeReferenceAsset">
         <Name>SchoolListBox</Name>
@@ -49,6 +71,28 @@
         <ZIndex>0</ZIndex>
         <Children />
         <NodeAssetName>Actors\SchoolListBox</NodeAssetName>
+      </Item>
+      <Item>
+        <Name>MagicExplosionLayer</Name>
+        <Class>Plan2015.Score.ScoreBoard.Layers.ParticleLayer, Plan2015.Score.ScoreBoard</Class>
+        <CustomProperties>
+          <Item>
+            <Name>ParticleSystemAssetName</Name>
+            <Value>ParticleSystems/MagicExplosion</Value>
+          </Item>
+        </CustomProperties>
+        <Position>0 0</Position>
+        <Rotation>0</Rotation>
+        <ScaleX>1</ScaleX>
+        <ScaleY>1</ScaleY>
+        <SkewX>0</SkewX>
+        <SkewY>0</SkewY>
+        <FlipX>false</FlipX>
+        <FlipY>false</FlipY>
+        <Opacity>1</Opacity>
+        <IsVisible>true</IsVisible>
+        <ZIndex>0</ZIndex>
+        <Children />
       </Item>
     </Children>
   </Asset>

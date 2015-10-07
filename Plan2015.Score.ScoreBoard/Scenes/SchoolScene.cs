@@ -29,15 +29,16 @@ namespace Plan2015.Score.ScoreBoard.Scenes
         public override void LoadContent(IContentManager contentManager)
         {
             SchoolListBox = this.Find<ListBox>("SchoolListBox");
-            SchoolListBox.Comparer = Compare;
-            SchoolListBox.Swapped = () =>
+            SchoolListBox.Comparer = SchoolComparer;
+            SchoolListBox.Swapped = (a, b) =>
                 {
                     EarthquakeManager.Push(new EarthquakeY(20));
                     EarthquakeManager.Push(new EarthquakeX(15));
+                    ((School)b).MagicExplosionEmitter.Emit();
                 };
         }
 
-        private bool Compare(INode a, INode b)
+        private bool SchoolComparer(INode a, INode b)
         {
             if (EarthquakeManager.Matrix != Matrix.Identity) return false;
 
@@ -46,6 +47,22 @@ namespace Plan2015.Score.ScoreBoard.Scenes
 
         public override void Update(GameTime gameTime)
         {
+            bool anyHouseListBoxIsSorting = false;
+            for (int i = 0; i < SchoolListBox.Items.Count; i++)
+            {
+                School school = SchoolListBox.Items[i].Content as School;
+                if (school != null)
+                {
+                    school.HouseListBox.UpdateSort(gameTime);
+                    if (school.HouseListBox.IsSorting) anyHouseListBoxIsSorting = true;
+                }
+            }
+
+            if (!anyHouseListBoxIsSorting)
+            {
+                SchoolListBox.UpdateSort(gameTime);
+            }
+
             EarthquakeManager.Update(gameTime);
         }
     }

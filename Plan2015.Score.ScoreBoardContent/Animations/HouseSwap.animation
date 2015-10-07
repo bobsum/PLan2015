@@ -43,9 +43,8 @@
         <KeyFrames>
           <Item>
             <FillBehavior>HoldEnd</FillBehavior>
-            <EasingFunction Type="EasingFunctions:BackEase">
-              <EasingMode>EaseOut</EasingMode>
-              <Amplitude>0.5</Amplitude>
+            <EasingFunction Type="EasingFunctions:SineEase">
+              <EasingMode>EaseInOut</EasingMode>
             </EasingFunction>
             <Time>0</Time>
             <Value Type="float">30</Value>
@@ -80,8 +79,8 @@
             <EasingFunction Type="EasingFunctions:SineEase">
               <EasingMode>EaseIn</EasingMode>
             </EasingFunction>
-            <Time>10</Time>
-            <Value Type="float">1.2</Value>
+            <Time>30</Time>
+            <Value Type="float">1.1</Value>
           </Item>
           <Item>
             <FillBehavior>HoldEnd</FillBehavior>

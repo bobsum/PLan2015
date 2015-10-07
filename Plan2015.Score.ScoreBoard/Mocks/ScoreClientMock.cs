@@ -34,7 +34,7 @@ namespace Plan2015.Score.ScoreBoard.Mocks
             KeyboardState ks = Keyboard.GetState();
             if (ks.IsKeyPressedOnce(Keys.A))
             {
-                AddSchool("Agernholdt", "Rasmus", "Mads", "Peter", "Jergen");
+                AddSchool("Agernholt", "Rasmus", "Mads", "Peter", "Jergen");
                 AddSchool("Hardenberg", "Blablabla", "Mads", "Peter", "Jergen");
                 AddSchool("Ravnsborg", "Blumensaat", "Mads", "Peter", "Jergen");
                 Initialized();

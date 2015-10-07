@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<XnaContent xmlns:GameObjects="Bismuth.Framework.Assets.GameObjects" xmlns:Sprites="Bismuth.Framework.Assets.Sprites" xmlns:Composite="Bismuth.Framework.Assets.Composite">
+<XnaContent xmlns:GameObjects="Bismuth.Framework.Assets.GameObjects" xmlns:Sprites="Bismuth.Framework.Assets.Sprites" xmlns:Particles="Bismuth.Framework.Assets.Particles" xmlns:Composite="Bismuth.Framework.Assets.Composite">
   <Asset Type="GameObjects:ActorAsset">
     <Name>Root</Name>
     <Class>Plan2015.Score.ScoreBoard.Actors.School, Plan2015.Score.ScoreBoard</Class>
@@ -33,8 +33,8 @@
             <Name>Logo</Name>
             <Position>-100 0</Position>
             <Rotation>0</Rotation>
-            <ScaleX>1</ScaleX>
-            <ScaleY>1</ScaleY>
+            <ScaleX>0.55</ScaleX>
+            <ScaleY>0.55</ScaleY>
             <SkewX>0</SkewX>
             <SkewY>0</SkewY>
             <FlipX>false</FlipX>
@@ -42,10 +42,101 @@
             <Opacity>1</Opacity>
             <IsVisible>true</IsVisible>
             <ZIndex>0</ZIndex>
-            <Children />
-            <TextureAssetName>Textures\Agernholdt</TextureAssetName>
-            <Rectangle>0 0 256 256</Rectangle>
-            <Origin>128 128</Origin>
+            <Children>
+              <Item Type="Particles:ParticleEmitterAsset">
+                <Name>GlowEmitter1</Name>
+                <Position>-100.684235 -126.03949</Position>
+                <Rotation>0</Rotation>
+                <ScaleX>1</ScaleX>
+                <ScaleY>1</ScaleY>
+                <SkewX>0</SkewX>
+                <SkewY>0</SkewY>
+                <FlipX>false</FlipX>
+                <FlipY>false</FlipY>
+                <Opacity>1</Opacity>
+                <IsVisible>true</IsVisible>
+                <ZIndex>0</ZIndex>
+                <Children />
+                <ParticleSystemName>GlowParticleLayer</ParticleSystemName>
+                <IsEnabled>true</IsEnabled>
+                <EmitRate>100</EmitRate>
+              </Item>
+              <Item Type="Particles:ParticleEmitterAsset">
+                <Name>GlowEmitter2</Name>
+                <Position>74.7697449 -132.302643</Position>
+                <Rotation>0</Rotation>
+                <ScaleX>1</ScaleX>
+                <ScaleY>1</ScaleY>
+                <SkewX>0</SkewX>
+                <SkewY>0</SkewY>
+                <FlipX>false</FlipX>
+                <FlipY>false</FlipY>
+                <Opacity>1</Opacity>
+                <IsVisible>true</IsVisible>
+                <ZIndex>0</ZIndex>
+                <Children />
+                <ParticleSystemName>GlowParticleLayer</ParticleSystemName>
+                <IsEnabled>true</IsEnabled>
+                <EmitRate>100</EmitRate>
+              </Item>
+              <Item Type="Particles:ParticleEmitterAsset">
+                <Name>GlowEmitter3</Name>
+                <Position>-87.0395 113.506607</Position>
+                <Rotation>0</Rotation>
+                <ScaleX>1</ScaleX>
+                <ScaleY>1</ScaleY>
+                <SkewX>0</SkewX>
+                <SkewY>0</SkewY>
+                <FlipX>false</FlipX>
+                <FlipY>false</FlipY>
+                <Opacity>1</Opacity>
+                <IsVisible>true</IsVisible>
+                <ZIndex>0</ZIndex>
+                <Children />
+                <ParticleSystemName>GlowParticleLayer</ParticleSystemName>
+                <IsEnabled>true</IsEnabled>
+                <EmitRate>100</EmitRate>
+              </Item>
+              <Item Type="Particles:ParticleEmitterAsset">
+                <Name>GlowEmitter4</Name>
+                <Position>58.8157845 117.210541</Position>
+                <Rotation>0</Rotation>
+                <ScaleX>1</ScaleX>
+                <ScaleY>1</ScaleY>
+                <SkewX>0</SkewX>
+                <SkewY>0</SkewY>
+                <FlipX>false</FlipX>
+                <FlipY>false</FlipY>
+                <Opacity>1</Opacity>
+                <IsVisible>true</IsVisible>
+                <ZIndex>0</ZIndex>
+                <Children />
+                <ParticleSystemName>GlowParticleLayer</ParticleSystemName>
+                <IsEnabled>true</IsEnabled>
+                <EmitRate>100</EmitRate>
+              </Item>
+              <Item Type="Particles:ParticleEmitterAsset">
+                <Name>MagicExplosionEmitter</Name>
+                <Position>0 0</Position>
+                <Rotation>0</Rotation>
+                <ScaleX>1</ScaleX>
+                <ScaleY>1</ScaleY>
+                <SkewX>0</SkewX>
+                <SkewY>0</SkewY>
+                <FlipX>false</FlipX>
+                <FlipY>false</FlipY>
+                <Opacity>1</Opacity>
+                <IsVisible>true</IsVisible>
+                <ZIndex>0</ZIndex>
+                <Children />
+                <ParticleSystemName>MagicExplosionLayer</ParticleSystemName>
+                <IsEnabled>false</IsEnabled>
+                <EmitRate>0</EmitRate>
+              </Item>
+            </Children>
+            <TextureAssetName>Textures\Agernholt</TextureAssetName>
+            <Rectangle>0 0 512 512</Rectangle>
+            <Origin>256 256</Origin>
             <Color>FFFFFFFF</Color>
           </Item>
           <Item>

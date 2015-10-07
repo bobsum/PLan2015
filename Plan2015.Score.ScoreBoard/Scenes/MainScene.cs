@@ -5,6 +5,7 @@ using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Plan2015.Score.Client;
 using Plan2015.Score.ScoreBoard.Actors;
+using Plan2015.Score.ScoreBoard.Layers;
 using Plan2015.Score.ScoreBoard.Mocks;
 using System;
 using System.Collections.Generic;
@@ -26,6 +27,8 @@ namespace Plan2015.Score.ScoreBoard.Scenes
 
         public IScoreClient ScoreClient { get; private set; }
 
+        private readonly List<ParticleLayer> _particleLayers = new List<ParticleLayer>();
+
         public override void Initialize()
         {
         }
@@ -46,16 +49,22 @@ namespace Plan2015.Score.ScoreBoard.Scenes
                 }
 
                 Root.SchoolListBox.Add(school);
+
+                foreach (ParticleLayer particleLayer in _particleLayers)
+                    particleLayer.Bind(school);
             }
         }
 
         public override void LoadContent()
         {
-            //ScoreClient = new ScoreClient("http://192.168.1.78");
-            ScoreClient = new ScoreClientMock();
-            ScoreClient.Initialized = Initialized;
-
             Root = Game.ContentManager.Load<SchoolScene>("Scenes/SchoolScene");
+            Root.FindAll<ParticleLayer>(_particleLayers);
+            foreach (ParticleLayer particleLayer in _particleLayers)
+                particleLayer.LoadContent(Game);
+
+            ScoreClient = new ScoreClient(Game.Configuration.Network.Url);
+            //ScoreClient = new ScoreClientMock();
+            ScoreClient.Initialized = Initialized;
             ScoreClient.Start();
         }
 

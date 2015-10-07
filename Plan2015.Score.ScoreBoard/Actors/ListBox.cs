@@ -18,7 +18,8 @@ namespace Plan2015.Score.ScoreBoard.Actors
         public List<ListBoxItem> Items { get { return _items; } }
 
         public Func<INode, INode, bool> Comparer { get; set; }
-        public Action Swapped { get; set; }
+        public Action<INode, INode> Swapped { get; set; }
+        public bool IsSorting { get; private set; }
 
         private INode _swapRoot;
         private ListBoxItem _swapA;
@@ -57,13 +58,9 @@ namespace Plan2015.Score.ScoreBoard.Actors
             }
         }
 
-        public override void Update(GameTime gameTime)
+        public void UpdateSort(GameTime gameTime)
         {
-            if (_swapAnimation.State == AnimationState.Playing)
-            {
-                _swapAnimation.Update(gameTime);
-            }
-            else if (_swapAnimation.State == AnimationState.Finished)
+            if (IsSorting && _swapAnimation.State == AnimationState.Finished)
             {
                 INode contentA = _swapA.Content;
                 INode contentB = _swapB.Content;
@@ -76,38 +73,49 @@ namespace Plan2015.Score.ScoreBoard.Actors
 
                 Children.Remove(_swapRoot);
 
-                _swapAnimation.Reset();
+                IsSorting = false;
 
-                if (Swapped != null) Swapped();
+                if (Swapped != null) Swapped(contentA, contentB);
             }
-            else
+
+            if (!IsSorting)
             {
-                for (int i = 1; i < _items.Count; i++)
+                CheckSort();
+            }
+
+            if (_swapAnimation.State == AnimationState.Playing)
+            {
+                _swapAnimation.Update(gameTime);
+            }
+        }
+
+        private void CheckSort()
+        {
+            for (int i = 1; i < _items.Count; i++)
+            {
+                _itemA = _items[i - 1];
+                _itemB = _items[i];
+                INode contentA = _itemA.Content;
+                INode contentB = _itemB.Content;
+
+                if (contentA != null && contentB != null && Comparer(contentA, contentB))
                 {
-                    _itemA = _items[i - 1];
-                    _itemB = _items[i];
-                    INode contentA = _itemA.Content;
-                    INode contentB = _itemB.Content;
+                    _itemA.Content = null;
+                    _itemB.Content = null;
 
-                    if (contentA != null && contentB != null && Comparer(contentA, contentB))
-                    {
-                        _itemA.Content = null;
-                        _itemB.Content = null;
+                    _swapAnimation.Reset();
+                    _swapAnimation.Play();
 
-                        _swapAnimation.Reset();
-                        _swapAnimation.Play();
+                    _swapA.Content = contentA;
+                    _swapB.Content = contentB;
 
-                        _swapA.Content = contentA;
-                        _swapB.Content = contentB;
+                    _swapRoot.Position = (_itemA.Position + _itemB.Position) * 0.5f;
 
-                        _swapRoot.Position = (_itemA.Position + _itemB.Position) * 0.5f;
+                    Children.Add(_swapRoot);
 
-                        Children.Add(_swapRoot);
+                    IsSorting = true;
 
-                        _swapAnimation.Update(gameTime);
-
-                        break;
-                    }
+                    break;
                 }
             }
         }

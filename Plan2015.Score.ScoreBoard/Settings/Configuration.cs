@@ -78,6 +78,7 @@ namespace Plan2015.Score.ScoreBoard.Settings
 
     public class NetworkSettings
     {
+        public string Url { get; set; }
         public string ServerName { get; set; }
         public string IP { get; set; }
         public int Port { get; set; }

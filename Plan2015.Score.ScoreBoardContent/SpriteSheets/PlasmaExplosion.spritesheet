@@ -1,0 +1,68 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<XnaContent xmlns:Sprites="Bismuth.Framework.Assets.Sprites">
+  <Asset Type="Sprites:SpriteSheetAsset">
+    <TextureAssetName>Textures\PlasmaExplosion</TextureAssetName>
+    <Frames>
+      <Item>
+        <Name>0</Name>
+        <Rectangle>0 0 128 128</Rectangle>
+        <Origin>64 64</Origin>
+      </Item>
+      <Item>
+        <Name>1</Name>
+        <Rectangle>128 0 128 128</Rectangle>
+        <Origin>64 64</Origin>
+      </Item>
+      <Item>
+        <Name>2</Name>
+        <Rectangle>256 0 128 128</Rectangle>
+        <Origin>64 64</Origin>
+      </Item>
+      <Item>
+        <Name>3</Name>
+        <Rectangle>384 0 128 128</Rectangle>
+        <Origin>64 64</Origin>
+      </Item>
+      <Item>
+        <Name>4</Name>
+        <Rectangle>0 128 128 128</Rectangle>
+        <Origin>64 64</Origin>
+      </Item>
+      <Item>
+        <Name>5</Name>
+        <Rectangle>128 128 128 128</Rectangle>
+        <Origin>64 64</Origin>
+      </Item>
+      <Item>
+        <Name>6</Name>
+        <Rectangle>256 128 128 128</Rectangle>
+        <Origin>64 64</Origin>
+      </Item>
+      <Item>
+        <Name>7</Name>
+        <Rectangle>384 128 128 128</Rectangle>
+        <Origin>64 64</Origin>
+      </Item>
+      <Item>
+        <Name>8</Name>
+        <Rectangle>0 256 128 128</Rectangle>
+        <Origin>64 64</Origin>
+      </Item>
+      <Item>
+        <Name>9</Name>
+        <Rectangle>128 256 128 128</Rectangle>
+        <Origin>64 64</Origin>
+      </Item>
+      <Item>
+        <Name>10</Name>
+        <Rectangle>256 256 128 128</Rectangle>
+        <Origin>64 64</Origin>
+      </Item>
+      <Item>
+        <Name>11</Name>
+        <Rectangle>384 256 128 128</Rectangle>
+        <Origin>64 64</Origin>
+      </Item>
+    </Frames>
+  </Asset>
+</XnaContent>

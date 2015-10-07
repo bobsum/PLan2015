@@ -1,0 +1,12 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<XnaContent xmlns:Sprites="Bismuth.Framework.Assets.Sprites">
+  <Asset Type="Sprites:SpriteSheetAsset">
+    <TextureAssetName>Textures\Particles</TextureAssetName>
+    <Frames>
+      <Item>
+        <Rectangle>57 301 69 66</Rectangle>
+        <Origin>34 33</Origin>
+      </Item>
+    </Frames>
+  </Asset>
+</XnaContent>
