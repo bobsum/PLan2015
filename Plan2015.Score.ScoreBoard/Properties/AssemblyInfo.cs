@@ -8,8 +8,8 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyTitle("Plan2015.Score.ScoreBoard")]
 [assembly: AssemblyProduct("Plan2015.Score.ScoreBoard")]
 [assembly: AssemblyDescription("")]
-[assembly: AssemblyCompany("Microsoft")]
-[assembly: AssemblyCopyright("Copyright © Microsoft 2015")]
+[assembly: AssemblyCompany("Bismuth")]
+[assembly: AssemblyCopyright("Copyright © Bismuth 2015")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 

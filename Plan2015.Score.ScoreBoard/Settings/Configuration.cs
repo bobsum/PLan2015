@@ -55,9 +55,6 @@ namespace Plan2015.Score.ScoreBoard.Settings
                 },
                 Network = new NetworkSettings
                 {
-                    ServerName = "MeServer",
-                    IP = "0.0.0.0",
-                    Port = 55555
                 }
             };
         }
@@ -79,9 +76,7 @@ namespace Plan2015.Score.ScoreBoard.Settings
     public class NetworkSettings
     {
         public string Url { get; set; }
-        public string ServerName { get; set; }
-        public string IP { get; set; }
-        public int Port { get; set; }
+        public bool UseMock { get; set; }
     }
 
     public class PlayerSettings

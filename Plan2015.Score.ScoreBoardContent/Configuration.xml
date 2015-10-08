@@ -11,8 +11,6 @@
   </Audio>
   <Network>
     <Url>http://192.168.1.78</Url>
-    <ServerName>MeServer</ServerName>
-    <IP>0.0.0.0</IP>
-    <Port>55555</Port>
+    <UseMock>true</UseMock>
   </Network>
 </Configuration>

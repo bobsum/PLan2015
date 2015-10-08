@@ -62,8 +62,11 @@ namespace Plan2015.Score.ScoreBoard.Scenes
             foreach (ParticleLayer particleLayer in _particleLayers)
                 particleLayer.LoadContent(Game);
 
-            //ScoreClient = new ScoreClient(Game.Configuration.Network.Url);
-            ScoreClient = new ScoreClientMock();
+            if (Game.Configuration.Network.UseMock)
+                ScoreClient = new ScoreClientMock();
+            else
+                ScoreClient = new ScoreClient(Game.Configuration.Network.Url);
+
             ScoreClient.Initialized = Initialized;
             ScoreClient.Start();
         }
