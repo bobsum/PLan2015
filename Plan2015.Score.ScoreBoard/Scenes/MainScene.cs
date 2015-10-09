@@ -58,6 +58,7 @@ namespace Plan2015.Score.ScoreBoard.Scenes
         public override void LoadContent()
         {
             Root = Game.ContentManager.Load<SchoolScene>("Scenes/SchoolScene");
+            Root.Game = Game;
             Root.FindAll<ParticleLayer>(_particleLayers);
             foreach (ParticleLayer particleLayer in _particleLayers)
                 particleLayer.LoadContent(Game);

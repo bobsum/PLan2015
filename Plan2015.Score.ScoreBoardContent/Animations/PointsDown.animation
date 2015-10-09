@@ -1,0 +1,136 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<XnaContent xmlns:Animations="Bismuth.Framework.Assets.Animations" xmlns:EasingFunctions="Bismuth.Framework.Animations.EasingFunctions">
+  <Asset Type="Animations:AnimationAsset">
+    <NodeAssetName>Actors\SwapPlaceholder</NodeAssetName>
+    <Mode>Once</Mode>
+    <Direction>Forward</Direction>
+    <Fps>60</Fps>
+    <FrameCount>60</FrameCount>
+    <Timelines>
+      <Item>
+        <TargetName>Root</TargetName>
+        <PropertyTimelineType>Bismuth.Framework.Animations.Timelines.PositionYTimeline, Bismuth.Framework</PropertyTimelineType>
+        <BeginTime>0</BeginTime>
+        <EndTime>60</EndTime>
+        <Duration>60</Duration>
+        <KeyFrames>
+          <Item>
+            <FillBehavior>HoldEnd</FillBehavior>
+            <EasingFunction Type="EasingFunctions:SineEase">
+              <EasingMode>EaseOut</EasingMode>
+            </EasingFunction>
+            <Time>0</Time>
+            <Value Type="float">0</Value>
+          </Item>
+          <Item>
+            <FillBehavior>HoldEnd</FillBehavior>
+            <EasingFunction Type="EasingFunctions:SineEase">
+              <EasingMode>EaseIn</EasingMode>
+            </EasingFunction>
+            <Time>24</Time>
+            <Value Type="float">-120</Value>
+          </Item>
+          <Item>
+            <FillBehavior>HoldEnd</FillBehavior>
+            <EasingFunction Type="EasingFunctions:LinearEase">
+              <EasingMode>EaseIn</EasingMode>
+            </EasingFunction>
+            <Time>60</Time>
+            <Value Type="float">402.976227</Value>
+          </Item>
+        </KeyFrames>
+      </Item>
+      <Item>
+        <TargetName>Root</TargetName>
+        <PropertyTimelineType>Bismuth.Framework.Animations.Timelines.PositionXTimeline, Bismuth.Framework</PropertyTimelineType>
+        <BeginTime>0</BeginTime>
+        <EndTime>60</EndTime>
+        <Duration>60</Duration>
+        <KeyFrames>
+          <Item>
+            <FillBehavior>HoldEnd</FillBehavior>
+            <EasingFunction Type="EasingFunctions:SineEase">
+              <EasingMode>EaseOut</EasingMode>
+            </EasingFunction>
+            <Time>0</Time>
+            <Value Type="float">0</Value>
+          </Item>
+          <Item>
+            <FillBehavior>HoldEnd</FillBehavior>
+            <EasingFunction Type="EasingFunctions:LinearEase">
+              <EasingMode>EaseIn</EasingMode>
+            </EasingFunction>
+            <Time>60</Time>
+            <Value Type="float">-306.315247</Value>
+          </Item>
+        </KeyFrames>
+      </Item>
+      <Item>
+        <TargetName>Root</TargetName>
+        <PropertyTimelineType>Bismuth.Framework.Animations.Timelines.RotationTimeline, Bismuth.Framework</PropertyTimelineType>
+        <BeginTime>0</BeginTime>
+        <EndTime>60</EndTime>
+        <Duration>60</Duration>
+        <KeyFrames>
+          <Item>
+            <FillBehavior>HoldEnd</FillBehavior>
+            <EasingFunction Type="EasingFunctions:SineEase">
+              <EasingMode>EaseOut</EasingMode>
+            </EasingFunction>
+            <Time>0</Time>
+            <Value Type="float">0.566729248</Value>
+          </Item>
+          <Item>
+            <FillBehavior>HoldEnd</FillBehavior>
+            <EasingFunction Type="EasingFunctions:LinearEase">
+              <EasingMode>EaseIn</EasingMode>
+            </EasingFunction>
+            <Time>60</Time>
+            <Value Type="float">-7.494318</Value>
+          </Item>
+        </KeyFrames>
+      </Item>
+      <Item>
+        <TargetName>Root</TargetName>
+        <PropertyTimelineType>Bismuth.Framework.Animations.Timelines.OpacityTimeline, Bismuth.Framework</PropertyTimelineType>
+        <BeginTime>0</BeginTime>
+        <EndTime>60</EndTime>
+        <Duration>60</Duration>
+        <KeyFrames>
+          <Item>
+            <FillBehavior>HoldEnd</FillBehavior>
+            <EasingFunction Type="EasingFunctions:SineEase">
+              <EasingMode>EaseOut</EasingMode>
+            </EasingFunction>
+            <Time>0</Time>
+            <Value Type="float">0</Value>
+          </Item>
+          <Item>
+            <FillBehavior>HoldEnd</FillBehavior>
+            <EasingFunction Type="EasingFunctions:LinearEase">
+              <EasingMode>EaseIn</EasingMode>
+            </EasingFunction>
+            <Time>11</Time>
+            <Value Type="float">1</Value>
+          </Item>
+          <Item>
+            <FillBehavior>HoldEnd</FillBehavior>
+            <EasingFunction Type="EasingFunctions:SineEase">
+              <EasingMode>EaseIn</EasingMode>
+            </EasingFunction>
+            <Time>31</Time>
+            <Value Type="float">1</Value>
+          </Item>
+          <Item>
+            <FillBehavior>HoldEnd</FillBehavior>
+            <EasingFunction Type="EasingFunctions:LinearEase">
+              <EasingMode>EaseIn</EasingMode>
+            </EasingFunction>
+            <Time>60</Time>
+            <Value Type="float">0</Value>
+          </Item>
+        </KeyFrames>
+      </Item>
+    </Timelines>
+  </Asset>
+</XnaContent>

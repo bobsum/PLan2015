@@ -4,15 +4,15 @@
     <NodeAssetName>Actors\SwapPlaceholder</NodeAssetName>
     <Mode>Once</Mode>
     <Direction>Forward</Direction>
-    <Fps>80</Fps>
-    <FrameCount>60</FrameCount>
+    <Fps>70</Fps>
+    <FrameCount>70</FrameCount>
     <Timelines>
       <Item>
         <TargetName>A</TargetName>
         <PropertyTimelineType>Bismuth.Framework.Animations.Timelines.PositionYTimeline, Bismuth.Framework</PropertyTimelineType>
         <BeginTime>0</BeginTime>
-        <EndTime>60</EndTime>
-        <Duration>60</Duration>
+        <EndTime>70</EndTime>
+        <Duration>70</Duration>
         <KeyFrames>
           <Item>
             <FillBehavior>HoldEnd</FillBehavior>
@@ -38,8 +38,8 @@
         <TargetName>B</TargetName>
         <PropertyTimelineType>Bismuth.Framework.Animations.Timelines.PositionYTimeline, Bismuth.Framework</PropertyTimelineType>
         <BeginTime>0</BeginTime>
-        <EndTime>60</EndTime>
-        <Duration>60</Duration>
+        <EndTime>70</EndTime>
+        <Duration>70</Duration>
         <KeyFrames>
           <Item>
             <FillBehavior>HoldEnd</FillBehavior>
@@ -63,8 +63,8 @@
         <TargetName>B</TargetName>
         <PropertyTimelineType>Bismuth.Framework.Animations.Timelines.ScaleTimeline, Bismuth.Framework</PropertyTimelineType>
         <BeginTime>0</BeginTime>
-        <EndTime>60</EndTime>
-        <Duration>60</Duration>
+        <EndTime>70</EndTime>
+        <Duration>70</Duration>
         <KeyFrames>
           <Item>
             <FillBehavior>HoldEnd</FillBehavior>

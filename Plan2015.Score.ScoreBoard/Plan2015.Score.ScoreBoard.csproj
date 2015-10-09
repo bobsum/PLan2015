@@ -76,6 +76,7 @@
   <ItemGroup>
     <Compile Include="Actors\House.cs" />
     <Compile Include="Actors\ListBoxItem.cs" />
+    <Compile Include="Actors\Points.cs" />
     <Compile Include="Actors\School.cs" />
     <Compile Include="Actors\ListBox.cs" />
     <Compile Include="Actors\Swap.cs" />

@@ -15,6 +15,8 @@ namespace Plan2015.Score.ScoreBoard.Mocks
     {
         private readonly List<SchoolScore> _schoolScores = new List<SchoolScore>();
 
+        private int _inc;
+
         public ScoreClientMock()
         {
 
@@ -40,6 +42,9 @@ namespace Plan2015.Score.ScoreBoard.Mocks
                 Initialized();
             }
 
+            _inc = 1;
+            if (ks.IsKeyDown(Keys.X)) _inc = -1;
+
             if (ks.IsKeyDown(Keys.Q))
             {
                 IncrementHouse(ks, _schoolScores[0]);
@@ -54,18 +59,18 @@ namespace Plan2015.Score.ScoreBoard.Mocks
             }
             else
             {
-                if (ks.IsKeyPressedOnce(Keys.D1)) _schoolScores[0].Amount++;
-                if (ks.IsKeyPressedOnce(Keys.D2)) _schoolScores[1].Amount++;
-                if (ks.IsKeyPressedOnce(Keys.D3)) _schoolScores[2].Amount++;
+                if (ks.IsKeyPressedOnce(Keys.D1)) _schoolScores[0].Amount += _inc;
+                if (ks.IsKeyPressedOnce(Keys.D2)) _schoolScores[1].Amount += _inc;
+                if (ks.IsKeyPressedOnce(Keys.D3)) _schoolScores[2].Amount += _inc;
             }
         }
 
         private void IncrementHouse(KeyboardState ks, SchoolScore school)
         {
-            if (ks.IsKeyPressedOnce(Keys.D1)) school.HouseScores.ToArray()[0].Amount++;
-            if (ks.IsKeyPressedOnce(Keys.D2)) school.HouseScores.ToArray()[1].Amount++;
-            if (ks.IsKeyPressedOnce(Keys.D3)) school.HouseScores.ToArray()[2].Amount++;
-            if (ks.IsKeyPressedOnce(Keys.D4)) school.HouseScores.ToArray()[3].Amount++;
+            if (ks.IsKeyPressedOnce(Keys.D1)) school.HouseScores.ToArray()[0].Amount += _inc;
+            if (ks.IsKeyPressedOnce(Keys.D2)) school.HouseScores.ToArray()[1].Amount += _inc;
+            if (ks.IsKeyPressedOnce(Keys.D3)) school.HouseScores.ToArray()[2].Amount += _inc;
+            if (ks.IsKeyPressedOnce(Keys.D4)) school.HouseScores.ToArray()[3].Amount += _inc;
         }
 
         public Action Initialized { get; set; }
@@ -73,7 +78,7 @@ namespace Plan2015.Score.ScoreBoard.Mocks
         private void AddSchool(string schoolName, params string[] houseNames)
         {
             SchoolScore school = new SchoolScore { Name = schoolName };
-            school.Amount = 2343;
+            school.Amount = 0;
             for (int i = 0; i < houseNames.Length; i++)
             {
                 AddHouse(school, houseNames[i], i);
@@ -90,7 +95,7 @@ namespace Plan2015.Score.ScoreBoard.Mocks
                 {
                     Id = id,
                     Name = houseName,
-                    Amount = 4590
+                    Amount = 0
                 }
             });
         }

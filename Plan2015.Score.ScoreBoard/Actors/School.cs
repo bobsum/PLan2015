@@ -27,6 +27,8 @@ namespace Plan2015.Score.ScoreBoard.Actors
 
         public SchoolScore Score { get; set; }
 
+        public int DisplayScore { get; set; }
+
         public ListBox HouseListBox { get; set; }
 
         public ParticleEmitter MagicExplosionEmitter { get; private set; }
@@ -59,7 +61,7 @@ namespace Plan2015.Score.ScoreBoard.Actors
 
         public virtual void Draw(ISpriteBatch spriteBatch)
         {
-            string scoreString = Score.Amount.ToString();
+            string scoreString = DisplayScore.ToString();
 
             Vector2 measure = Font.MeasureString(scoreString);
             Vector2 origin = new Vector2(measure.X, measure.Y * 0.5f);

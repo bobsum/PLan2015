@@ -71,6 +71,16 @@
       <Importer>XmlImporter</Importer>
       <Processor>PassThroughProcessor</Processor>
     </Compile>
+    <Compile Include="Animations\PointsDown.animation">
+      <Name>PointsDown</Name>
+      <Importer>XmlImporter</Importer>
+      <Processor>PassThroughProcessor</Processor>
+    </Compile>
+    <Compile Include="Animations\PointsUp.animation">
+      <Name>PointsUp</Name>
+      <Importer>XmlImporter</Importer>
+      <Processor>PassThroughProcessor</Processor>
+    </Compile>
     <Compile Include="Animations\SchoolHover.animation">
       <Name>SchoolHover</Name>
       <Importer>XmlImporter</Importer>

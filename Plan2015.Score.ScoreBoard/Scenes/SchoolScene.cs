@@ -23,9 +23,10 @@ namespace Plan2015.Score.ScoreBoard.Scenes
             EarthquakeManager = new EarthquakeManager();
         }
 
+        public MainGame Game { get; set; }
         public ListBox SchoolListBox { get; private set; }
         public EarthquakeManager EarthquakeManager { get; private set; }
-
+        
         public override void LoadContent(IContentManager contentManager)
         {
             SchoolListBox = this.Find<ListBox>("SchoolListBox");
@@ -42,7 +43,7 @@ namespace Plan2015.Score.ScoreBoard.Scenes
         {
             if (EarthquakeManager.Matrix != Matrix.Identity) return false;
 
-            return ((School)a).Score.Amount < ((School)b).Score.Amount;
+            return ((School)a).DisplayScore < ((School)b).DisplayScore;
         }
 
         public override void Update(GameTime gameTime)
@@ -61,6 +62,21 @@ namespace Plan2015.Score.ScoreBoard.Scenes
             if (!anyHouseListBoxIsSorting)
             {
                 SchoolListBox.UpdateSort(gameTime);
+
+                for (int i = 0; i < SchoolListBox.Items.Count; i++)
+                {
+                    School school = SchoolListBox.Items[i].Content as School;
+                    if (school != null && school.DisplayScore != school.Score.Amount)
+                    {
+                        int delta = school.Score.Amount - school.DisplayScore;
+                        school.DisplayScore = school.Score.Amount;
+
+                        Points points = new Points();
+                        points.Setup(Game.ContentManager, delta);
+                        points.Position = school.ScorePosition.WorldPosition + new Vector2(-100, 0);
+                        Children.Add(points);
+                    }
+                }
             }
 
             EarthquakeManager.Update(gameTime);
