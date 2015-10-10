@@ -12,6 +12,7 @@ using Bismuth.Framework;
 using Plan2015.Score.ScoreBoard.Settings;
 using Bismuth.Framework.Particles;
 using Plan2015.Score.ScoreBoard.Scenes;
+using Bismuth.Framework.Audio;
 
 namespace Plan2015.Score.ScoreBoard
 {
@@ -22,6 +23,7 @@ namespace Plan2015.Score.ScoreBoard
     {
         public Configuration Configuration { get; set; }
         public Pool<Particle> Pool { get; private set; }
+        public static ISoundManager SoundManager { get; private set; }
 
         public MainScene MainScene { get; private set; }
 
@@ -67,6 +69,7 @@ namespace Plan2015.Score.ScoreBoard
             base.LoadContent();
 
             Pool = new Pool<Particle>();
+            SoundManager = new XactSoundManager("Content//Audio//Plan2015.xgs", "Content//Audio//Plan2015.xwb", "Content//Audio//Plan2015.xsb");
 
             SceneManager.AddScene("Main", MainScene = new MainScene(this));
             MainScene.LoadContent();

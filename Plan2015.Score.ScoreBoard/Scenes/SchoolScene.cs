@@ -13,6 +13,7 @@ using System.Text;
 using Bismuth.Framework.Input;
 using Bismuth.Framework.Animations;
 using Plan2015.Score.ScoreBoard.Earthquakes;
+using Plan2015.Score.ScoreBoard.Audio;
 
 namespace Plan2015.Score.ScoreBoard.Scenes
 {
@@ -26,7 +27,7 @@ namespace Plan2015.Score.ScoreBoard.Scenes
         public MainGame Game { get; set; }
         public ListBox SchoolListBox { get; private set; }
         public EarthquakeManager EarthquakeManager { get; private set; }
-        
+
         public override void LoadContent(IContentManager contentManager)
         {
             SchoolListBox = this.Find<ListBox>("SchoolListBox");
@@ -36,6 +37,7 @@ namespace Plan2015.Score.ScoreBoard.Scenes
                     EarthquakeManager.Push(new EarthquakeY(20));
                     EarthquakeManager.Push(new EarthquakeX(15));
                     ((School)b).MagicExplosionEmitter.Emit();
+                    MainGame.SoundManager.PlayCue(SfxNames.Explosion);
                 };
         }
 
@@ -73,8 +75,14 @@ namespace Plan2015.Score.ScoreBoard.Scenes
 
                         Points points = new Points();
                         points.Setup(Game.ContentManager, delta);
-                        points.Position = school.ScorePosition.WorldPosition + new Vector2(-100, 0);
+                        Vector2 m = points.Font.MeasureString(points.ValueString);
+                        points.Position = school.ScorePosition.WorldPosition + new Vector2(-m.X * 0.5f, 0);
                         Children.Add(points);
+
+                        if (points.Value > 0)
+                            MainGame.SoundManager.PlayCue(SfxNames.PointsUp);
+                        else
+                            MainGame.SoundManager.PlayCue(SfxNames.PointsDown);
                     }
                 }
             }

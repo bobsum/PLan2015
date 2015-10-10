@@ -40,7 +40,7 @@ namespace Plan2015.Score.ScoreBoard.Scenes
                 School school = Game.ContentManager.Load<School>("Actors/School", true);
                 school.Score = schoolScore;
                 school.Find<Sprite>("Logo").Texture = Game.ContentManager.Load<Texture2D>("Textures/" + schoolScore.Name);
-
+                //school.Find<Sprite>("Logo").IsVisible = false;
                 foreach (HouseScore houseScore in schoolScore.HouseScores)
                 {
                     House house = Game.ContentManager.Load<House>("Actors/House", true);

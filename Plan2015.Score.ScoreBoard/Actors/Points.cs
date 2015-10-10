@@ -20,6 +20,7 @@ namespace Plan2015.Score.ScoreBoard.Actors
         public int Value { get; set; }
         public SpriteFont Font { get; set; }
         public INode NumberPosition { get; set; }
+        public string ValueString { get; set; }
 
         public void Setup(IContentManager contentManager, int value)
         {
@@ -28,6 +29,8 @@ namespace Plan2015.Score.ScoreBoard.Actors
             Children.Add(NumberPosition);
 
             Value = value;
+            ValueString = Value.ToString();
+            if (Value > 0) ValueString = "+" + ValueString;
 
             Font = contentManager.Load<SpriteFont>("Fonts/Gabriola200");
             Animation = contentManager.Load<Animation>(value < 0 ? "Animations/PointsDown" : "Animations/PointsUp", true);
@@ -46,16 +49,13 @@ namespace Plan2015.Score.ScoreBoard.Actors
 
         public virtual void Draw(ISpriteBatch spriteBatch)
         {
-            string valueString = Value.ToString();
-            if (Value > 0) valueString = "+" + valueString;
-
             Color color = Value > 0 ? Color.LightGreen : Color.Red;
             color *= NumberPosition.Opacity;
 
-            Vector2 measure = Font.MeasureString(valueString);
+            Vector2 measure = Font.MeasureString(ValueString);
             Vector2 origin = new Vector2(measure.X, measure.Y) * 0.5f;
 
-            spriteBatch.DrawString(Font, valueString, NumberPosition.WorldPosition, color, NumberPosition.WorldRotation, origin, NumberPosition.WorldScale, SpriteEffects.None, 0);
+            spriteBatch.DrawString(Font, ValueString, NumberPosition.WorldPosition, color, NumberPosition.WorldRotation, origin, NumberPosition.WorldScale, SpriteEffects.None, 0);
         }
 
         public virtual void Draw(PrimitiveBatch primitiveBatch)

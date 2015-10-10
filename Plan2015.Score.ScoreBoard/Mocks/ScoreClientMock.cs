@@ -44,6 +44,8 @@ namespace Plan2015.Score.ScoreBoard.Mocks
 
             _inc = 1;
             if (ks.IsKeyDown(Keys.X)) _inc = -1;
+            if (ks.IsKeyDown(Keys.C)) _inc = 15;
+            if (ks.IsKeyDown(Keys.V)) _inc = -15;
 
             if (ks.IsKeyDown(Keys.Q))
             {

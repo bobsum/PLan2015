@@ -9,6 +9,7 @@ using Bismuth.Framework.Sprites;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Plan2015.Score.Client;
+using Plan2015.Score.ScoreBoard.Audio;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -51,7 +52,9 @@ namespace Plan2015.Score.ScoreBoard.Actors
 
         private bool HouseComparer(INode a, INode b)
         {
-            return ((House)a).Score.Amount < ((House)b).Score.Amount;
+            bool r = ((House)a).Score.Amount < ((House)b).Score.Amount;
+            if (r) MainGame.SoundManager.PlayCue(SfxNames.HousePointsUpDown);
+            return r;
         }
 
         public override void Update(GameTime gameTime)
