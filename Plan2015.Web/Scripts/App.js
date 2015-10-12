@@ -27,7 +27,7 @@ var Activity;
                     });
                     return sum;
                 });
-                this.isValid = ko.computed(function () { return (_this.totalPoints === _this.sum()); });
+                this.isValid = ko.computed(function () { return (_this.totalPoints >= _this.sum()); });
             }
             ActivityViewModel.prototype.toggleExpanded = function () {
                 this.isExpanded(!this.isExpanded());
@@ -391,7 +391,7 @@ var Punctuality;
             function PunctualityViewModel(punctuality) {
                 this.id = punctuality.id;
                 this.name = punctuality.name;
-                this.deadline = new Date(punctuality.deadline.replace('T', ' '));
+                this.deadline = punctuality.deadline.replace('T', ' ');
                 this.all = punctuality.all;
             }
             PunctualityViewModel.prototype.sendDelete = function () {
@@ -453,7 +453,11 @@ var Punctuality;
             App.prototype.add = function (punctuality) {
                 this.punctualities.push(new PunctualityViewModel(punctuality));
                 this.punctualities.sort(function (a, b) {
-                    return a.deadline.getTime() - b.deadline.getTime();
+                    if (a.deadline < b.deadline)
+                        return -1;
+                    if (a.deadline > b.deadline)
+                        return 1;
+                    return 0;
                 });
             };
             App.prototype.remove = function (id) {

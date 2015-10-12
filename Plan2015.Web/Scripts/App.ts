@@ -40,7 +40,7 @@
                 });
                 return sum;
             });
-            this.isValid = ko.computed(() => (this.totalPoints === this.sum()));
+            this.isValid = ko.computed(() => (this.totalPoints >= this.sum()));
         }
 
         convertPoints() {
@@ -400,13 +400,13 @@ module Punctuality.Index {
     class PunctualityViewModel {
         id: number;
         name: string;
-        deadline: Date;
+        deadline: string;
         all: boolean;
 
         constructor(punctuality: IPunctualityDto) {
             this.id = punctuality.id;
             this.name = punctuality.name;
-            this.deadline = new Date(punctuality.deadline.replace('T', ' '));
+            this.deadline = punctuality.deadline.replace('T', ' ');
             this.all = punctuality.all;
         }
 
@@ -474,7 +474,9 @@ module Punctuality.Index {
         add(punctuality: IPunctualityDto) {
             this.punctualities.push(new PunctualityViewModel(punctuality));
             this.punctualities.sort((a: PunctualityViewModel, b: PunctualityViewModel) => {
-                return a.deadline.getTime() - b.deadline.getTime();
+                if (a.deadline < b.deadline) return -1;
+                if (a.deadline > b.deadline) return 1;
+                return 0;
             });
         }
 
