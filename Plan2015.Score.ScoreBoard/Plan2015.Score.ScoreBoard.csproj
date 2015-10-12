@@ -80,6 +80,8 @@
     <Compile Include="Actors\School.cs" />
     <Compile Include="Actors\ListBox.cs" />
     <Compile Include="Actors\Swap.cs" />
+    <Compile Include="Audio\NoCue.cs" />
+    <Compile Include="Audio\NoSoundManager.cs" />
     <Compile Include="Audio\SfxNames.cs" />
     <Compile Include="Common\FileHelper.cs" />
     <Compile Include="Common\Timer.cs" />

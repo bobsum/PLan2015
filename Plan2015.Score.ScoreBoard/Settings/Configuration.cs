@@ -51,6 +51,7 @@ namespace Plan2015.Score.ScoreBoard.Settings
                 },
                 Audio = new AudioSettings
                 {
+                    IsSoundEnabled = true,
                     IsMusicEnabled = true
                 },
                 Network = new NetworkSettings
@@ -70,6 +71,7 @@ namespace Plan2015.Score.ScoreBoard.Settings
 
     public class AudioSettings
     {
+        public bool IsSoundEnabled { get; set; }
         public bool IsMusicEnabled { get; set; }
     }
 

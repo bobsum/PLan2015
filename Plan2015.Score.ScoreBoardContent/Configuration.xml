@@ -7,6 +7,7 @@
     <Height>720</Height>
   </Video>
   <Audio>
+    <IsSoundEnabled>true</IsSoundEnabled>
     <IsMusicEnabled>true</IsMusicEnabled>
   </Audio>
   <Network>
