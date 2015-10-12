@@ -2,7 +2,7 @@
 <Configuration xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
   <Video>
     <IsFullScreen>false</IsFullScreen>
-    <AutoDetectResolution>false</AutoDetectResolution>
+    <AutoDetectResolution>true</AutoDetectResolution>
     <Width>1280</Width>
     <Height>720</Height>
   </Video>
@@ -11,7 +11,7 @@
     <IsMusicEnabled>true</IsMusicEnabled>
   </Audio>
   <Network>
-    <Url>http://192.168.1.78</Url>
-    <UseMock>true</UseMock>
+    <Url>http://192.168.1.200</Url>
+    <UseMock>false</UseMock>
   </Network>
 </Configuration>
