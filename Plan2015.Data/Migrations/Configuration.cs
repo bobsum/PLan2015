@@ -10,11 +10,11 @@ namespace Plan2015.Data.Migrations
             AutomaticMigrationsEnabled = false;
         }
 
-        protected override void Seed(DataContext context)
+        /*protected override void Seed(DataContext context)
         {
             var schools = new[]
             {
-                new School {Name = "Agernholdt"},
+                new School {Name = "Agernholt"},
                 new School {Name = "Ravnsborg"},
                 new School {Name = "Hardenberg"}
             };
@@ -53,7 +53,7 @@ namespace Plan2015.Data.Migrations
                     Name = "TeamMember " + (i + 1),
                     Rfid = (i + 101).ToString("D10")
                 });
-            }*/
-        }
+            }
+        }*/
     }
 }

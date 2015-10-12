@@ -9,5 +9,6 @@ namespace Plan2015.Data.Entities
         public virtual TeamMember TeamMember { get; set; }
         public int HouseId { get; set; }
         public virtual House House { get; set; }
+        public string Log { get; set; }
     }
 }

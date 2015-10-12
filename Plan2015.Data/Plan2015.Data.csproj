@@ -68,6 +68,10 @@
     <Compile Include="Migrations\201510071934575_AddedDiscarded.Designer.cs">
       <DependentUpon>201510071934575_AddedDiscarded.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201510121627521_LogToTurnoutPoint.cs" />
+    <Compile Include="Migrations\201510121627521_LogToTurnoutPoint.Designer.cs">
+      <DependentUpon>201510121627521_LogToTurnoutPoint.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -81,6 +85,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201510071934575_AddedDiscarded.resx">
       <DependentUpon>201510071934575_AddedDiscarded.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201510121627521_LogToTurnoutPoint.resx">
+      <DependentUpon>201510121627521_LogToTurnoutPoint.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

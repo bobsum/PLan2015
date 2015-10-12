@@ -47,7 +47,8 @@ namespace Plan2015.Web.Controllers.Api
                         Amount = sign == "+" ? 1 : -1,
                         House = scout.House,
                         TeamMember = teamMember,
-                        Discarded = MAX_POINTS <= Db.TurnoutPoints.Count(tp => tp.TeamMemberId == teamMember.Id)
+                        Discarded = MAX_POINTS <= Db.TurnoutPoints.Count(tp => tp.TeamMemberId == teamMember.Id),
+                        Log = string.Format("{0} : {1}", line, scout.Name)
                     };
                     Db.TurnoutPoints.Add(point);
                     await Db.SaveChangesAsync();
