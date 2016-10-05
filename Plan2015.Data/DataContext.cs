@@ -7,7 +7,7 @@ namespace Plan2015.Data
     //Import-Module .\packages\EntityFramework.6.1.1\tools\EntityFramework.psm1
     public class DataContext : DbContext
     {
-        public DataContext() : base("Plan2015")
+        public DataContext() : base("Plan2016")
         {
             //Configuration.ProxyCreationEnabled = false;
             //Database.Log = s => Debug.WriteLine(s);
