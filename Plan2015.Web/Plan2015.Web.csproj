@@ -144,6 +144,7 @@
     <Content Include="Views\Turnout\Index.cshtml" />
     <Content Include="Views\MagicGamesSetup\Marker.cshtml" />
     <Content Include="Views\Punctuality\Status.cshtml" />
+    <Content Include="Views\Score\Index.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -169,6 +170,7 @@
     <Compile Include="Controllers\Api\MagicGamesMarkerSwipeController.cs" />
     <Compile Include="Controllers\Api\TurnoutSwipeController.cs" />
     <Compile Include="Controllers\Mvc\PunctualityController.cs" />
+    <Compile Include="Controllers\Mvc\ScoreController.cs" />
     <Compile Include="Controllers\Mvc\TurnoutController.cs" />
     <Compile Include="Hubs\IPunctualityClient.cs" />
     <Compile Include="Controllers\Api\MagicGamesSetupController.cs" />

@@ -521,6 +521,47 @@ module Punctuality.Status {
     }
 }
 
+module Score.Index {
+    class ScoreHouseViewModel {
+        constructor(public name: string, public amount: number) {
+        }
+    }
+
+    class ScoreSchoolViewModel {
+        houses: ScoreHouseViewModel[];
+        amount: number;
+
+        constructor(public name: string, houses: IHouseScoreDto[]) {
+            var sum = 0;
+            this.houses = ko.utils.arrayMap(houses, house => {
+                sum += house.amount;
+                return new ScoreHouseViewModel(house.name, house.amount);
+            }).sort((a: ScoreHouseViewModel, b: ScoreHouseViewModel) => {
+                return b.amount - a.amount;
+            });
+            this.amount = sum;
+        }
+    }
+
+    export class App {
+        schools = ko.observableArray<ScoreSchoolViewModel>();
+
+        constructor() {
+            var hub = $.connection.scoreHub;
+
+            hub.client.updated = schools => {
+                this.schools(ko.utils.arrayMap(schools, school => {
+                    return new ScoreSchoolViewModel(school.name, school.houses);
+                }).sort((a: ScoreSchoolViewModel, b: ScoreSchoolViewModel) => {
+                    return b.amount - a.amount;
+                }));
+            }
+
+            $.connection.hub.start();
+        }
+    }
+}
+
 module Helpers {
     export function readText(file: File): JQueryPromise<string> {
         var reader = new FileReader();

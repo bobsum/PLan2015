@@ -503,6 +503,50 @@ var Punctuality;
         Status.App = App;
     })(Status = Punctuality.Status || (Punctuality.Status = {}));
 })(Punctuality || (Punctuality = {}));
+var Score;
+(function (Score) {
+    var Index;
+    (function (Index) {
+        var ScoreHouseViewModel = (function () {
+            function ScoreHouseViewModel(name, amount) {
+                this.name = name;
+                this.amount = amount;
+            }
+            return ScoreHouseViewModel;
+        })();
+        var ScoreSchoolViewModel = (function () {
+            function ScoreSchoolViewModel(name, houses) {
+                this.name = name;
+                var sum = 0;
+                this.houses = ko.utils.arrayMap(houses, function (house) {
+                    sum += house.amount;
+                    return new ScoreHouseViewModel(house.name, house.amount);
+                }).sort(function (a, b) {
+                    return b.amount - a.amount;
+                });
+                this.amount = sum;
+            }
+            return ScoreSchoolViewModel;
+        })();
+        var App = (function () {
+            function App() {
+                var _this = this;
+                this.schools = ko.observableArray();
+                var hub = $.connection.scoreHub;
+                hub.client.updated = function (schools) {
+                    _this.schools(ko.utils.arrayMap(schools, function (school) {
+                        return new ScoreSchoolViewModel(school.name, school.houses);
+                    }).sort(function (a, b) {
+                        return b.amount - a.amount;
+                    }));
+                };
+                $.connection.hub.start();
+            }
+            return App;
+        })();
+        Index.App = App;
+    })(Index = Score.Index || (Score.Index = {}));
+})(Score || (Score = {}));
 var Helpers;
 (function (Helpers) {
     function readText(file) {

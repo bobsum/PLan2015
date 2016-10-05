@@ -48,12 +48,12 @@ namespace Plan2015.Web.Controllers.Api
                         House = scout.House,
                         TeamMember = teamMember,
                         Discarded = MAX_POINTS <= Db.TurnoutPoints.Count(tp => tp.TeamMemberId == teamMember.Id),
-                        Log = string.Format("{0} : {1}", line, scout.Name)
+                        Log = string.Format("{0} : {1} : {2} : {3}", line, scout.Name, scout.House.Name, teamMember.Name)
                     };
                     Db.TurnoutPoints.Add(point);
                     await Db.SaveChangesAsync();
+                    ScoreHub.Clients.All.Updated(Repository.GetScore(Db));
                 }
-                ScoreHub.Clients.All.Updated(Repository.GetScore(Db));
                 return Ok();
             }
         }
