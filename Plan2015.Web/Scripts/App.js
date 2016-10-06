@@ -8,9 +8,10 @@ var Activity;
                 this.houseId = point.houseId;
                 this.houseName = point.houseName;
                 this.amount = ko.observable(point.amount);
+                this.visible = ko.observable(point.visible);
             }
             return ActivityPointViewModel;
-        })();
+        }());
         var ActivityViewModel = (function () {
             function ActivityViewModel(activity) {
                 var _this = this;
@@ -26,6 +27,14 @@ var Activity;
                         sum += (+p.amount() || 0);
                     });
                     return sum;
+                });
+                this.allVisible = ko.computed({
+                    read: function () {
+                        return !ko.utils.arrayFirst(_this.points(), function (p) { return !p.visible(); });
+                    },
+                    write: function (value) {
+                        ko.utils.arrayForEach(_this.points(), function (p) { return p.visible(value); });
+                    }
                 });
                 this.isValid = ko.computed(function () { return (_this.totalPoints >= _this.sum()); });
             }
@@ -58,7 +67,8 @@ var Activity;
                                 id: p.id,
                                 houseId: p.houseId,
                                 houseName: p.houseName,
-                                amount: p.amount()
+                                amount: p.amount(),
+                                visible: p.visible()
                             };
                         })
                     }
@@ -74,7 +84,7 @@ var Activity;
                 });
             };
             return ActivityViewModel;
-        })();
+        }());
         var CreateActivityViewModel = (function () {
             function CreateActivityViewModel() {
                 var _this = this;
@@ -84,7 +94,7 @@ var Activity;
                 this.isValid = ko.computed(function () { return (_this.name() && _this.totalPoints() && _this.houseIds().length > 0); });
             }
             return CreateActivityViewModel;
-        })();
+        }());
         var App = (function () {
             function App() {
                 var _this = this;
@@ -142,7 +152,7 @@ var Activity;
                 this.newActivity(new CreateActivityViewModel());
             };
             return App;
-        })();
+        }());
         Index.App = App;
     })(Index = Activity.Index || (Activity.Index = {}));
 })(Activity || (Activity = {}));
@@ -156,7 +166,7 @@ var MagicGames;
                 this.progress = ko.observable(0);
             }
             return StatusViewModel;
-        })();
+        }());
         var UploadViewModel = (function () {
             function UploadViewModel() {
                 var _this = this;
@@ -193,13 +203,13 @@ var MagicGames;
                 this.files(null);
             };
             return UploadViewModel;
-        })();
+        }());
         var App = (function () {
             function App() {
                 this.upload = ko.observable(new UploadViewModel());
             }
             return App;
-        })();
+        }());
         Marker.App = App;
     })(Marker = MagicGames.Marker || (MagicGames.Marker = {}));
 })(MagicGames || (MagicGames = {}));
@@ -214,7 +224,7 @@ var MagicGames;
                 this.amount = ko.observable(interval.amount);
             }
             return IntervalViewModel;
-        })();
+        }());
         var SetupViewModel = (function () {
             function SetupViewModel(setup) {
                 var _this = this;
@@ -287,7 +297,7 @@ var MagicGames;
                 return intervals;
             };
             return SetupViewModel;
-        })();
+        }());
         var App = (function () {
             function App() {
                 var _this = this;
@@ -305,7 +315,7 @@ var MagicGames;
                 }, 'json');
             }
             return App;
-        })();
+        }());
         Setup.App = App;
     })(Setup = MagicGames.Setup || (MagicGames.Setup = {}));
 })(MagicGames || (MagicGames = {}));
@@ -322,7 +332,7 @@ var MagicGames;
                 }, 'json');
             }
             return App;
-        })();
+        }());
         Score.App = App;
     })(Score = MagicGames.Score || (MagicGames.Score = {}));
 })(MagicGames || (MagicGames = {}));
@@ -336,7 +346,7 @@ var Turnout;
                 this.progress = ko.observable(0);
             }
             return StatusViewModel;
-        })();
+        }());
         var UploadViewModel = (function () {
             function UploadViewModel() {
                 var _this = this;
@@ -373,13 +383,13 @@ var Turnout;
                 this.files(null);
             };
             return UploadViewModel;
-        })();
+        }());
         var App = (function () {
             function App() {
                 this.upload = ko.observable(new UploadViewModel());
             }
             return App;
-        })();
+        }());
         Index.App = App;
     })(Index = Turnout.Index || (Turnout.Index = {}));
 })(Turnout || (Turnout = {}));
@@ -403,7 +413,7 @@ var Punctuality;
                 });
             };
             return PunctualityViewModel;
-        })();
+        }());
         var CreatePunctualityViewModel = (function () {
             function CreatePunctualityViewModel() {
                 var _this = this;
@@ -417,7 +427,7 @@ var Punctuality;
                 this.isValid = ko.computed(function () { return true || !!_this.name() && !!_this.deadline(); });
             }
             return CreatePunctualityViewModel;
-        })();
+        }());
         var App = (function () {
             function App() {
                 var _this = this;
@@ -464,7 +474,7 @@ var Punctuality;
                 this.punctualities.remove(function (p) { return (p.id === id); });
             };
             return App;
-        })();
+        }());
         Index.App = App;
     })(Index = Punctuality.Index || (Punctuality.Index = {}));
 })(Punctuality || (Punctuality = {}));
@@ -479,7 +489,7 @@ var Punctuality;
                 this.arrived = ko.utils.arrayFilter(house.scouts, function (s) { return s.arrived; }).length;
             }
             return HouseStatusViewModel;
-        })();
+        }());
         var App = (function () {
             function App(id) {
                 var _this = this;
@@ -499,7 +509,7 @@ var Punctuality;
                 });
             }
             return App;
-        })();
+        }());
         Status.App = App;
     })(Status = Punctuality.Status || (Punctuality.Status = {}));
 })(Punctuality || (Punctuality = {}));
@@ -508,26 +518,30 @@ var Score;
     var Index;
     (function (Index) {
         var ScoreHouseViewModel = (function () {
-            function ScoreHouseViewModel(name, amount) {
+            function ScoreHouseViewModel(name, visibleAmount, hiddenAmount) {
                 this.name = name;
-                this.amount = amount;
+                this.visibleAmount = visibleAmount;
+                this.hiddenAmount = hiddenAmount;
             }
             return ScoreHouseViewModel;
-        })();
+        }());
         var ScoreSchoolViewModel = (function () {
             function ScoreSchoolViewModel(name, houses) {
                 this.name = name;
-                var sum = 0;
+                var sumH = 0;
+                var sumV = 0;
                 this.houses = ko.utils.arrayMap(houses, function (house) {
-                    sum += house.amount;
-                    return new ScoreHouseViewModel(house.name, house.amount);
+                    sumV += house.amount;
+                    sumH += house.hiddenAmount;
+                    return new ScoreHouseViewModel(house.name, house.amount, house.hiddenAmount);
                 }).sort(function (a, b) {
-                    return b.amount - a.amount;
+                    return b.visibleAmount - a.visibleAmount;
                 });
-                this.amount = sum;
+                this.visibleAmount = sumV;
+                this.hiddenAmount = sumH;
             }
             return ScoreSchoolViewModel;
-        })();
+        }());
         var App = (function () {
             function App() {
                 var _this = this;
@@ -537,13 +551,13 @@ var Score;
                     _this.schools(ko.utils.arrayMap(schools, function (school) {
                         return new ScoreSchoolViewModel(school.name, school.houses);
                     }).sort(function (a, b) {
-                        return b.amount - a.amount;
+                        return b.visibleAmount - a.visibleAmount;
                     }));
                 };
                 $.connection.hub.start();
             }
             return App;
-        })();
+        }());
         Index.App = App;
     })(Index = Score.Index || (Score.Index = {}));
 })(Score || (Score = {}));
@@ -564,4 +578,3 @@ var Helpers;
     }
     Helpers.compare = compare;
 })(Helpers || (Helpers = {}));
-//# sourceMappingURL=App.js.map

@@ -10,6 +10,13 @@ namespace Plan2015.Web
         public IEnumerable<SchoolScoreDto> GetScore(DataContext db)
         {
             var ap = db.ActivityPoints
+                .Where(p => p.Visible)
+                .Select(p => new
+                {
+                    p.House,
+                    p.Amount
+                });
+            var aph = db.ActivityPoints
                 .Select(p => new
                 {
                     p.House,
@@ -39,7 +46,8 @@ namespace Plan2015.Web
                         {
                             Id = h.Id,
                             Name = h.Name,
-                            Amount = ap.Concat(pp).Concat(tp).Where(p => p.House == h).Sum(p => (int?) p.Amount) ?? 0
+                            Amount = ap.Concat(pp).Concat(tp).Where(p => p.House == h).Sum(p => (int?) p.Amount) ?? 0,
+                            HiddenAmount = aph.Concat(pp).Concat(tp).Where(p => p.House == h).Sum(p => (int?)p.Amount) ?? 0
                         })
                 })
                 .ToList();

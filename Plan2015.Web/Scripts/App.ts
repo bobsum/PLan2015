@@ -4,12 +4,14 @@
         houseId: number;
         houseName: string;
         amount: KnockoutObservable<number>;
+        visible: KnockoutObservable<boolean>;
 
         constructor(point: IActivityPointDto) {
             this.id = point.id;
             this.houseId = point.houseId;
             this.houseName = point.houseName;
             this.amount = ko.observable(point.amount);
+            this.visible = ko.observable(point.visible);
         }
     }
 
@@ -20,6 +22,7 @@
         points: KnockoutObservableArray<ActivityPointViewModel>;
         houseNames: string;
         sum: KnockoutComputed<number>;
+        allVisible: KnockoutComputed<boolean>;
         isValid: KnockoutComputed<boolean>;
         isExpanded = ko.observable<boolean>();
 
@@ -39,6 +42,14 @@
                     sum += (+p.amount() || 0);
                 });
                 return sum;
+            });
+            this.allVisible = ko.computed({
+                read: () => {
+                    return !ko.utils.arrayFirst(this.points(), p => !p.visible());
+                },
+                write: value => {
+                    ko.utils.arrayForEach(this.points(), p => p.visible(value));
+                }
             });
             this.isValid = ko.computed(() => (this.totalPoints >= this.sum()));
         }
@@ -71,7 +82,8 @@
                             id: p.id,
                             houseId: p.houseId,
                             houseName: p.houseName,
-                            amount: p.amount()
+                            amount: p.amount(),
+                            visible: p.visible()
                         }
                     })
                 }
@@ -523,23 +535,27 @@ module Punctuality.Status {
 
 module Score.Index {
     class ScoreHouseViewModel {
-        constructor(public name: string, public amount: number) {
+        constructor(public name: string, public visibleAmount: number, public hiddenAmount: number) {
         }
     }
 
     class ScoreSchoolViewModel {
         houses: ScoreHouseViewModel[];
-        amount: number;
+        visibleAmount: number;
+        hiddenAmount: number;
 
         constructor(public name: string, houses: IHouseScoreDto[]) {
-            var sum = 0;
+            var sumH = 0;
+            var sumV = 0;
             this.houses = ko.utils.arrayMap(houses, house => {
-                sum += house.amount;
-                return new ScoreHouseViewModel(house.name, house.amount);
+                sumV += house.amount;
+                sumH += house.hiddenAmount;
+                return new ScoreHouseViewModel(house.name, house.amount, house.hiddenAmount);
             }).sort((a: ScoreHouseViewModel, b: ScoreHouseViewModel) => {
-                return b.amount - a.amount;
+                return b.visibleAmount - a.visibleAmount;
             });
-            this.amount = sum;
+            this.visibleAmount = sumV;
+            this.hiddenAmount = sumH;
         }
     }
 
@@ -553,7 +569,7 @@ module Score.Index {
                 this.schools(ko.utils.arrayMap(schools, school => {
                     return new ScoreSchoolViewModel(school.name, school.houses);
                 }).sort((a: ScoreSchoolViewModel, b: ScoreSchoolViewModel) => {
-                    return b.amount - a.amount;
+                    return b.visibleAmount - a.visibleAmount;
                 }));
             }
 

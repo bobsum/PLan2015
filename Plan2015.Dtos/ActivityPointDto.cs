@@ -10,5 +10,6 @@ namespace Plan2015.Dtos
         public string HouseName { get; set; }
         [Required]
         public int Amount { get; set; }
+        public bool Visible { get; set; }
     }
 }

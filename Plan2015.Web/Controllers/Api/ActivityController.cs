@@ -54,6 +54,7 @@ namespace Plan2015.Web.Controllers.Api
             {
                 var ep = Db.ActivityPoints.Single(p => p.Id == point.Id);
                 ep.Amount = point.Amount;
+                ep.Visible = point.Visible;
             }
 
             await Db.SaveChangesAsync();
@@ -89,7 +90,8 @@ namespace Plan2015.Web.Controllers.Api
                     Id = p.Id,
                     Amount = p.Amount,
                     HouseId = p.House.Id,
-                    HouseName = p.House.Name
+                    HouseName = p.House.Name,
+                    Visible = p.Visible
                 })
             };
         }

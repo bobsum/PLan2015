@@ -8,5 +8,6 @@ namespace Plan2015.Data.Entities
         public virtual Activity Activity { get; set; }
         public int HouseId { get; set; }
         public virtual House House { get; set; }
+        public bool Visible { get; set; }
     }
 }

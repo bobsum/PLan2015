@@ -10,9 +10,9 @@ namespace Plan2015.Data.Migrations
             AutomaticMigrationsEnabled = false;
         }
 
-        /*protected override void Seed(DataContext context)
+        protected override void Seed(DataContext context)
         {
-            var schools = new[]
+            /*var schools = new[]
             {
                 new School {Name = "Agernholt"},
                 new School {Name = "Ravnsborg"},
@@ -35,7 +35,7 @@ namespace Plan2015.Data.Migrations
                 new House {Name = "Malling", School = schools[2]}
             };
             context.Houses.AddOrUpdate(h => h.Name, houses);
-            /*
+            
             for (int i = 0; i < 84; i++)
             {
                context.Scouts.AddOrUpdate(s => s.Name, new Scout
@@ -53,7 +53,7 @@ namespace Plan2015.Data.Migrations
                     Name = "TeamMember " + (i + 1),
                     Rfid = (i + 101).ToString("D10")
                 });
-            }
-        }*/
+            }*/
+        }
     }
 }

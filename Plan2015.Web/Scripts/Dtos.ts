@@ -10,6 +10,7 @@ interface IActivityPointDto {
     houseId: number;
     houseName: string;
     amount: number;
+    visible: boolean;
 }
 
 interface IHouseDto {
@@ -21,6 +22,7 @@ interface IHouseScoreDto {
     id: number;
     name: string;
     amount: number;
+    hiddenAmount: number;
 }
 
 interface IMagicGamesIntervalDto {

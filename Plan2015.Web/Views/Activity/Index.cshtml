@@ -17,20 +17,33 @@
                     <!-- ko foreach: points-->
                     <div class="form-group form-group-sm">
                         <label class="col-xs-12 col-sm-2 control-label" data-bind="text: houseName"></label>
-                        <div class="col-xs-12 col-sm-10">
+                        <div class="col-xs-12 col-sm-8">
                             <input type="number" class="form-control" data-bind="value: amount, valueUpdate: 'afterkeydown'">
+                        </div>
+                        <div class="checkbox col-xs-12 col-sm-2">
+                            <label>
+                                <input type="checkbox" data-bind="checked: visible" /> Vis
+                            </label>
                         </div>
                     </div>
                     <!-- /ko -->
                     <div class="form-group form-group-sm">
-                        <div class="col-xs-12 col-sm-offset-2 col-sm-10">
+                        <div class="col-xs-12 col-sm-offset-2 col-sm-8">
                             <button type="submit" class="btn btn-primary btn-xs" data-bind="enable: isValid">Gem</button>
                             <button type="button" class="btn btn-default btn-xs" data-bind="click: convertPoints, enable: sum() !== 0 && sum() !== totalPoints">Omregn</button>
+                        </div>
+                        <div class="checkbox col-xs-12 col-sm-2">
+                            <label>
+                                <input type="checkbox" data-bind="checked: allVisible" /> Alle
+                            </label>
                         </div>
                     </div>
                 </form>
             </td>
-            <td data-bind="text: sum() + ' af ' + totalPoints"></td>
+            <td>
+                <span data-bind="text: sum() + ' af ' + totalPoints, css: allVisible() ? 'text-success' : 'text-danger'"></span>
+                <span class="glyphicon" data-bind="css: allVisible() ? 'glyphicon-ok text-success' : 'glyphicon-remove text-danger'"></span>
+            </td>
             <td><button data-bind="click: toggleExpanded, attr: { title: isExpanded() ? 'Skjul': 'Vis'}" class="btn btn-default btn-xs"><span data-bind="css: isExpanded() ? 'glyphicon-chevron-up': 'glyphicon-chevron-down'" class="glyphicon"></span></button></td>
             <td><button data-bind="click: sendDelete" class="btn btn-danger btn-xs" title="Slet"><span class="glyphicon glyphicon-trash"></span></button></td>
         </tr>

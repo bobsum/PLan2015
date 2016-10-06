@@ -2,20 +2,24 @@
     <table class="table table-hover table-condensed">
         <thead>
             <tr>
-                <th>Score</th>
-                <th>Skole</th>
-                <th>Kolegier</th>
+                <th colspan="2" class="col-xs-3">Score</th>
+                <th class="col-xs-3">Skole</th>
+                <th class="col-xs-6">Kolegier</th>
             </tr>
         </thead>
         <tbody data-bind="foreach: schools">
             <tr>
-                <td data-bind="text: amount"></td>
+                <td><strong data-bind="text: visibleAmount"></strong></td>
+                <td><em>(<span data-bind="text: hiddenAmount"></span>)</em></td>
                 <td data-bind="text: name"></td>
                 <td>
                     <ul class="list-group" data-bind="foreach: houses">
                         <li class="list-group-item">
-                            <span class="badge" data-bind="text: amount"></span>
-                            <span data-bind="text: name"></span> 
+                            <div class="row">
+                                <div class="col-xs-8" data-bind="text: name"></div>
+                                <div class="col-xs-2 text-right"><strong data-bind="text: visibleAmount"></strong></div>
+                                <div class="col-xs-2 text-right"><em>(<span data-bind="text: hiddenAmount"></span>)</em></div>
+                            </div>
                         </li>
                     </ul>
                 </td>
