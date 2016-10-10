@@ -75,7 +75,7 @@ namespace Plan2015.Punctuality.Swiper
                         {
                             PunctualityId = punctuality.Id,
                             Rfid = rfid,
-                            Time = DateTime.Now
+                            //Time = DateTime.Now
                         };
 
                         response = await client.PostAsJsonAsync("api/punctualityswipe", swipe);

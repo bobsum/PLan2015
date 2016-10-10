@@ -1,4 +1,5 @@
-﻿using System.Data.Entity;
+﻿using System;
+using System.Data.Entity;
 using System.Linq;
 using System.Net;
 using System.Threading.Tasks;
@@ -22,7 +23,7 @@ namespace Plan2015.Web.Controllers.Api
             {
                 Scout = scout,
                 Punctuality = punctuality,
-                Time = dto.Time
+                Time = DateTime.Now
             };
 
             Db.PunctualitySwipes.Add(entity);
@@ -32,7 +33,7 @@ namespace Plan2015.Web.Controllers.Api
 
             if (!Db.PunctualityPoints.Any(pp => pp.HouseId == scout.HouseId && pp.PunctualityId == punctuality.Id))
             {
-                if (!punctuality.All && dto.Time < punctuality.Deadline || !await Db.Scouts
+                if (!punctuality.All && entity.Time < punctuality.Deadline || !await Db.Scouts
                     .Where(s => s.HouseId == scout.HouseId && !s.Home)
                     .Except(Db.PunctualitySwipes
                         .Where(ps =>

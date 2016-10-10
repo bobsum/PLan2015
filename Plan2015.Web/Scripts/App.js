@@ -497,6 +497,7 @@ var Punctuality;
                 this.name = ko.observable();
                 this.all = ko.observable();
                 this.houses = ko.observableArray();
+                this.buffer = '';
                 var hub = $.connection.punctualityStatusHub;
                 hub.client.updated = function (status) {
                     _this.name(status.name);
@@ -508,6 +509,40 @@ var Punctuality;
                     hub.server.setId(id);
                 });
             }
+            App.prototype.resetBuffer = function () {
+                this.buffer = '';
+            };
+            App.prototype.resetBufferTimer = function () {
+                if (this.bufferTimer)
+                    clearTimeout(this.bufferTimer);
+                this.bufferTimer = setTimeout(this.resetBuffer, 50);
+            };
+            App.prototype.keydown = function (data, event) {
+                if (event.repeat)
+                    return true;
+                var key = event.key;
+                if (/^\w$/.test(key)) {
+                    this.buffer += key;
+                    this.resetBufferTimer();
+                }
+                else if (key === 'Enter' && this.buffer.length) {
+                    this.sendSwipe(this.buffer);
+                    this.resetBuffer();
+                }
+                return true;
+            };
+            App.prototype.sendSwipe = function (rfid) {
+                $.ajax({
+                    url: '/Api/PunctualitySwipe',
+                    type: 'POST',
+                    data: {
+                        punctualityId: this.status().id,
+                        rfid: rfid
+                    },
+                    error: function () { },
+                    success: function () { }
+                });
+            };
             return App;
         }());
         Status.App = App;

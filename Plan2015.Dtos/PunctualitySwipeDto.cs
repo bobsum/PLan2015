@@ -10,7 +10,5 @@ namespace Plan2015.Dtos
         public int PunctualityId { get; set; }
         [Required]
         public string Rfid { get; set; }
-        [Required]
-        public DateTime Time { get; set; }
     }
 }

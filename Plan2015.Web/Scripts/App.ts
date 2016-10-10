@@ -516,6 +516,8 @@ module Punctuality.Status {
         name = ko.observable<string>();
         all = ko.observable<boolean>();
         houses = ko.observableArray<HouseStatusViewModel>();
+        buffer = '';
+        bufferTimer: number;
 
         constructor(id: number) {
             var hub = $.connection.punctualityStatusHub;
@@ -528,6 +530,41 @@ module Punctuality.Status {
             };
             $.connection.hub.start().done(() => {
                 hub.server.setId(id);
+            });
+        }
+
+        resetBuffer() {
+            this.buffer = '';
+        }
+
+        resetBufferTimer() {
+            if (this.bufferTimer) clearTimeout(this.bufferTimer);
+            this.bufferTimer = setTimeout(this.resetBuffer, 50);
+        }
+
+        keydown(data: App, event: KeyboardEvent) {
+            if (event.repeat) return true;
+
+            var key = event.key;
+            if (/^\w$/.test(key)) {
+                this.buffer += key;
+                this.resetBufferTimer();
+            } else if(key === 'Enter' && this.buffer.length) {
+                this.sendSwipe(this.buffer);
+                this.resetBuffer();
+            }
+            return true;
+        }
+
+        sendSwipe(rfid: string) {
+            $.ajax({
+                url: '/Api/PunctualitySwipe',
+                type: 'POST',
+                    punctualityId: this.status().id,
+                    rfid
+                },
+                error: () => { },
+                success: () => { }
             });
         }
     }

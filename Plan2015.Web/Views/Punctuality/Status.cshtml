@@ -9,6 +9,9 @@
     </div>
 </div>
 <!-- /ko -->
+<div data-bind="text: test"></div>
+@section Body {data-bind="event: { keydown: keydown }"}
+
 @section Scripts
 {
     <script type="text/javascript">
