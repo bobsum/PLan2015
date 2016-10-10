@@ -560,6 +560,7 @@ module Punctuality.Status {
             $.ajax({
                 url: '/Api/PunctualitySwipe',
                 type: 'POST',
+                data: <IPunctualitySwipeDto> {
                     punctualityId: this.status().id,
                     rfid
                 },
