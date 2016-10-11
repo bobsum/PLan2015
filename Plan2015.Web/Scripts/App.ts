@@ -278,7 +278,6 @@ module MagicGames.Setup {
         });
 
         setInterval = (interval: IntervalViewModel) => {
-            console.log('click');
             interval.amount(!interval.amount() ? this.availableIntervals()[0] : 0);
             this.isSaved(false);
         }
@@ -412,8 +411,8 @@ module Punctuality.Index {
     class PunctualityViewModel {
         id: number;
         name: string;
-        start: string;
-        stop: string;
+        start: moment.Moment;
+        stop: moment.Moment;
         stationId: number;
         stationName: string;
         all: boolean;
@@ -421,8 +420,8 @@ module Punctuality.Index {
         constructor(punctuality: IPunctualityDto) {
             this.id = punctuality.id;
             this.name = punctuality.name;
-            this.start = punctuality.start.replace('T', ' ');
-            this.stop = punctuality.stop.replace('T', ' ');
+            this.start = moment(punctuality.start);
+            this.stop = moment(punctuality.stop);
             this.stationId = punctuality.stationId;
             this.stationName = punctuality.stationName;
             this.all = punctuality.all;
@@ -440,44 +439,47 @@ module Punctuality.Index {
 
     class CreatePunctualityViewModel {
         name = ko.observable<string>();
-        startDate = ko.observable<string>();
-        startTime = ko.observable<string>();
-        start = ko.computed<string>(() => {
-            return this.startDate() + 'T' + this.startTime();
+        startDate = ko.observable<string>('');
+        startTime = ko.observable<string>('');
+        start = ko.computed<moment.Moment>(() => {
+            if (this.startDate().length < 10 || this.startTime().length < 5) return null;
+            return moment(this.startDate() + 'T' + this.startTime());
         });
-        stopDate = ko.observable<string>();
-        stopTime = ko.observable<string>();
-        stop = ko.computed<string>(() => {
-            console.log(this.stopDate() + 'T' + this.stopTime());
-            return this.stopDate() + 'T' + this.stopTime();
+        stopDate = ko.observable<string>('');
+        stopTime = ko.observable<string>('');
+        stop = ko.computed<moment.Moment>(() => {
+            if (this.stopDate().length < 10 || this.stopTime().length < 5) return null;
+            return moment(this.stopDate() + 'T' + this.stopTime());
         });
         stationId = ko.observable<number>();
         all = ko.observable<boolean>(false);
-        isValid = ko.computed<boolean>(() => !!this.name() && !!this.start() && !!this.stop());
+        isValid = ko.computed<boolean>(() => !!this.stationId() && !!this.name() && !!this.start() && !!this.stop() && this.start().isBefore(this.stop()));
     }
 
     export class App {
         newPunctuality = ko.observable(new CreatePunctualityViewModel());
-
         punctualities = ko.observableArray<PunctualityViewModel>();
-
         stations = ko.observableArray<IPunctualityStationDto>();
+        sending = ko.observable<boolean>(false);
 
         sendCreate() {
             var punctuality = this.newPunctuality();
-
+            this.sending(true);
             $.ajax({
-                url: '/Api/Punctuality',
-                type: 'POST',
-                data: <IPunctualityDto>{
-                    name: punctuality.name(),
-                    start: punctuality.start(),
-                    stop: punctuality.stop(),
-                    stationId: punctuality.stationId(),
-                    all: punctuality.all()
-                }
-            });
-            this.newPunctuality(new CreatePunctualityViewModel());
+                    url: '/Api/Punctuality',
+                    type: 'POST',
+                    data: <IPunctualityDto>{
+                        name: punctuality.name(),
+                        start: punctuality.start().toJSON(),
+                        stop: punctuality.stop().toJSON(),
+                        stationId: punctuality.stationId(),
+                        all: punctuality.all()
+                    }
+                })
+                .done(() => {
+                    this.newPunctuality(new CreatePunctualityViewModel());
+                })
+                .always(() => this.sending(false));
         }
 
         constructor() {
@@ -535,8 +537,8 @@ module Punctuality.Station {
     class PunctualityViewModel {
         id: number;
         name: string;
-        start: Date;
-        stop: Date;
+        start: moment.Moment;
+        stop: moment.Moment;
         stationId: number;
         stationName: string;
         all: boolean;
@@ -544,8 +546,8 @@ module Punctuality.Station {
         constructor(punctuality: IPunctualityDto) {
             this.id = punctuality.id;
             this.name = punctuality.name;
-            this.start = new Date(punctuality.start.replace('T', ' '));
-            this.stop = new Date(punctuality.stop.replace('T', ' '));
+            this.start = moment(punctuality.start);
+            this.stop = moment(punctuality.stop);
             this.stationId = punctuality.stationId;
             this.stationName = punctuality.stationName;
             this.all = punctuality.all;
@@ -575,7 +577,6 @@ module Punctuality.Station {
             };
 
             this.hub.client.updatedStatus = houses => {
-                console.log(houses);
                 this.houses(ko.utils.arrayMap(houses, h => new HouseStatusViewModel(h)));
             };
             $.connection.hub.start()
@@ -642,9 +643,9 @@ module Punctuality.Station {
         }
         
         findCurrent() {
-            let now = new Date();
+            let now = moment();
             let oldPunctuality = this.punctuality.peek();
-            var newPunctuality = ko.utils.arrayFirst(this.punctualities(), p => p.stationId === this.id && p.start < now && now < p.stop);
+            var newPunctuality = ko.utils.arrayFirst(this.punctualities(), p => p.stationId === this.id && now.isBetween(p.start, p.stop));
             if (oldPunctuality !== newPunctuality) {
                 this.punctuality(newPunctuality);
                 this.houses(null);

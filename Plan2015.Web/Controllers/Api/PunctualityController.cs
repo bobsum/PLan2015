@@ -5,6 +5,7 @@ using System.Linq;
 using System.Linq.Expressions;
 using System.Threading.Tasks;
 using System.Web.Http;
+using System.Web.Http.Results;
 using Plan2015.Data.Entities;
 using Plan2015.Dtos;
 using Plan2015.Web.Hubs;
@@ -28,7 +29,12 @@ namespace Plan2015.Web.Controllers.Api
                 StationId = dto.StationId,
                 All = dto.All
             };
-            //todo check om der er overlap mellem station og tid
+
+            if(Db.Punctualities
+                .Where(p => p.StationId == dto.StationId)
+                .Where(p => p.Start < dto.Stop)
+                .Any(p => dto.Start < p.Stop)) return BadRequest("Overlapper en anden punktlighed.");
+
             Db.Punctualities.Add(entity);
             await Db.SaveChangesAsync();
 
