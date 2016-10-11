@@ -50,6 +50,7 @@
     <Compile Include="MagicGamesScoreDto.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="PunctualityDto.cs" />
+    <Compile Include="PunctualityStationDto.cs" />
     <Compile Include="PunctualityStatusHouseDto.cs" />
     <Compile Include="PunctualityStatusDto.cs" />
     <Compile Include="PunctualitySwipeDto.cs" />

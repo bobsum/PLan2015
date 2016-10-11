@@ -1,64 +1,56 @@
 interface SignalR {
     activityHub: IActivityHubProxy;
-    magicGamesSetupHub: IMagicGamesSetupProxy;
-    punctualityHub: IPunctualityProxy;
-    punctualityStatusHub: IPunctualityStatusProxy;
-    scoreHub: IScoreProxy;
-    turnoutPointHub: ITurnoutPointProxy;
+    magicGamesSetupHub: IMagicGamesSetupHubProxy;
+    punctualityHub: IPunctualityHubProxy;
+    scoreHub: IScoreHubProxy;
+    turnoutPointHub: ITurnoutPointHubProxy;
 }
 
 interface IActivityHubProxy {
-    client: IActivityClient;
+    client: IActivityHubClient;
 }
 
-interface IActivityClient {
+interface IActivityHubClient {
     add: (activity: IActivityDto) => void;
     update: (activity: IActivityDto) => void;
     remove: (id: number) => void;
 }
 
-interface IMagicGamesSetupProxy {
-    client: IMagicGamesSetupClient;
+interface IMagicGamesSetupHubProxy {
+    client: IMagicGamesSetupHubClient;
 }
 
-interface IMagicGamesSetupClient {
+interface IMagicGamesSetupHubClient {
     update: (house: IMagicGamesSetupDto) => void;
 }
 
-interface IPunctualityProxy {
-    client: IPunctualityClient;
+interface IPunctualityHubProxy {
+    client: IPunctualityHubClient;
+    server: IPunctualityHubServer;
 }
 
-interface IPunctualityClient {
+interface IPunctualityHubClient {
     add: (punctuality: IPunctualityDto) => void;
     remove: (id: number) => void;
+    updatedStatus: (status: IPunctualityStatusHouseDto[]) => void;
 }
 
-interface IPunctualityStatusServer {
-    setId: (id: number) => void
+interface IPunctualityHubServer {
+    setId: (newId: number, oldId: number) => void
 }
 
-interface IPunctualityStatusProxy {
-    client: IPunctualityStatusClient;
-    server: IPunctualityStatusServer;
+interface IScoreHubProxy {
+    client: IScoreHubClient;
 }
 
-interface IPunctualityStatusClient {
-    updated: (status: IPunctualityStatusDto) => void
-}
-
-interface IScoreProxy {
-    client: IScoreClient;
-}
-
-interface IScoreClient {
+interface IScoreHubClient {
     updated: (status: ISchoolScoreDto[]) => void
 }
 
-interface ITurnoutPointProxy {
-    client: ITurnoutPointClient;
+interface ITurnoutPointHubProxy {
+    client: ITurnoutPointHubClient;
 }
 
-interface ITurnoutPointClient {
+interface ITurnoutPointHubClient {
     add: (turnoutPoint: ITurnoutPointDto) => void;
 }

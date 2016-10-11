@@ -55,6 +55,7 @@
     <Compile Include="Entities\MagicGamesMarkerPoint.cs" />
     <Compile Include="Entities\Punctuality.cs" />
     <Compile Include="Entities\PunctualityPoint.cs" />
+    <Compile Include="Entities\PunctualityStation.cs" />
     <Compile Include="Entities\PunctualitySwipe.cs" />
     <Compile Include="Entities\School.cs" />
     <Compile Include="Entities\Scout.cs" />
@@ -76,6 +77,14 @@
     <Compile Include="Migrations\201610061426394_VisibleOnActivityPoint.Designer.cs">
       <DependentUpon>201610061426394_VisibleOnActivityPoint.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201610101617158_PunctualityStation.cs" />
+    <Compile Include="Migrations\201610101617158_PunctualityStation.Designer.cs">
+      <DependentUpon>201610101617158_PunctualityStation.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201610101710021_PunctualityStation_Punctuality.cs" />
+    <Compile Include="Migrations\201610101710021_PunctualityStation_Punctuality.Designer.cs">
+      <DependentUpon>201610101710021_PunctualityStation_Punctuality.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -95,6 +104,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201610061426394_VisibleOnActivityPoint.resx">
       <DependentUpon>201610061426394_VisibleOnActivityPoint.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201610101617158_PunctualityStation.resx">
+      <DependentUpon>201610101617158_PunctualityStation.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201610101710021_PunctualityStation_Punctuality.resx">
+      <DependentUpon>201610101710021_PunctualityStation_Punctuality.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

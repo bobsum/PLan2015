@@ -401,7 +401,10 @@ var Punctuality;
             function PunctualityViewModel(punctuality) {
                 this.id = punctuality.id;
                 this.name = punctuality.name;
-                this.deadline = punctuality.deadline.replace('T', ' ');
+                this.start = punctuality.start.replace('T', ' ');
+                this.stop = punctuality.stop.replace('T', ' ');
+                this.stationId = punctuality.stationId;
+                this.stationName = punctuality.stationName;
                 this.all = punctuality.all;
             }
             PunctualityViewModel.prototype.sendDelete = function () {
@@ -418,13 +421,20 @@ var Punctuality;
             function CreatePunctualityViewModel() {
                 var _this = this;
                 this.name = ko.observable();
-                this.deadlineDate = ko.observable();
-                this.deadlineTime = ko.observable();
-                this.deadline = ko.computed(function () {
-                    return _this.deadlineDate() + 'T' + _this.deadlineTime();
+                this.startDate = ko.observable();
+                this.startTime = ko.observable();
+                this.start = ko.computed(function () {
+                    return _this.startDate() + 'T' + _this.startTime();
                 });
+                this.stopDate = ko.observable();
+                this.stopTime = ko.observable();
+                this.stop = ko.computed(function () {
+                    console.log(_this.stopDate() + 'T' + _this.stopTime());
+                    return _this.stopDate() + 'T' + _this.stopTime();
+                });
+                this.stationId = ko.observable();
                 this.all = ko.observable(false);
-                this.isValid = ko.computed(function () { return true || !!_this.name() && !!_this.deadline(); });
+                this.isValid = ko.computed(function () { return !!_this.name() && !!_this.start() && !!_this.stop(); });
             }
             return CreatePunctualityViewModel;
         }());
@@ -433,9 +443,10 @@ var Punctuality;
                 var _this = this;
                 this.newPunctuality = ko.observable(new CreatePunctualityViewModel());
                 this.punctualities = ko.observableArray();
+                this.stations = ko.observableArray();
                 var hub = $.connection.punctualityHub;
-                hub.client.add = function (activity) {
-                    _this.add(activity);
+                hub.client.add = function (punctuality) {
+                    _this.add(punctuality);
                 };
                 hub.client.remove = function (id) {
                     _this.remove(id);
@@ -446,6 +457,9 @@ var Punctuality;
                         _this.add(punctuality);
                     });
                 }, 'json');
+                $.get('/Api/PunctualityStation', function (stations) {
+                    _this.stations(stations);
+                }, 'json');
             }
             App.prototype.sendCreate = function () {
                 var punctuality = this.newPunctuality();
@@ -454,7 +468,9 @@ var Punctuality;
                     type: 'POST',
                     data: {
                         name: punctuality.name(),
-                        deadline: punctuality.deadline(),
+                        start: punctuality.start(),
+                        stop: punctuality.stop(),
+                        stationId: punctuality.stationId(),
                         all: punctuality.all()
                     }
                 });
@@ -463,9 +479,9 @@ var Punctuality;
             App.prototype.add = function (punctuality) {
                 this.punctualities.push(new PunctualityViewModel(punctuality));
                 this.punctualities.sort(function (a, b) {
-                    if (a.deadline < b.deadline)
+                    if (a.start < b.start)
                         return -1;
-                    if (a.deadline > b.deadline)
+                    if (a.start > b.start)
                         return 1;
                     return 0;
                 });
@@ -480,8 +496,8 @@ var Punctuality;
 })(Punctuality || (Punctuality = {}));
 var Punctuality;
 (function (Punctuality) {
-    var Status;
-    (function (Status) {
+    var Station;
+    (function (Station) {
         var HouseStatusViewModel = (function () {
             function HouseStatusViewModel(house) {
                 this.name = house.name;
@@ -490,23 +506,46 @@ var Punctuality;
             }
             return HouseStatusViewModel;
         }());
+        var PunctualityViewModel = (function () {
+            function PunctualityViewModel(punctuality) {
+                this.id = punctuality.id;
+                this.name = punctuality.name;
+                this.start = new Date(punctuality.start.replace('T', ' '));
+                this.stop = new Date(punctuality.stop.replace('T', ' '));
+                this.stationId = punctuality.stationId;
+                this.stationName = punctuality.stationName;
+                this.all = punctuality.all;
+            }
+            return PunctualityViewModel;
+        }());
         var App = (function () {
             function App(id) {
                 var _this = this;
-                this.status = ko.observable();
-                this.name = ko.observable();
-                this.all = ko.observable();
+                this.id = id;
+                this.punctuality = ko.observable();
+                this.punctualities = ko.observableArray();
                 this.houses = ko.observableArray();
                 this.buffer = '';
-                var hub = $.connection.punctualityStatusHub;
-                hub.client.updated = function (status) {
-                    _this.name(status.name);
-                    _this.all(status.all);
-                    _this.houses(ko.utils.arrayMap(status.houses, function (h) { return new HouseStatusViewModel(h); }));
-                    _this.status(status);
+                var timeout = 15 * 1000;
+                this.hub = $.connection.punctualityHub;
+                this.hub.client.add = function (punctuality) {
+                    _this.add(punctuality);
                 };
-                $.connection.hub.start().done(function () {
-                    hub.server.setId(id);
+                this.hub.client.remove = function (punctualityId) {
+                    _this.remove(punctualityId);
+                };
+                this.hub.client.updatedStatus = function (houses) {
+                    console.log(houses);
+                    _this.houses(ko.utils.arrayMap(houses, function (h) { return new HouseStatusViewModel(h); }));
+                };
+                $.connection.hub.start()
+                    .done(function () {
+                    $.get('/Api/Punctuality', function (punctualities) { return _this.addAll(punctualities); }, 'json')
+                        .done(function () { return setInterval(function () { return _this.findCurrent(); }, timeout); });
+                });
+                this.all = ko.computed(function () {
+                    var punctuality = _this.punctuality();
+                    return !!punctuality ? punctuality.all : false;
                 });
             }
             App.prototype.resetBuffer = function () {
@@ -518,7 +557,7 @@ var Punctuality;
                 this.bufferTimer = setTimeout(this.resetBuffer, 50);
             };
             App.prototype.keydown = function (data, event) {
-                if (event.repeat)
+                if (!this.punctuality() || event.repeat)
                     return true;
                 var key = event.key;
                 if (/^\w$/.test(key)) {
@@ -536,17 +575,42 @@ var Punctuality;
                     url: '/Api/PunctualitySwipe',
                     type: 'POST',
                     data: {
-                        punctualityId: this.status().id,
+                        punctualityId: this.punctuality().id,
                         rfid: rfid
                     },
                     error: function () { },
                     success: function () { }
                 });
             };
+            App.prototype.addAll = function (punctualities) {
+                var _this = this;
+                ko.utils.arrayForEach(punctualities, function (punctuality) {
+                    _this.add(punctuality);
+                });
+            };
+            App.prototype.add = function (punctuality) {
+                this.punctualities.push(new PunctualityViewModel(punctuality));
+                this.findCurrent();
+            };
+            App.prototype.remove = function (id) {
+                this.punctualities.remove(function (p) { return (p.id === id); });
+                this.findCurrent();
+            };
+            App.prototype.findCurrent = function () {
+                var _this = this;
+                var now = new Date();
+                var oldPunctuality = this.punctuality.peek();
+                var newPunctuality = ko.utils.arrayFirst(this.punctualities(), function (p) { return p.stationId === _this.id && p.start < now && now < p.stop; });
+                if (oldPunctuality !== newPunctuality) {
+                    this.punctuality(newPunctuality);
+                    this.houses(null);
+                    this.hub.server.setId(!!newPunctuality ? newPunctuality.id : null, !!oldPunctuality ? oldPunctuality.id : null);
+                }
+            };
             return App;
         }());
-        Status.App = App;
-    })(Status = Punctuality.Status || (Punctuality.Status = {}));
+        Station.App = App;
+    })(Station = Punctuality.Station || (Punctuality.Station = {}));
 })(Punctuality || (Punctuality = {}));
 var Score;
 (function (Score) {

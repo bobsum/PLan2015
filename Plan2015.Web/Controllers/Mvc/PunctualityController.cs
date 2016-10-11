@@ -11,9 +11,8 @@ namespace Plan2015.Web.Controllers.Mvc
             return View();
         }
 
-        public ActionResult Status(int id)
+        public ActionResult Station(int id)
         {
-            ViewBag.Title = "Punktlighed - Status";
             ViewBag.HideMenu = true;
 
             return View(id);

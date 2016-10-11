@@ -37,10 +37,10 @@ namespace Plan2015.Punctuality.Swiper
                 }
                 
                 var punctualities = await response.Content.ReadAsAsync<IEnumerable<PunctualityDto>>();
-                var upcomming = punctualities.Where(p => p.Deadline > DateTime.Now).OrderBy(p => p.Deadline).ToList();
+                var upcomming = punctualities.Where(p => p.Stop > DateTime.Now).OrderBy(p => p.Stop).ToList();
                 foreach (var p in upcomming)
                 {
-                    Console.WriteLine("{0:000}: ({1}) {2}", p.Id, p.Deadline, p.Name);
+                    Console.WriteLine("{0:000}: ({1}) {2}", p.Id, p.Stop, p.Name);
                 }
 
                 PunctualityDto punctuality = null;
@@ -61,7 +61,7 @@ namespace Plan2015.Punctuality.Swiper
                     var rfid = Console.ReadLine();
                     if (rfid != null && rfid.Equals("q", StringComparison.InvariantCultureIgnoreCase)) break;
                     Console.Clear();
-                    if (punctuality.Deadline < DateTime.Now)
+                    if (punctuality.Stop < DateTime.Now)
                     {
                         Console.ForegroundColor = ConsoleColor.Yellow;
                         Console.WriteLine("Deadline er overskredet!");

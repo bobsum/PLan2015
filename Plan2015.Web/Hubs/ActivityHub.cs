@@ -2,7 +2,7 @@
 
 namespace Plan2015.Web.Hubs
 {
-    public class ActivityHub : Hub<IActivityClient>
+    public class ActivityHub : Hub<IActivityHubClient>
     {
     }
 }

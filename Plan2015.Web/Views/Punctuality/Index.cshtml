@@ -1,31 +1,40 @@
 ﻿<div class="col-xs-12">
-        <table class="table table-hover table-condensed">
-            <thead>
+    <table class="table table-hover table-condensed">
+        <thead>
             <tr>
                 <th>#</th>
-                <th class="col-xs-6 col-sm-8">Navn</th>
-                <th class="col-xs-1">Alle</th>
-                <th class="col-xs-5 col-sm-3">Deadline</th>
+                <th class="col-xs-6">Navn</th>
+                <th>Alle</th>
+                <th class="col-xs-2">Start</th>
+                <th class="col-xs-2">Stop</th>
+                <th class="col-xs-2">Station</th>
                 <th class="text-center" colspan="2"><span class="glyphicon glyphicon-option-horizontal"></span></th>
             </tr>
-            </thead>
-            <tbody data-bind="foreach: punctualities">
-                <tr>
-                    <td data-bind="text: id"></td>
-                    <td data-bind="text: name"></td>
-                    <td><span class="glyphicon" data-bind="css: all ? 'glyphicon-ok' :'glyphicon-remove'"></span></td>
-                    <td data-bind="text: deadline.toLocaleString()"></td>
-                    <td><a data-bind="attr: {href: '@Url.Action("Status")/' + id}" class="btn btn-primary btn-xs" title="Vis status"><span class="glyphicon glyphicon glyphicon-th"></span></a></td>
-                    <td><button data-bind="click: sendDelete" class="btn btn-danger btn-xs" title="Slet"><span class="glyphicon glyphicon-trash"></span></button></td>
-                </tr>
-            </tbody>
-        </table>
-    </div>
+        </thead>
+        <tbody data-bind="foreach: punctualities">
+            <tr>
+                <td data-bind="text: id"></td>
+                <td data-bind="text: name"></td>
+                <td><span class="glyphicon" data-bind="css: all ? 'glyphicon-ok' :'glyphicon-remove'"></span></td>
+                <td data-bind="text: start.toLocaleString()"></td>
+                <td data-bind="text: stop.toLocaleString()"></td>
+                <td data-bind="text: stationName"></td>
+                <td><button data-bind="click: sendDelete" class="btn btn-danger btn-xs" title="Slet"><span class="glyphicon glyphicon-trash"></span></button></td>
+            </tr>
+        </tbody>
+    </table>
+</div>
 <div class="col-xs-12">
     <div class="panel panel-default">
         <div class="panel-heading">Ny punktlighed</div>
         <div class="panel-body">
             <form class="form-horizontal" data-bind="submit: sendCreate, with: newPunctuality">
+                <div class="form-group">
+                    <label for="station" class="col-sm-2 control-label">Station</label>
+                    <div class="col-sm-10">
+                        <select class="form-control" id="station" data-bind="options: $root.stations, selectedOptions: stationId, optionsText: 'name', optionsValue: 'id'"></select>
+                    </div>
+                </div>
                 <div class="form-group">
                     <label for="name" class="col-sm-2 control-label">Navn</label>
                     <div class="col-sm-10">
@@ -33,15 +42,21 @@
                     </div>
                 </div>
                 <div class="form-group">
-                    <label for="deadlineDate" class="col-sm-2 control-label">Dato</label>
-                    <div class="col-sm-10">
-                        <input type="date" class="form-control" id="deadlineDate" placeholder="Dato" data-bind="value: deadlineDate">
+                    <label class="col-sm-2 control-label">Start</label>
+                    <div class="col-sm-5">
+                        <input type="date" class="form-control" placeholder="Dato" data-bind="value: startDate">
+                    </div>
+                    <div class="col-sm-5">
+                        <input type="time" class="form-control" placeholder="Tid" data-bind="value: startTime">
                     </div>
                 </div>
                 <div class="form-group">
-                    <label for="deadlineTime" class="col-sm-2 control-label">Tid</label>
-                    <div class="col-sm-10">
-                        <input type="time" class="form-control" id="deadlineTime" placeholder="Tid" data-bind="value: deadlineTime">
+                    <label class="col-sm-2 control-label">Stop</label>
+                    <div class="col-sm-5">
+                        <input type="date" class="form-control" placeholder="Dato" data-bind="value: stopDate">
+                    </div>
+                    <div class="col-sm-5">
+                        <input type="time" class="form-control" placeholder="Tid" data-bind="value: stopTime">
                     </div>
                 </div>
                 <div class="form-group">
@@ -60,10 +75,20 @@
     </div>
 </div>
 
+<div class="col-xs-12">
+    <div class="panel panel-default">
+        <div class="panel-heading">Stationer</div>
+        <div class="panel-body" data-bind="foreach: stations">
+            <div class="col-xs-12 col-sm-6 col-md-4 col-lg-3">
+                <a type="button" class="btn btn-default btn-lg btn-block" data-bind="text: name, attr: {href: '@Url.Action("Station")/' + id}"></a>
+            </div>
+        </div>
+    </div>
+</div>
 @section Scripts
 {
     <script type="text/javascript">
-        $(function() {
+        $(function () {
             ko.applyBindings(new Punctuality.Index.App());
         });
     </script>

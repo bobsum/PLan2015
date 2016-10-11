@@ -14,7 +14,7 @@ namespace Plan2015.Web.Controllers.Api
 
         private readonly Lazy<DataContext> _db = new Lazy<DataContext>(
             () => new DataContext()
-            );
+        );
 
         private readonly Lazy<IHubContext<IScoreHubClient>> _scoreHub = new Lazy<IHubContext<IScoreHubClient>>(
             () => GlobalHost.ConnectionManager.GetHubContext<ScoreHub, IScoreHubClient>()
@@ -25,9 +25,9 @@ namespace Plan2015.Web.Controllers.Api
             get { return _db.Value; }
         }
 
-        protected IHubContext<IScoreHubClient>ScoreHub
+        protected void ScoreUpdated()
         {
-            get { return _scoreHub.Value; }
+            _scoreHub.Value.Clients.All.Updated(Repository.GetScore(_db.Value));
         }
     }
 }

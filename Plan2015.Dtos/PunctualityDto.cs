@@ -1,5 +1,4 @@
 using System;
-using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
 namespace Plan2015.Dtos
@@ -10,8 +9,13 @@ namespace Plan2015.Dtos
         [Required]
         public string Name { get; set; }
         [Required]
-        public DateTime Deadline { get; set; }
+        public DateTime Start { get; set; }
+        [Required]
+        public DateTime Stop { get; set; }
         [Required]
         public bool All { get; set; }
+        [Required]
+        public int StationId { get; set; }
+        public string StationName { get; set; }
     }
 }

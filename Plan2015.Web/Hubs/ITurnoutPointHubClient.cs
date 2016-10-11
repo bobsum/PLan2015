@@ -2,7 +2,7 @@
 
 namespace Plan2015.Web.Hubs
 {
-    public interface ITurnoutPointClient
+    public interface ITurnoutPointHubClient
     {
         void Add(TurnoutPointDto turnoutPoint);
     }

@@ -24,8 +24,9 @@ namespace Plan2015.Data
         public DbSet<TurnoutPoint> TurnoutPoints { get; set; }
         
         public DbSet<Punctuality> Punctualities { get; set; }
-        public DbSet<PunctualitySwipe> PunctualitySwipes { get; set; }
         public DbSet<PunctualityPoint> PunctualityPoints { get; set; }
+        public DbSet<PunctualityStation> PunctualityStations { get; set; }
+        public DbSet<PunctualitySwipe> PunctualitySwipes { get; set; }
 
         public DbSet<MagicGamesMarkerPoint> MagicGamesMarkerPoints { get; set; }
         public DbSet<MagicGamesTimePoint> MagicGamesTimePoints { get; set; }

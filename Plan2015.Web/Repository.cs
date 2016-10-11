@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using Plan2015.Data;
@@ -53,19 +54,47 @@ namespace Plan2015.Web
                 .ToList();
         }
 
+        public IList<PunctualityStatusHouseDto> GetStatus(DataContext db, int id)
+        {
+            return db.Punctualities
+                .Where(p => p.Id == id)
+                .Select(p => p.Swipes.Where(s => p.Start < s.Time && s.Time < p.Stop).Select(s => s.Scout).Distinct())
+                .SelectMany(p => db.Houses
+                    .Select(h => new PunctualityStatusHouseDto
+                    {
+                        Id = h.Id,
+                        Name = h.Name,
+                        Scouts = h.Scouts.Where(s => !s.Home).Select(s => new PunctualityStatusScoutDto
+                        {
+                            Id = s.Id,
+                            Name = s.Name,
+                            Arrived = p.Contains(s)
+                        })
+                    })
+                )
+                .ToList();
+        }
+
         public PunctualityStatusDto GetPunctualityStatus(DataContext db, int id)
         {
             return db.Punctualities
+                .Where(p => p.Id == id)
                 .Select(p => new
                 {
                     Punctuality = p,
-                    Scouts = p.Swipes.Where(s => s.Time < p.Deadline).Select(s => s.Scout).Distinct()
+                    Scouts = p.Swipes.Where(s => p.Start < s.Time && s.Time < p.Stop).Select(s => s.Scout).Distinct()
                 })
                 .Select(p => new PunctualityStatusDto
                 {
-                    Id = p.Punctuality.Id,
-                    All = p.Punctuality.All,
-                    Name = p.Punctuality.Name,
+                    Punctuality = new PunctualityDto
+                    {
+                        Id = p.Punctuality.Id,
+                        Name = p.Punctuality.Name,
+                        Start = p.Punctuality.Start,
+                        Stop = p.Punctuality.Stop,
+                        StationId = p.Punctuality.StationId,
+                        All = p.Punctuality.All
+                    },
                     Houses = db.Houses
                         .Select(h => new PunctualityStatusHouseDto
                         {
@@ -78,8 +107,8 @@ namespace Plan2015.Web
                                 Arrived = p.Scouts.Contains(s)
                             })
                         })
-                }
-                ).FirstOrDefault(p => p.Id == id);
+                })
+                .FirstOrDefault();
         }
     }
 }

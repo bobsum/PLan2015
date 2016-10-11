@@ -10,7 +10,7 @@ using Plan2015.Web.Hubs;
 
 namespace Plan2015.Web.Controllers.Api
 {
-    public class PunctualitySwipeController : ApiControllerWithHub<PunctualityStatusHub,IPunctualityStatusHubClient>
+    public class PunctualitySwipeController : ApiControllerWithHub<PunctualityHub,IPunctualityHubClient>
     {
         public async Task<IHttpActionResult> PostPunctualitySwipe(PunctualitySwipeDto dto)
         {
@@ -29,17 +29,18 @@ namespace Plan2015.Web.Controllers.Api
             Db.PunctualitySwipes.Add(entity);
             await Db.SaveChangesAsync();
 
-            Hub.Clients.Group(punctuality.Id.ToString()).Updated(Repository.GetPunctualityStatus(Db, punctuality.Id));
-
+            Hub.Clients.Group(punctuality.Id.ToString()).UpdatedStatus(Repository.GetStatus(Db, punctuality.Id));
+            
             if (!Db.PunctualityPoints.Any(pp => pp.HouseId == scout.HouseId && pp.PunctualityId == punctuality.Id))
             {
-                if (!punctuality.All && entity.Time < punctuality.Deadline || !await Db.Scouts
+                if (!punctuality.All && punctuality.Start < entity.Time && entity.Time < punctuality.Stop || !await Db.Scouts
                     .Where(s => s.HouseId == scout.HouseId && !s.Home)
                     .Except(Db.PunctualitySwipes
                         .Where(ps =>
                             ps.Scout.HouseId == scout.HouseId &&
-                            ps.PunctualityId == punctuality.Id &&
-                            ps.Time < punctuality.Deadline)
+                            ps.PunctualityId == punctuality.Id
+                            )
+                        .Where(ps => punctuality.Start < ps.Time && ps.Time < punctuality.Stop)
                         .Select(ps => ps.Scout)
                         .Distinct())
                     .AnyAsync())
@@ -51,7 +52,7 @@ namespace Plan2015.Web.Controllers.Api
                     };
                     Db.PunctualityPoints.Add(point);
                     await Db.SaveChangesAsync();
-                    ScoreHub.Clients.All.Updated(Repository.GetScore(Db));
+                    ScoreUpdated();
                 }
             }
             return Ok();

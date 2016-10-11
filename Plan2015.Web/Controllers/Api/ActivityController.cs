@@ -11,7 +11,7 @@ using Plan2015.Web.Hubs;
 
 namespace Plan2015.Web.Controllers.Api
 {
-    public class ActivityController : ApiControllerWithHub<ActivityHub, IActivityClient>
+    public class ActivityController : ApiControllerWithHub<ActivityHub, IActivityHubClient>
     {
         /*[ResponseType(typeof (ActivityDto))]
         public async Task<IHttpActionResult> GetActivity(int id)
@@ -62,7 +62,7 @@ namespace Plan2015.Web.Controllers.Api
             dto = await Db.Activities.Select(ToDto()).SingleAsync(a => a.Id == dto.Id);
             
             Hub.Clients.All.Update(dto);
-            ScoreHub.Clients.All.Updated(Repository.GetScore(Db));
+            ScoreUpdated();
             return dto;
         }
 
@@ -74,7 +74,7 @@ namespace Plan2015.Web.Controllers.Api
             await Db.SaveChangesAsync();
             
             Hub.Clients.All.Remove(id);
-            ScoreHub.Clients.All.Updated(Repository.GetScore(Db));
+            ScoreUpdated();
             return Ok();
         }
 

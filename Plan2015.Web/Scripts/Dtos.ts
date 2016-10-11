@@ -52,14 +52,21 @@ interface IMagicGamesScoreDto {
 interface IPunctualityDto {
     id: number;
     name: string;
-    deadline: string;
+    start: string;
+    stop: string;
+    stationId: number;
+    stationName: string;
     all: boolean;
 }
 
-interface IPunctualityStatusDto {
+interface IPunctualityStationDto {
     id: number;
     name: string;
-    all: boolean;
+    defaultAll: boolean;
+}
+
+interface IPunctualityStatusDto {
+    punctuality: IPunctualityDto;
     houses: IPunctualityStatusHouseDto[];
 }
 

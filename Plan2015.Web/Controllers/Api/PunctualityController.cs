@@ -7,10 +7,11 @@ using System.Threading.Tasks;
 using System.Web.Http;
 using Plan2015.Data.Entities;
 using Plan2015.Dtos;
+using Plan2015.Web.Hubs;
 
 namespace Plan2015.Web.Controllers.Api
 {
-    public class PunctualityController : ApiControllerWithHub<PunctualityHub, IPunctualityClient>
+    public class PunctualityController : ApiControllerWithHub<PunctualityHub, IPunctualityHubClient>
     {
         public async Task<IEnumerable<PunctualityDto>> GetPunctualities()
         {
@@ -22,10 +23,12 @@ namespace Plan2015.Web.Controllers.Api
             var entity = new Punctuality
             {
                 Name = dto.Name,
-                Deadline = dto.Deadline,
+                Start = dto.Start,
+                Stop = dto.Stop,
+                StationId = dto.StationId,
                 All = dto.All
             };
-
+            //todo check om der er overlap mellem station og tid
             Db.Punctualities.Add(entity);
             await Db.SaveChangesAsync();
 
@@ -44,7 +47,7 @@ namespace Plan2015.Web.Controllers.Api
             await Db.SaveChangesAsync();
 
             Hub.Clients.All.Remove(id);
-            ScoreHub.Clients.All.Updated(Repository.GetScore(Db));
+            ScoreUpdated();
             return Ok();
         }
 
@@ -54,7 +57,10 @@ namespace Plan2015.Web.Controllers.Api
             {
                 Id = p.Id,
                 Name = p.Name,
-                Deadline = p.Deadline,
+                Start = p.Start,
+                Stop = p.Stop,
+                StationId = p.StationId,
+                StationName = p.Station != null ? p.Station.Name : null,
                 All = p.All
             };
         }

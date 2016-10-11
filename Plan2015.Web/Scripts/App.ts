@@ -412,13 +412,19 @@ module Punctuality.Index {
     class PunctualityViewModel {
         id: number;
         name: string;
-        deadline: string;
+        start: string;
+        stop: string;
+        stationId: number;
+        stationName: string;
         all: boolean;
 
         constructor(punctuality: IPunctualityDto) {
             this.id = punctuality.id;
             this.name = punctuality.name;
-            this.deadline = punctuality.deadline.replace('T', ' ');
+            this.start = punctuality.start.replace('T', ' ');
+            this.stop = punctuality.stop.replace('T', ' ');
+            this.stationId = punctuality.stationId;
+            this.stationName = punctuality.stationName;
             this.all = punctuality.all;
         }
 
@@ -434,19 +440,28 @@ module Punctuality.Index {
 
     class CreatePunctualityViewModel {
         name = ko.observable<string>();
-        deadlineDate = ko.observable<string>();
-        deadlineTime = ko.observable<string>();
-        deadline = ko.computed<string>(() => {
-            return this.deadlineDate() + 'T' + this.deadlineTime();
+        startDate = ko.observable<string>();
+        startTime = ko.observable<string>();
+        start = ko.computed<string>(() => {
+            return this.startDate() + 'T' + this.startTime();
         });
+        stopDate = ko.observable<string>();
+        stopTime = ko.observable<string>();
+        stop = ko.computed<string>(() => {
+            console.log(this.stopDate() + 'T' + this.stopTime());
+            return this.stopDate() + 'T' + this.stopTime();
+        });
+        stationId = ko.observable<number>();
         all = ko.observable<boolean>(false);
-        isValid = ko.computed<boolean>(() => true || !!this.name() && !!this.deadline());
+        isValid = ko.computed<boolean>(() => !!this.name() && !!this.start() && !!this.stop());
     }
 
     export class App {
         newPunctuality = ko.observable(new CreatePunctualityViewModel());
 
         punctualities = ko.observableArray<PunctualityViewModel>();
+
+        stations = ko.observableArray<IPunctualityStationDto>();
 
         sendCreate() {
             var punctuality = this.newPunctuality();
@@ -456,7 +471,9 @@ module Punctuality.Index {
                 type: 'POST',
                 data: <IPunctualityDto>{
                     name: punctuality.name(),
-                    deadline: punctuality.deadline(),
+                    start: punctuality.start(),
+                    stop: punctuality.stop(),
+                    stationId: punctuality.stationId(),
                     all: punctuality.all()
                 }
             });
@@ -466,8 +483,8 @@ module Punctuality.Index {
         constructor() {
             var hub = $.connection.punctualityHub;
 
-            hub.client.add = activity => {
-                this.add(activity);
+            hub.client.add = punctuality => {
+                this.add(punctuality);
             };
 
             hub.client.remove = id => {
@@ -481,13 +498,17 @@ module Punctuality.Index {
                     this.add(<IPunctualityDto>punctuality);
                 });
             }, 'json');
+
+            $.get('/Api/PunctualityStation', stations => {
+                this.stations(stations);
+            }, 'json');
         }
 
         add(punctuality: IPunctualityDto) {
             this.punctualities.push(new PunctualityViewModel(punctuality));
             this.punctualities.sort((a: PunctualityViewModel, b: PunctualityViewModel) => {
-                if (a.deadline < b.deadline) return -1;
-                if (a.deadline > b.deadline) return 1;
+                if (a.start < b.start) return -1;
+                if (a.start > b.start) return 1;
                 return 0;
             });
         }
@@ -498,7 +519,7 @@ module Punctuality.Index {
     }
 }
 
-module Punctuality.Status {
+module Punctuality.Station {
     class HouseStatusViewModel {
         name: string;
         scouts: IPunctualityStatusScoutDto[];
@@ -511,25 +532,60 @@ module Punctuality.Status {
         }
     }
 
+    class PunctualityViewModel {
+        id: number;
+        name: string;
+        start: Date;
+        stop: Date;
+        stationId: number;
+        stationName: string;
+        all: boolean;
+
+        constructor(punctuality: IPunctualityDto) {
+            this.id = punctuality.id;
+            this.name = punctuality.name;
+            this.start = new Date(punctuality.start.replace('T', ' '));
+            this.stop = new Date(punctuality.stop.replace('T', ' '));
+            this.stationId = punctuality.stationId;
+            this.stationName = punctuality.stationName;
+            this.all = punctuality.all;
+        }
+    }
+
     export class App {
-        status = ko.observable<IPunctualityStatusDto>();
-        name = ko.observable<string>();
-        all = ko.observable<boolean>();
+        hub: IPunctualityHubProxy;
+        punctuality = ko.observable<PunctualityViewModel>();
+        punctualities = ko.observableArray<PunctualityViewModel>();
+
         houses = ko.observableArray<HouseStatusViewModel>();
         buffer = '';
         bufferTimer: number;
+        all: KnockoutObservable<boolean>;
+        
+        constructor(private id: number) {
+            const timeout = 15*1000;
 
-        constructor(id: number) {
-            var hub = $.connection.punctualityStatusHub;
-
-            hub.client.updated = status => {
-                this.name(status.name);
-                this.all(status.all);
-                this.houses(ko.utils.arrayMap(status.houses, h => new HouseStatusViewModel(h)));
-                this.status(status);
+            this.hub = $.connection.punctualityHub;
+            
+            this.hub.client.add = punctuality => {
+                this.add(punctuality);
             };
-            $.connection.hub.start().done(() => {
-                hub.server.setId(id);
+            this.hub.client.remove = punctualityId => {
+                this.remove(punctualityId);
+            };
+
+            this.hub.client.updatedStatus = houses => {
+                console.log(houses);
+                this.houses(ko.utils.arrayMap(houses, h => new HouseStatusViewModel(h)));
+            };
+            $.connection.hub.start()
+                .done(() => {
+                    $.get('/Api/Punctuality', punctualities => this.addAll(punctualities), 'json')
+                        .done(() => setInterval(() => this.findCurrent(), timeout));
+                });
+            this.all = ko.computed(() => {
+                let punctuality = this.punctuality();
+                return !!punctuality ? punctuality.all : false;
             });
         }
 
@@ -543,7 +599,7 @@ module Punctuality.Status {
         }
 
         keydown(data: App, event: KeyboardEvent) {
-            if (event.repeat) return true;
+            if (!this.punctuality() || event.repeat) return true;
 
             var key = event.key;
             if (/^\w$/.test(key)) {
@@ -561,12 +617,39 @@ module Punctuality.Status {
                 url: '/Api/PunctualitySwipe',
                 type: 'POST',
                 data: <IPunctualitySwipeDto> {
-                    punctualityId: this.status().id,
+                    punctualityId: this.punctuality().id,
                     rfid
                 },
                 error: () => { },
                 success: () => { }
             });
+        }
+
+        addAll(punctualities: IPunctualityDto[]) {
+            ko.utils.arrayForEach(punctualities, punctuality => {
+                this.add(punctuality);
+            });
+        }
+
+        add(punctuality: IPunctualityDto) {
+            this.punctualities.push(new PunctualityViewModel(punctuality));
+            this.findCurrent();
+        }
+
+        remove(id: number) {
+            this.punctualities.remove(p => (p.id === id));
+            this.findCurrent();
+        }
+        
+        findCurrent() {
+            let now = new Date();
+            let oldPunctuality = this.punctuality.peek();
+            var newPunctuality = ko.utils.arrayFirst(this.punctualities(), p => p.stationId === this.id && p.start < now && now < p.stop);
+            if (oldPunctuality !== newPunctuality) {
+                this.punctuality(newPunctuality);
+                this.houses(null);
+                this.hub.server.setId(!!newPunctuality ? newPunctuality.id : null, !!oldPunctuality? oldPunctuality.id : null);
+            }
         }
     }
 }

@@ -2,7 +2,7 @@
 
 namespace Plan2015.Web.Hubs
 {
-    public interface IActivityClient
+    public interface IActivityHubClient
     {
         void Add(ActivityDto activity);
         void Update(ActivityDto activity);
