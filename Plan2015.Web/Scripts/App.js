@@ -645,6 +645,28 @@ var Score;
         Index.App = App;
     })(Index = Score.Index || (Score.Index = {}));
 })(Score || (Score = {}));
+var SortingHat;
+(function (SortingHat) {
+    var Index;
+    (function (Index) {
+        var App = (function () {
+            function App() {
+                var _this = this;
+                this.scout = ko.observable();
+                this.scouts = ko.observableArray();
+                this.rfid = new Helpers.RfidReader(function (t) { return _this.findScout(t); });
+                $.get('/Api/Scout', function (scouts) {
+                    _this.scouts(scouts);
+                }, 'json');
+            }
+            App.prototype.findScout = function (tag) {
+                this.scout(ko.utils.arrayFirst(this.scouts(), function (s) { return s.rfid === tag; }));
+            };
+            return App;
+        }());
+        Index.App = App;
+    })(Index = SortingHat.Index || (SortingHat.Index = {}));
+})(SortingHat || (SortingHat = {}));
 var Helpers;
 (function (Helpers) {
     var RfidReader = (function () {

@@ -677,6 +677,24 @@ module Score.Index {
     }
 }
 
+module SortingHat.Index {
+    export class App {
+        scout = ko.observable<IScoutDto>();
+        scouts = ko.observableArray<IScoutDto>();
+        rfid = new Helpers.RfidReader(t => this.findScout(t));
+
+        constructor() {
+            $.get('/Api/Scout', scouts => {
+                this.scouts(scouts);
+            }, 'json');
+        }
+
+        findScout(tag: string): void {
+            this.scout(ko.utils.arrayFirst(this.scouts(), s => s.rfid === tag));
+        }
+    }
+}
+
 module Helpers {
     export class RfidReader {
         buffer = '';

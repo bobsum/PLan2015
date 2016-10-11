@@ -56,6 +56,7 @@
     <Compile Include="PunctualitySwipeDto.cs" />
     <Compile Include="SchoolScoreDto.cs" />
     <Compile Include="PunctualityStatusScoutDto.cs" />
+    <Compile Include="ScoutDto.cs" />
     <Compile Include="TurnoutPointDto.cs" />
     <Compile Include="TurnoutSwipeDto.cs" />
   </ItemGroup>

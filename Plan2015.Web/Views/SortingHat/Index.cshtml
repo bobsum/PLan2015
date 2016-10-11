@@ -1,0 +1,47 @@
+﻿<div class="col-xs-12" data-bind="with: scout">
+    <div class="panel panel-default">
+        <div class="panel-heading">Spejder</div>
+        <div class="panel-body">
+            <div class="form-horizontal">
+                <div class="form-group">
+                    <label class="col-sm-2 control-label">Navn</label>
+                    <div class="col-sm-10">
+                        <p class="form-control-static" data-bind="text: name"></p>
+                    </div>
+                </div>
+                <div class="form-group bg-success">
+                    <label class="col-sm-2 control-label">Kolegie</label>
+                    <div class="col-sm-10">
+                        <p class="form-control-static" data-bind="text: houseName"></p>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-2 control-label">Skole</label>
+                    <div class="col-sm-10">
+                        <p class="form-control-static" data-bind="text: schoolName"></p>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-2 control-label">Info</label>
+                    <div class="col-sm-10">
+                        <p class="form-control-static" style="white-space: pre" data-bind="text: info"></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div data-bind="if: !scouts().length">
+    Henter spejder... dette bør ikke tage længe
+</div>
+@section Body {data-bind="event: { keydown: function(d,e) { rfid.keydown(e); return true; } }"}
+
+@section Scripts
+{
+    <script type="text/javascript">
+        $(function() {
+            ko.applyBindings(new SortingHat.Index.App());
+        });
+    </script>
+}
