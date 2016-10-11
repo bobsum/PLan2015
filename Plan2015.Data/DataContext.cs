@@ -20,6 +20,9 @@ namespace Plan2015.Data
 
         public DbSet<Activity> Activities { get; set; }
         public DbSet<ActivityPoint> ActivityPoints { get; set; }
+
+        public DbSet<QuizPoint> QuizPoints { get; set; }
+        public DbSet<QuizQuestion> QuizQuestions { get; set; }
         
         public DbSet<TurnoutPoint> TurnoutPoints { get; set; }
         

@@ -57,6 +57,8 @@
     <Compile Include="Entities\PunctualityPoint.cs" />
     <Compile Include="Entities\PunctualityStation.cs" />
     <Compile Include="Entities\PunctualitySwipe.cs" />
+    <Compile Include="Entities\QuizPoint.cs" />
+    <Compile Include="Entities\QuizQuestion.cs" />
     <Compile Include="Entities\School.cs" />
     <Compile Include="Entities\Scout.cs" />
     <Compile Include="Entities\TeamMember.cs" />
@@ -85,6 +87,10 @@
     <Compile Include="Migrations\201610101710021_PunctualityStation_Punctuality.Designer.cs">
       <DependentUpon>201610101710021_PunctualityStation_Punctuality.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201610111753068_AddedQuiz.cs" />
+    <Compile Include="Migrations\201610111753068_AddedQuiz.Designer.cs">
+      <DependentUpon>201610111753068_AddedQuiz.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -110,6 +116,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201610101710021_PunctualityStation_Punctuality.resx">
       <DependentUpon>201610101710021_PunctualityStation_Punctuality.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201610111753068_AddedQuiz.resx">
+      <DependentUpon>201610111753068_AddedQuiz.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

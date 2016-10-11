@@ -597,9 +597,7 @@ module Punctuality.Station {
                 data: <IPunctualitySwipeDto> {
                     punctualityId: this.punctuality().id,
                     rfid
-                },
-                error: () => { },
-                success: () => { }
+                }
             });
         }
 
@@ -628,6 +626,55 @@ module Punctuality.Station {
                 this.houses(null);
                 this.hub.server.setId(!!newPunctuality ? newPunctuality.id : null, !!oldPunctuality? oldPunctuality.id : null);
             }
+        }
+    }
+}
+
+module Quiz.Index {
+    export class App {
+        rfid = new Helpers.RfidReader(t => this.sendSwipe(t));
+        teamMembers: ITeamMemberDto[];
+        question = ko.observable<IQiuzQuestionDto>();
+        hasFocus = ko.observable<boolean>();
+        swipes = ko.observableArray<string>();
+
+        constructor() {
+            $.get('/Api/TeamMember', teamMembers => {
+                this.teamMembers = teamMembers;
+            }, 'json');
+        }
+
+        nextQuestion() {
+            this.swipes.removeAll();
+            this.hasFocus(false);
+            $.ajax({
+                    url: '/Api/QuizQuestion',
+                    type: 'POST',
+                    data: {}
+                })
+                .done(question => this.question(question));
+
+        }
+
+        sendSwipe(rfid: string) {
+            if (!!ko.utils.arrayFirst(this.teamMembers, t => t.rfid === rfid )) {
+                this.nextQuestion();
+                return;
+            }
+
+            let question = this.question();
+            if (!question) return;
+
+            this.swipes.push(rfid);
+
+            $.ajax({
+                url: '/Api/QuizSwipe',
+                type: 'POST',
+                data: <IQiuzSwipeDto>{
+                    rfid,
+                    questionId: question.id
+                }
+            });
         }
     }
 }
@@ -712,7 +759,7 @@ module Helpers {
         }
 
         keydown(event: KeyboardEvent) {
-            if (event.repeat) return true;
+            if (event.repeat) return;
             var key = event.key;
             if (/^\w$/.test(key)) {
                 this.buffer += key;
@@ -721,7 +768,6 @@ module Helpers {
                 this.callback(this.buffer);
                 this.resetBuffer();
             }
-            return true;
         }
     }
 

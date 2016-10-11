@@ -88,6 +88,16 @@ interface IPunctualitySwipeDto {
     rfid: string;
 }
 
+interface IQiuzQuestionDto {
+    id: number;
+}
+
+interface IQiuzSwipeDto {
+    id: number;
+    questionId: number;
+    rfid: string;
+}
+
 interface ISchoolScoreDto {
     id: number;
     name: string;
@@ -101,6 +111,12 @@ interface IScoutDto {
     houseName: string;
     schoolName: string;
     info: string;
+}
+
+interface ITeamMemberDto {
+    id: number;
+    rfid: string;
+    name: string;
 }
 
 interface ITurnoutSwipeDto {

@@ -29,6 +29,12 @@ namespace Plan2015.Web
                     p.House,
                     Amount = 5
                 });
+            var qp = db.QuizPoints
+                .Select(p => new
+                {
+                    p.House,
+                    Amount = 1
+                });
             var tp = db.TurnoutPoints
                 .Where(p => !p.Discarded)
                 .Select(p => new
@@ -47,8 +53,8 @@ namespace Plan2015.Web
                         {
                             Id = h.Id,
                             Name = h.Name,
-                            Amount = ap.Concat(pp).Concat(tp).Where(p => p.House == h).Sum(p => (int?) p.Amount) ?? 0,
-                            HiddenAmount = aph.Concat(pp).Concat(tp).Where(p => p.House == h).Sum(p => (int?)p.Amount) ?? 0
+                            Amount = ap.Concat(pp).Concat(qp).Concat(tp).Where(p => p.House == h).Sum(p => (int?) p.Amount) ?? 0,
+                            HiddenAmount = aph.Concat(pp).Concat(qp).Concat(tp).Where(p => p.House == h).Sum(p => (int?)p.Amount) ?? 0
                         })
                 })
                 .ToList();

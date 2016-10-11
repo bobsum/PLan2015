@@ -54,9 +54,12 @@
     <Compile Include="PunctualityStatusHouseDto.cs" />
     <Compile Include="PunctualityStatusDto.cs" />
     <Compile Include="PunctualitySwipeDto.cs" />
+    <Compile Include="QuizQuestionDto.cs" />
+    <Compile Include="QuizSwipeDto.cs" />
     <Compile Include="SchoolScoreDto.cs" />
     <Compile Include="PunctualityStatusScoutDto.cs" />
     <Compile Include="ScoutDto.cs" />
+    <Compile Include="TeamMemberDto.cs" />
     <Compile Include="TurnoutPointDto.cs" />
     <Compile Include="TurnoutSwipeDto.cs" />
   </ItemGroup>

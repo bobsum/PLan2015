@@ -562,9 +562,7 @@ var Punctuality;
                     data: {
                         punctualityId: this.punctuality().id,
                         rfid: rfid
-                    },
-                    error: function () { },
-                    success: function () { }
+                    }
                 });
             };
             App.prototype.addAll = function (punctualities) {
@@ -597,6 +595,55 @@ var Punctuality;
         Station.App = App;
     })(Station = Punctuality.Station || (Punctuality.Station = {}));
 })(Punctuality || (Punctuality = {}));
+var Quiz;
+(function (Quiz) {
+    var Index;
+    (function (Index) {
+        var App = (function () {
+            function App() {
+                var _this = this;
+                this.rfid = new Helpers.RfidReader(function (t) { return _this.sendSwipe(t); });
+                this.question = ko.observable();
+                this.hasFocus = ko.observable();
+                this.swipes = ko.observableArray();
+                $.get('/Api/TeamMember', function (teamMembers) {
+                    _this.teamMembers = teamMembers;
+                }, 'json');
+            }
+            App.prototype.nextQuestion = function () {
+                var _this = this;
+                this.swipes.removeAll();
+                this.hasFocus(false);
+                $.ajax({
+                    url: '/Api/QuizQuestion',
+                    type: 'POST',
+                    data: {}
+                })
+                    .done(function (question) { return _this.question(question); });
+            };
+            App.prototype.sendSwipe = function (rfid) {
+                if (!!ko.utils.arrayFirst(this.teamMembers, function (t) { return t.rfid === rfid; })) {
+                    this.nextQuestion();
+                    return;
+                }
+                var question = this.question();
+                if (!question)
+                    return;
+                this.swipes.push(rfid);
+                $.ajax({
+                    url: '/Api/QuizSwipe',
+                    type: 'POST',
+                    data: {
+                        rfid: rfid,
+                        questionId: question.id
+                    }
+                });
+            };
+            return App;
+        }());
+        Index.App = App;
+    })(Index = Quiz.Index || (Quiz.Index = {}));
+})(Quiz || (Quiz = {}));
 var Score;
 (function (Score) {
     var Index;
@@ -685,7 +732,7 @@ var Helpers;
         };
         RfidReader.prototype.keydown = function (event) {
             if (event.repeat)
-                return true;
+                return;
             var key = event.key;
             if (/^\w$/.test(key)) {
                 this.buffer += key;
@@ -695,7 +742,6 @@ var Helpers;
                 this.callback(this.buffer);
                 this.resetBuffer();
             }
-            return true;
         };
         return RfidReader;
     }());
