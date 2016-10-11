@@ -10,7 +10,7 @@
     </div>
 </div>
 <!-- /ko -->
-@section Body {data-bind="event: { keydown: keydown }"}
+@section Body {data-bind="event: { keydown: function(d,e) { rfid.keydown(e); return true; } }"}
 
 @section Scripts
 {

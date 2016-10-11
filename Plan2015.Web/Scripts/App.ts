@@ -560,9 +560,9 @@ module Punctuality.Station {
         punctualities = ko.observableArray<PunctualityViewModel>();
 
         houses = ko.observableArray<HouseStatusViewModel>();
-        buffer = '';
-        bufferTimer: number;
         all: KnockoutObservable<boolean>;
+
+        rfid = new Helpers.RfidReader(t => !!this.punctuality() ? this.sendSwipe(t) : null);
         
         constructor(private id: number) {
             const timeout = 15*1000;
@@ -588,29 +588,6 @@ module Punctuality.Station {
                 let punctuality = this.punctuality();
                 return !!punctuality ? punctuality.all : false;
             });
-        }
-
-        resetBuffer() {
-            this.buffer = '';
-        }
-
-        resetBufferTimer() {
-            if (this.bufferTimer) clearTimeout(this.bufferTimer);
-            this.bufferTimer = setTimeout(this.resetBuffer, 50);
-        }
-
-        keydown(data: App, event: KeyboardEvent) {
-            if (!this.punctuality() || event.repeat) return true;
-
-            var key = event.key;
-            if (/^\w$/.test(key)) {
-                this.buffer += key;
-                this.resetBufferTimer();
-            } else if(key === 'Enter' && this.buffer.length) {
-                this.sendSwipe(this.buffer);
-                this.resetBuffer();
-            }
-            return true;
         }
 
         sendSwipe(rfid: string) {
@@ -701,6 +678,35 @@ module Score.Index {
 }
 
 module Helpers {
+    export class RfidReader {
+        buffer = '';
+        bufferTimer: number;
+
+        constructor(private callback: (tag: string) => void) { }
+
+        resetBuffer() {
+            this.buffer = '';
+        }
+
+        resetBufferTimer() {
+            if (this.bufferTimer) clearTimeout(this.bufferTimer);
+            this.bufferTimer = setTimeout(() => this.resetBuffer(), 50);
+        }
+
+        keydown(event: KeyboardEvent) {
+            if (event.repeat) return true;
+            var key = event.key;
+            if (/^\w$/.test(key)) {
+                this.buffer += key;
+                this.resetBufferTimer();
+            } else if (key === 'Enter' && this.buffer.length) {
+                this.callback(this.buffer);
+                this.resetBuffer();
+            }
+            return true;
+        }
+    }
+
     export function readText(file: File): JQueryPromise<string> {
         var reader = new FileReader();
         var deferred: JQueryDeferred<string> = $.Deferred<string>();

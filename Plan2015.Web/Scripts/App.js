@@ -533,7 +533,7 @@ var Punctuality;
                 this.punctuality = ko.observable();
                 this.punctualities = ko.observableArray();
                 this.houses = ko.observableArray();
-                this.buffer = '';
+                this.rfid = new Helpers.RfidReader(function (t) { return !!_this.punctuality() ? _this.sendSwipe(t) : null; });
                 var timeout = 15 * 1000;
                 this.hub = $.connection.punctualityHub;
                 this.hub.client.add = function (punctuality) {
@@ -555,28 +555,6 @@ var Punctuality;
                     return !!punctuality ? punctuality.all : false;
                 });
             }
-            App.prototype.resetBuffer = function () {
-                this.buffer = '';
-            };
-            App.prototype.resetBufferTimer = function () {
-                if (this.bufferTimer)
-                    clearTimeout(this.bufferTimer);
-                this.bufferTimer = setTimeout(this.resetBuffer, 50);
-            };
-            App.prototype.keydown = function (data, event) {
-                if (!this.punctuality() || event.repeat)
-                    return true;
-                var key = event.key;
-                if (/^\w$/.test(key)) {
-                    this.buffer += key;
-                    this.resetBufferTimer();
-                }
-                else if (key === 'Enter' && this.buffer.length) {
-                    this.sendSwipe(this.buffer);
-                    this.resetBuffer();
-                }
-                return true;
-            };
             App.prototype.sendSwipe = function (rfid) {
                 $.ajax({
                     url: '/Api/PunctualitySwipe',
@@ -669,6 +647,37 @@ var Score;
 })(Score || (Score = {}));
 var Helpers;
 (function (Helpers) {
+    var RfidReader = (function () {
+        function RfidReader(callback) {
+            this.callback = callback;
+            this.buffer = '';
+        }
+        RfidReader.prototype.resetBuffer = function () {
+            this.buffer = '';
+        };
+        RfidReader.prototype.resetBufferTimer = function () {
+            var _this = this;
+            if (this.bufferTimer)
+                clearTimeout(this.bufferTimer);
+            this.bufferTimer = setTimeout(function () { return _this.resetBuffer(); }, 50);
+        };
+        RfidReader.prototype.keydown = function (event) {
+            if (event.repeat)
+                return true;
+            var key = event.key;
+            if (/^\w$/.test(key)) {
+                this.buffer += key;
+                this.resetBufferTimer();
+            }
+            else if (key === 'Enter' && this.buffer.length) {
+                this.callback(this.buffer);
+                this.resetBuffer();
+            }
+            return true;
+        };
+        return RfidReader;
+    }());
+    Helpers.RfidReader = RfidReader;
     function readText(file) {
         var reader = new FileReader();
         var deferred = $.Deferred();
@@ -684,4 +693,3 @@ var Helpers;
     }
     Helpers.compare = compare;
 })(Helpers || (Helpers = {}));
-//# sourceMappingURL=App.js.map
