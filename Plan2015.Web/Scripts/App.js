@@ -364,7 +364,7 @@ var Boxter;
                 }, 'json');
                 $.get('/Api/BoxterSwipe', function (swipes) {
                     _this.swipes(ko.utils.arrayFilter(swipes, function (swipe) {
-                        return swipe.appMode.toLowerCase() === 'Oloeb';
+                        return swipe.appMode.toLowerCase() === 'oloeb';
                     }));
                 }, 'json');
                 ko.computed(function () {

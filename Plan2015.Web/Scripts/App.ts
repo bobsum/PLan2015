@@ -387,7 +387,7 @@ module Boxter.Marker {
                 'json');
             $.get('/Api/BoxterSwipe', (swipes: IBoxterSwipe[]) => {
                 this.swipes(ko.utils.arrayFilter(swipes, swipe => {
-                    return swipe.appMode.toLowerCase() === 'Oloeb';
+                    return swipe.appMode.toLowerCase() === 'oloeb';
                 }));
             }, 'json');
 
@@ -412,7 +412,8 @@ module Boxter.Marker {
                             name: house.name,
                             amount: ko.utils.arrayGetDistinctValues(map[house.name]).length
                         }
-                    }));
+                    })
+                );
             });
         }
     }
