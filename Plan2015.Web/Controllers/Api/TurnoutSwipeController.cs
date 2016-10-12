@@ -12,11 +12,8 @@ namespace Plan2015.Web.Controllers.Api
 {
     public class TurnoutSwipeController : ApiControllerWithDB
     {
-        private const int MAX_POINTS = 10 * 6;
-
         public async Task<IHttpActionResult> PostTurnoutSwipe(TurnoutSwipeDto dto)
         {
-            TeamMember teamMember = null;
             using (var reader = new StringReader(dto.Data))
             {
                 string line;
@@ -29,15 +26,6 @@ namespace Plan2015.Web.Controllers.Api
                     var hexRfid = match.Groups[2].ToString();
                     var rfid = Convert.ToInt32(hexRfid, 16).ToString("D10");
 
-                    var member = await Db.TeamMembers.FirstOrDefaultAsync(t => t.Rfid == rfid);
-                    if (member != null)
-                    {
-                        teamMember = member;
-                        continue;
-                    }
-
-                    if(teamMember == null) continue;
-
                     var scout = await Db.Scouts.FirstOrDefaultAsync(s => s.Rfid == rfid);
 
                     if (scout == null) continue;
@@ -45,10 +33,8 @@ namespace Plan2015.Web.Controllers.Api
                     var point = new TurnoutPoint
                     {
                         Amount = sign == "+" ? 1 : -1,
-                        House = scout.House,
-                        TeamMember = teamMember,
-                        Discarded = MAX_POINTS <= Db.TurnoutPoints.Count(tp => tp.TeamMemberId == teamMember.Id),
-                        Log = $"{line} : {scout.Name} : {scout.House.Name} : {teamMember.Name}"
+                        HouseId = scout.HouseId,
+                        Time = DateTime.Now
                     };
                     Db.TurnoutPoints.Add(point);
                     await Db.SaveChangesAsync();

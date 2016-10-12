@@ -33,5 +33,7 @@ namespace Plan2015.Data
 
         public DbSet<MagicGamesMarkerPoint> MagicGamesMarkerPoints { get; set; }
         public DbSet<MagicGamesTimePoint> MagicGamesTimePoints { get; set; }
+
+        public DbSet<BoxterSwipe> BoxterSwipes{ get; set; }
     }
 }

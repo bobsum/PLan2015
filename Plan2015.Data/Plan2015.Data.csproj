@@ -49,6 +49,7 @@
     <Compile Include="Entities\Activity.cs" />
     <Compile Include="DataContext.cs" />
     <Compile Include="Entities\ActivityPoint.cs" />
+    <Compile Include="Entities\BoxterSwipe.cs" />
     <Compile Include="Entities\House.cs" />
     <Compile Include="Entities\MagicGamesInterval.cs" />
     <Compile Include="Entities\MagicGamesTimePoint.cs" />
@@ -91,6 +92,14 @@
     <Compile Include="Migrations\201610111753068_AddedQuiz.Designer.cs">
       <DependentUpon>201610111753068_AddedQuiz.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201610121610257_AddingBoxterSwipe.cs" />
+    <Compile Include="Migrations\201610121610257_AddingBoxterSwipe.Designer.cs">
+      <DependentUpon>201610121610257_AddingBoxterSwipe.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201610121722160_ChangedTurnoutPoint.cs" />
+    <Compile Include="Migrations\201610121722160_ChangedTurnoutPoint.Designer.cs">
+      <DependentUpon>201610121722160_ChangedTurnoutPoint.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -119,6 +128,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201610111753068_AddedQuiz.resx">
       <DependentUpon>201610111753068_AddedQuiz.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201610121610257_AddingBoxterSwipe.resx">
+      <DependentUpon>201610121610257_AddingBoxterSwipe.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201610121722160_ChangedTurnoutPoint.resx">
+      <DependentUpon>201610121722160_ChangedTurnoutPoint.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

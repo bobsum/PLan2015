@@ -179,6 +179,7 @@
     <Compile Include="Controllers\Api\QuizQuestionController.cs" />
     <Compile Include="Controllers\Api\ScoutController.cs" />
     <Compile Include="Controllers\Api\TeamMemberController.cs" />
+    <Compile Include="Controllers\Api\TurnoutController.cs" />
     <Compile Include="Controllers\Api\TurnoutSwipeController.cs" />
     <Compile Include="Controllers\Mvc\PunctualityController.cs" />
     <Compile Include="Controllers\Mvc\QuizController.cs" />
