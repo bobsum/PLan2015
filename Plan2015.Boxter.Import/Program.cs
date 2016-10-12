@@ -1,10 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
 using System.Net.Http;
-using System.Runtime.Remoting.Contexts;
-using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using log4net;
@@ -17,7 +14,7 @@ namespace Plan2015.Boxter.Import
 {
     class Program
     {
-        private const int DELAY = 3*1000;
+        private const int DELAY = 30*1000;
         private const string URL = "http://boxter-v42.azurewebsites.net/umbraco/api/boxcall/getall";
 
         private static readonly ILog _log;
