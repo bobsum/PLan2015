@@ -335,6 +335,61 @@ var MagicGames;
         Score.App = App;
     })(Score = MagicGames.Score || (MagicGames.Score = {}));
 })(MagicGames || (MagicGames = {}));
+var Boxter;
+(function (Boxter) {
+    var Marker;
+    (function (Marker) {
+        var App = (function () {
+            function App() {
+                var _this = this;
+                this.startDate = ko.observable('2016-10-16');
+                this.startTime = ko.observable('00:00');
+                this.start = ko.computed(function () {
+                    if (_this.startDate().length < 10 || _this.startTime().length < 5)
+                        return null;
+                    return moment(_this.startDate() + 'T' + _this.startTime());
+                });
+                this.stopDate = ko.observable('2016-10-22');
+                this.stopTime = ko.observable('23:59');
+                this.stop = ko.computed(function () {
+                    if (_this.stopDate().length < 10 || _this.stopTime().length < 5)
+                        return null;
+                    return moment(_this.stopDate() + 'T' + _this.stopTime());
+                });
+                this.houses = ko.observableArray();
+                this.swipes = ko.observableArray();
+                this.result = ko.observable();
+                $.get('/Api/House', function (houses) {
+                    _this.houses(houses);
+                }, 'json');
+                $.get('/Api/BoxterSwipe', function (swipes) {
+                    _this.swipes(ko.utils.arrayFilter(swipes, function (swipe) {
+                        return swipe.appMode.toLowerCase() === 'Oloeb';
+                    }));
+                }, 'json');
+                ko.computed(function () {
+                    var swipes = _this.swipes();
+                    var start = _this.start();
+                    var stop = _this.stop();
+                    swipes = ko.utils.arrayFilter(swipes, function (swipe) { return !!start && !!stop && moment(swipe.createDate).isBetween(start, stop); });
+                    var map = {};
+                    ko.utils.arrayForEach(swipes, function (swipe) {
+                        var house = map[swipe.houseName] || (map[swipe.houseName] = []);
+                        house.push(swipe.boxId);
+                    });
+                    _this.result(ko.utils.arrayMap(_this.houses(), function (house) {
+                        return {
+                            name: house.name,
+                            amount: ko.utils.arrayGetDistinctValues(map[house.name]).length
+                        };
+                    }));
+                });
+            }
+            return App;
+        }());
+        Marker.App = App;
+    })(Marker = Boxter.Marker || (Boxter.Marker = {}));
+})(Boxter || (Boxter = {}));
 var Turnout;
 (function (Turnout) {
     var Index;
@@ -420,15 +475,15 @@ var Punctuality;
             function CreatePunctualityViewModel() {
                 var _this = this;
                 this.name = ko.observable();
-                this.startDate = ko.observable('');
-                this.startTime = ko.observable('');
+                this.startDate = ko.observable('2016-10-16');
+                this.startTime = ko.observable('00:00');
                 this.start = ko.computed(function () {
                     if (_this.startDate().length < 10 || _this.startTime().length < 5)
                         return null;
                     return moment(_this.startDate() + 'T' + _this.startTime());
                 });
-                this.stopDate = ko.observable('');
-                this.stopTime = ko.observable('');
+                this.stopDate = ko.observable('2016-10-22');
+                this.stopTime = ko.observable('23:59');
                 this.stop = ko.computed(function () {
                     if (_this.stopDate().length < 10 || _this.stopTime().length < 5)
                         return null;
@@ -761,4 +816,3 @@ var Helpers;
     }
     Helpers.compare = compare;
 })(Helpers || (Helpers = {}));
-//# sourceMappingURL=App.js.map

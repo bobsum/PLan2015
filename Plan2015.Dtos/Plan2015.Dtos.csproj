@@ -42,6 +42,7 @@
   <ItemGroup>
     <Compile Include="ActivityDto.cs" />
     <Compile Include="ActivityPointDto.cs" />
+    <Compile Include="BoxterSwipeDto.cs" />
     <Compile Include="HouseDto.cs" />
     <Compile Include="HouseScoreDto.cs" />
     <Compile Include="MagicGamesMarkerSwipeDto.cs" />

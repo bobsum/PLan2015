@@ -127,5 +127,18 @@ interface ITurnoutSwipeDto {
 interface ITurnoutPointDto {
     amount: number;
     houseId: number;
-    teamMemberId?: number;
+}
+
+interface IBoxterSwipe {
+    id: number;
+    swipeId: number;
+    scoutId: number;
+    scoutName: string;
+    houseId: number;
+    houseName: string;
+    boxId: string;
+    boxIdFriendly: string;
+    appMode: string;
+    appResponse: string;
+    createDate: string;
 }

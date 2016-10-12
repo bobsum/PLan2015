@@ -152,6 +152,7 @@
     <Content Include="Views\Score\Index.cshtml" />
     <Content Include="Views\SortingHat\Index.cshtml" />
     <Content Include="Views\Quiz\Index.cshtml" />
+    <Content Include="Views\Boxter\Marker.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -174,13 +175,16 @@
     <Compile Include="Controllers\Api\ApiControllerWithDB.cs" />
     <Compile Include="Controllers\Api\ApiControllerWithHub.cs" />
     <Compile Include="Controllers\Api\ActivityController.cs" />
+    <Compile Include="Controllers\Api\BoxterSwipeController.cs" />
     <Compile Include="Controllers\Api\MagicGamesMarkerSwipeController.cs" />
     <Compile Include="Controllers\Api\PunctualityStationController.cs" />
     <Compile Include="Controllers\Api\QuizQuestionController.cs" />
+    <Compile Include="Controllers\Api\QuizSwipeController.cs" />
     <Compile Include="Controllers\Api\ScoutController.cs" />
     <Compile Include="Controllers\Api\TeamMemberController.cs" />
     <Compile Include="Controllers\Api\TurnoutController.cs" />
     <Compile Include="Controllers\Api\TurnoutSwipeController.cs" />
+    <Compile Include="Controllers\Mvc\BoxterController.cs" />
     <Compile Include="Controllers\Mvc\PunctualityController.cs" />
     <Compile Include="Controllers\Mvc\QuizController.cs" />
     <Compile Include="Controllers\Mvc\ScoreController.cs" />

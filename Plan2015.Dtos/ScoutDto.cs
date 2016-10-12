@@ -15,6 +15,5 @@ namespace Plan2015.Dtos
         public string SchoolName { get; set; }
         [Required]
         public string Info { get; set; }
-
     }
 }

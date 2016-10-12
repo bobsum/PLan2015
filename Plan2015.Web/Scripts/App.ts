@@ -359,6 +359,65 @@ module MagicGames.Score {
     }
 }
 
+module Boxter.Marker {
+    export class App {
+        startDate = ko.observable<string>('2016-10-16');
+        startTime = ko.observable<string>('00:00');
+        start = ko.computed<moment.Moment>(() => {
+            if (this.startDate().length < 10 || this.startTime().length < 5) return null;
+            return moment(this.startDate() + 'T' + this.startTime());
+        });
+        stopDate = ko.observable<string>('2016-10-22');
+        stopTime = ko.observable<string>('23:59');
+        stop = ko.computed<moment.Moment>(() => {
+            if (this.stopDate().length < 10 || this.stopTime().length < 5) return null;
+            return moment(this.stopDate() + 'T' + this.stopTime());
+        });
+
+        houses = ko.observableArray<IHouseDto>();
+        swipes = ko.observableArray<IBoxterSwipe>();
+
+        result = ko.observable();
+
+        constructor() {
+            $.get('/Api/House',
+                (houses: IHouseDto[]) => {
+                    this.houses(houses);
+                },
+                'json');
+            $.get('/Api/BoxterSwipe', (swipes: IBoxterSwipe[]) => {
+                this.swipes(ko.utils.arrayFilter(swipes, swipe => {
+                    return swipe.appMode.toLowerCase() === 'Oloeb';
+                }));
+            }, 'json');
+
+            ko.computed(() => {
+                let swipes = this.swipes();
+                let start = this.start();
+                let stop = this.stop();
+
+                swipes = ko.utils.arrayFilter(swipes,
+                    swipe => !!start && !!stop && moment(swipe.createDate).isBetween(start, stop)
+                );
+
+                let map = {};
+                ko.utils.arrayForEach(swipes, swipe => {
+                    let house = map[swipe.houseName] || (map[swipe.houseName] = []);
+                    house.push(swipe.boxId);
+                });
+
+                this.result(ko.utils.arrayMap(this.houses(),
+                    house => {
+                        return {
+                            name: house.name,
+                            amount: ko.utils.arrayGetDistinctValues(map[house.name]).length
+                        }
+                    }));
+            });
+        }
+    }
+}
+
 module Turnout.Index {
     class StatusViewModel {
         progress = ko.observable<number>(0);
@@ -439,14 +498,14 @@ module Punctuality.Index {
 
     class CreatePunctualityViewModel {
         name = ko.observable<string>();
-        startDate = ko.observable<string>('');
-        startTime = ko.observable<string>('');
+        startDate = ko.observable<string>('2016-10-16');
+        startTime = ko.observable<string>('00:00');
         start = ko.computed<moment.Moment>(() => {
             if (this.startDate().length < 10 || this.startTime().length < 5) return null;
             return moment(this.startDate() + 'T' + this.startTime());
         });
-        stopDate = ko.observable<string>('');
-        stopTime = ko.observable<string>('');
+        stopDate = ko.observable<string>('2016-10-22');
+        stopTime = ko.observable<string>('23:59');
         stop = ko.computed<moment.Moment>(() => {
             if (this.stopDate().length < 10 || this.stopTime().length < 5) return null;
             return moment(this.stopDate() + 'T' + this.stopTime());
