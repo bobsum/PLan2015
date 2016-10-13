@@ -375,7 +375,7 @@ var Boxter;
                     var map = {};
                     ko.utils.arrayForEach(swipes, function (swipe) {
                         var house = map[swipe.houseName] || (map[swipe.houseName] = []);
-                        house.push(swipe.boxId);
+                        house.push(swipe.boxIdFriendly);
                     });
                     _this.result(ko.utils.arrayMap(_this.houses(), function (house) {
                         return {
@@ -816,3 +816,4 @@ var Helpers;
     }
     Helpers.compare = compare;
 })(Helpers || (Helpers = {}));
+//# sourceMappingURL=App.js.map

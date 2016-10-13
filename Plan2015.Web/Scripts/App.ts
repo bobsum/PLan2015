@@ -403,7 +403,7 @@ module Boxter.Marker {
                 let map = {};
                 ko.utils.arrayForEach(swipes, swipe => {
                     let house = map[swipe.houseName] || (map[swipe.houseName] = []);
-                    house.push(swipe.boxId);
+                    house.push(swipe.boxIdFriendly);
                 });
 
                 this.result(ko.utils.arrayMap(this.houses(),

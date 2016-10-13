@@ -72,6 +72,8 @@ namespace Plan2015.Boxter.Import
                                 var rfid = dto.Tag.PadLeft(10, '0');
                                 var scout = await db.Scouts.FirstOrDefaultAsync(s => s.Rfid == rfid);
 
+                                last = dto.Id;
+
                                 if (scout == null)
                                 {
                                     if (_isWarnEnabled) _log.Warn($"Rfid not found: {rfid}");
@@ -90,7 +92,7 @@ namespace Plan2015.Boxter.Import
                                 };
                                 db.BoxterSwipes.Add(swipe);
 
-                                if (dto.AppMode.Equals("Turnout", StringComparison.InvariantCultureIgnoreCase))
+                                if (dto.AppMode.Equals("Bogen", StringComparison.InvariantCultureIgnoreCase))
                                 {
                                     tournoutPointAdded = true;
                                     var point = new TurnoutPoint
@@ -103,8 +105,6 @@ namespace Plan2015.Boxter.Import
                                     db.TurnoutPoints.Add(point);
                                 }
                                 await db.SaveChangesAsync();
-
-                                last = swipe.SwipeId;
                             }
                         }
 
