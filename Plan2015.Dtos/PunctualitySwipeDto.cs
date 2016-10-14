@@ -8,6 +8,6 @@ namespace Plan2015.Dtos
         [Required]
         public int PunctualityId { get; set; }
         [Required]
-        public string Rfid { get; set; }
+        public long Rfid { get; set; }
     }
 }

@@ -24,7 +24,7 @@ namespace Plan2015.Web.Controllers.Api
                     if (!match.Success) continue;
                     
                     var hexRfid = match.Groups[1].ToString();
-                    var rfid = Convert.ToInt32(hexRfid, 16).ToString("D10");
+                    var rfid = Convert.ToInt64(hexRfid, 16);
 
                     var scout = Db.Scouts.FirstOrDefault(s => s.Rfid == rfid);
 

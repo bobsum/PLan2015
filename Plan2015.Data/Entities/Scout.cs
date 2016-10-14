@@ -5,7 +5,7 @@ namespace Plan2015.Data.Entities
     public class Scout
     {
         public int Id { get; set; }
-        public string Rfid { get; set; }
+        public long Rfid { get; set; }
         public string Name { get; set; }
         public int HouseId { get; set; }
         public virtual House House { get; set; }

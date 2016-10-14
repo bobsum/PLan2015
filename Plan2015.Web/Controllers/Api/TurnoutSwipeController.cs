@@ -24,7 +24,7 @@ namespace Plan2015.Web.Controllers.Api
 
                     var sign = match.Groups[1].ToString();
                     var hexRfid = match.Groups[2].ToString();
-                    var rfid = Convert.ToInt32(hexRfid, 16).ToString("D10");
+                    var rfid = Convert.ToInt64(hexRfid, 16);
 
                     var scout = await Db.Scouts.FirstOrDefaultAsync(s => s.Rfid == rfid);
 

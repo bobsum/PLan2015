@@ -20,7 +20,8 @@ namespace Plan2015.MagicGames.TimeSwiper
                 using (var db = new DataContext())
                 {
                     Console.WriteLine("Svirp tryllestav");
-                    var rfid = Console.ReadLine();
+                    long rfid;
+                    if(long.TryParse(Console.ReadLine(), out rfid)) continue;
                     var now = DateTime.Now;
                     Console.Clear();
                     if (start.AddMinutes(61) < now)
@@ -31,13 +32,11 @@ namespace Plan2015.MagicGames.TimeSwiper
                         break;
                     }
 
-                    if (rfid == null) continue;
-                    
                     var scout = db.Scouts
                         .Include(s => s.MagicGamesInterval)
                         .FirstOrDefault(s => s.Rfid == rfid);
 
-                    if (scout == null || scout.MagicGamesInterval == null) continue;
+                    if (scout?.MagicGamesInterval == null) continue;
                     var lastSwipe = scout.MagicGamesInterval.LastSwipe;
                     if ((lastSwipe.HasValue && (now - lastSwipe.Value).Minutes == 0)) continue;
                     var elapsed = (now - start).Minutes;

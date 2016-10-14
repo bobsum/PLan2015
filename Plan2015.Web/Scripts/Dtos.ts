@@ -85,7 +85,7 @@ interface IPunctualityStatusScoutDto {
 interface IPunctualitySwipeDto {
     id: number;
     punctualityId: number;
-    rfid: string;
+    rfid: number;
 }
 
 interface IQiuzQuestionDto {
@@ -95,7 +95,7 @@ interface IQiuzQuestionDto {
 interface IQiuzSwipeDto {
     id: number;
     questionId: number;
-    rfid: string;
+    rfid: number;
 }
 
 interface ISchoolScoreDto {
@@ -106,7 +106,7 @@ interface ISchoolScoreDto {
 
 interface IScoutDto {
     id: number;
-    rfid: string;
+    rfid: number;
     name: string;
     houseName: string;
     schoolName: string;
@@ -115,7 +115,7 @@ interface IScoutDto {
 
 interface ITeamMemberDto {
     id: number;
-    rfid: string;
+    rfid: number;
     name: string;
 }
 

@@ -650,7 +650,7 @@ module Punctuality.Station {
             });
         }
 
-        sendSwipe(rfid: string) {
+        sendSwipe(rfid: number) {
             $.ajax({
                 url: '/Api/PunctualitySwipe',
                 type: 'POST',
@@ -696,7 +696,7 @@ module Quiz.Index {
         teamMembers: ITeamMemberDto[];
         question = ko.observable<IQiuzQuestionDto>();
         hasFocus = ko.observable<boolean>();
-        swipes = ko.observableArray<string>();
+        swipes = ko.observableArray<number>();
 
         constructor() {
             $.get('/Api/TeamMember', teamMembers => {
@@ -716,7 +716,7 @@ module Quiz.Index {
 
         }
 
-        sendSwipe(rfid: string) {
+        sendSwipe(rfid: number) {
             if (!!ko.utils.arrayFirst(this.teamMembers, t => t.rfid === rfid )) {
                 this.nextQuestion();
                 return;
@@ -796,7 +796,7 @@ module SortingHat.Index {
             }, 'json');
         }
 
-        findScout(tag: string): void {
+        findScout(tag: number): void {
             this.scout(ko.utils.arrayFirst(this.scouts(), s => s.rfid === tag));
         }
     }
@@ -807,7 +807,7 @@ module Helpers {
         buffer = '';
         bufferTimer: number;
 
-        constructor(private callback: (tag: string) => void) { }
+        constructor(private callback: (tag: number) => void) { }
 
         resetBuffer() {
             this.buffer = '';
@@ -825,7 +825,7 @@ module Helpers {
                 this.buffer += key;
                 this.resetBufferTimer();
             } else if (key === 'Enter' && this.buffer.length) {
-                this.callback(this.buffer);
+                this.callback(+this.buffer);
                 this.resetBuffer();
             }
         }

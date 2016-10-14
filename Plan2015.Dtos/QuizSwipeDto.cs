@@ -9,6 +9,6 @@ namespace Plan2015.Dtos
         [Required]
         public int QuestionId { get; set; }
         [Required]
-        public string Rfid { get; set; }
+        public long Rfid { get; set; }
     }
 }

@@ -794,7 +794,7 @@ var Helpers;
                 this.resetBufferTimer();
             }
             else if (key === 'Enter' && this.buffer.length) {
-                this.callback(this.buffer);
+                this.callback(+this.buffer);
                 this.resetBuffer();
             }
         };
