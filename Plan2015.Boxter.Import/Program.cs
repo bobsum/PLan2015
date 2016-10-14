@@ -69,7 +69,12 @@ namespace Plan2015.Boxter.Import
                         {
                             foreach (var dto in dtos)
                             {
-                                var rfid = long.Parse(dto.Tag);
+                                long rfid;
+                                if (!long.TryParse(dto.Tag, out rfid))
+                                {
+                                    if (_isWarnEnabled) _log.Warn($"Rfid not valid: {rfid}");
+                                    continue;
+                                }
                                 var scout = await db.Scouts.FirstOrDefaultAsync(s => s.Rfid == rfid);
 
                                 last = dto.Id;
