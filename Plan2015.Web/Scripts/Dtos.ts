@@ -125,8 +125,11 @@ interface ITurnoutSwipeDto {
 }
 
 interface ITurnoutPointDto {
+    id: number;
     amount: number;
     houseId: number;
+    houseName: string;
+    time: string;
 }
 
 interface IBoxterSwipe {

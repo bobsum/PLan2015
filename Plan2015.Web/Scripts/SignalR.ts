@@ -53,4 +53,5 @@ interface ITurnoutPointHubProxy {
 
 interface ITurnoutPointHubClient {
     add: (turnoutPoint: ITurnoutPointDto) => void;
+    remove: (id: number) => void ;
 }

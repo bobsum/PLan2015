@@ -1,29 +1,49 @@
-﻿<div class="col-xs-12" data-bind="with: upload">
+﻿<div class="col-xs-12">
     <div class="panel panel-default">
-        <div class="panel-heading">Indlæs turnout points</div>
+        <div class="panel-heading">Ny turnout</div>
         <div class="panel-body">
-            <form class="form-horizontal" data-bind="submit: sendUplaod">
-                <div class="form-group form-group-sm">
-                    <label class="col-xs-12 col-sm-2 control-label">File</label>
-                    <div class="col-xs-12 col-sm-10">
-                        <input type="file" class="form-control" multiple data-bind="event: { change: selectFile }">
+            <form class="form-horizontal" data-bind="submit: sendCreate, with: newTurnoutPoint">
+                <div class="form-group">
+                    <label for="houses" class="col-sm-2 control-label">Kolegie</label>
+                    <div class="col-sm-10">
+                        <select class="form-control" id="houses" data-bind="options: $parent.houses, selectedOptions: houseId, optionsText: 'name', optionsValue: 'id'"></select>
                     </div>
                 </div>
-                <div class="form-group form-group-sm">
-                    <div class="col-xs-12 col-sm-offset-2 col-sm-10">
-                        <button type="submit" class="btn btn-primary" data-bind="enable: isValid">Upload</button>
+                <div class="form-group">
+                    <label for="amount" class="col-sm-2 control-label">Points</label>
+                    <div class="col-sm-10">
+                        <input class="form-control" id="amount" data-bind="value: amount"/>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-sm-offset-2 col-sm-10">
+                        <button type="submit" class="btn btn-primary" data-bind="enable: isValid">Tildel turnout point</button>
                     </div>
                 </div>
             </form>
-            <div data-bind="foreach: status">
-                <div class="progress">
-                    <div class="progress-bar progress-bar-success  progress-bar-striped" style="width: 45%" data-bind="css: {active : progress() < 100}, style: {width:progress() + '%'}">
-                        <span data-bind="text: name"></span>
-                    </div>
-                </div>
-            </div>
         </div>
     </div>
+</div>
+
+<div class="col-xs-12">
+    <table class="table table-hover table-condensed">
+        <thead>
+            <tr>
+                <th class="col-xs-4 col-sm-6">Kolegie</th>
+                <th class="col-xs-4 col-sm-1">Points</th>
+                <th class="col-xs-4 col-sm-5">Tid</th>
+                <th colspan="2" class="text-center"><span class="glyphicon glyphicon-option-horizontal"></span></th>
+            </tr>
+        </thead>
+        <tbody data-bind="foreach: turnoutPoints">
+            <tr>
+                <td data-bind="text: houseName"></td>
+                <td data-bind="text: amount"></td>
+                <td data-bind="text: moment(time).format('dddd HH:mm')"></td>
+                <td><button data-bind="click: $root.sendDelete" class="btn btn-danger btn-xs" title="Slet"><span class="glyphicon glyphicon-trash"></span></button></td>
+            </tr>
+        </tbody>
+    </table>
 </div>
 @section Scripts
 {

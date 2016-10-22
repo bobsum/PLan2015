@@ -21,7 +21,16 @@ namespace Plan2015.MagicGames.TimeSwiper
                 {
                     Console.WriteLine("Svirp tryllestav");
                     long rfid;
-                    if(long.TryParse(Console.ReadLine(), out rfid)) continue;
+                    var readLine = Console.ReadLine();
+                    try
+                    {
+                        rfid = Convert.ToInt64(readLine);
+                    }
+                    catch
+                    {
+                        Console.WriteLine("Kunne ikke læse tag");
+                        continue;
+                    }
                     var now = DateTime.Now;
                     Console.Clear();
                     if (start.AddMinutes(61) < now)

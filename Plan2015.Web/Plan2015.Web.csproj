@@ -153,6 +153,7 @@
     <Content Include="Views\SortingHat\Index.cshtml" />
     <Content Include="Views\Quiz\Index.cshtml" />
     <Content Include="Views\Boxter\Marker.cshtml" />
+    <Content Include="Views\Turnout\Index - Copy.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

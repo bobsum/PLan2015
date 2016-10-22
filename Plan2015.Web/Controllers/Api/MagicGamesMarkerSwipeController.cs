@@ -20,11 +20,12 @@ namespace Plan2015.Web.Controllers.Api
                 string line;
                 while ((line = reader.ReadLine()) != null)
                 {
-                    var match = Regex.Match(line, @"^\x02\w{2}(\w{8})\w{2}\x03\x03$");
-                    if (!match.Success) continue;
+                    //var match = Regex.Match(line, @"^\x02\w{2}(\w{8})\w{2}\x03\x03$");
+                    //if (!match.Success) continue;
                     
-                    var hexRfid = match.Groups[1].ToString();
-                    var rfid = Convert.ToInt64(hexRfid, 16);
+                    //var hexRfid = match.Groups[1].ToString();
+                    //var rfid = Convert.ToInt64(hexRfid, 16);
+                    var rfid = Convert.ToInt64(line);
 
                     var scout = Db.Scouts.FirstOrDefault(s => s.Rfid == rfid);
 

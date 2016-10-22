@@ -375,7 +375,7 @@ var Boxter;
                     var map = {};
                     ko.utils.arrayForEach(swipes, function (swipe) {
                         var house = map[swipe.houseName] || (map[swipe.houseName] = []);
-                        house.push(swipe.boxIdFriendly);
+                        house.push(swipe.boxId);
                     });
                     _this.result(ko.utils.arrayMap(_this.houses(), function (house) {
                         return {
@@ -394,6 +394,73 @@ var Turnout;
 (function (Turnout) {
     var Index;
     (function (Index) {
+        var CreateTurnoutPointViewModel = (function () {
+            function CreateTurnoutPointViewModel() {
+                var _this = this;
+                this.houseId = ko.observable();
+                this.amount = ko.observable();
+                this.isValid = ko.computed(function () { return !!_this.houseId() && !!_this.amount(); });
+            }
+            return CreateTurnoutPointViewModel;
+        }());
+        var App = (function () {
+            function App() {
+                var _this = this;
+                this.newTurnoutPoint = ko.observable(new CreateTurnoutPointViewModel());
+                this.houses = ko.observableArray();
+                this.turnoutPoints = ko.observableArray();
+                var hub = $.connection.turnoutPointHub;
+                hub.client.add = function (point) {
+                    _this.add(point);
+                };
+                hub.client.remove = function (id) {
+                    _this.remove(id);
+                };
+                $.connection.hub.start();
+                $.get('/Api/Turnout', function (turnoutPoints) {
+                    ko.utils.arrayForEach(turnoutPoints, function (turnoutPoint) {
+                        _this.add(turnoutPoint);
+                    });
+                }, 'json');
+                $.get('/Api/House', function (houses) {
+                    _this.houses(houses);
+                }, 'json');
+            }
+            App.prototype.add = function (turnoutPoint) {
+                this.turnoutPoints.push(turnoutPoint);
+            };
+            App.prototype.remove = function (id) {
+                this.turnoutPoints.remove(function (a) { return (a.id === id); });
+            };
+            App.prototype.sendCreate = function () {
+                var turnoutPoint = this.newTurnoutPoint();
+                $.ajax({
+                    url: '/Api/Turnout',
+                    type: 'POST',
+                    data: {
+                        houseId: turnoutPoint.houseId(),
+                        amount: turnoutPoint.amount()
+                    }
+                });
+                this.newTurnoutPoint(new CreateTurnoutPointViewModel());
+            };
+            App.prototype.sendDelete = function (turnoutPoint) {
+                if (!confirm("Er du sikker på du vil slette turnout?"))
+                    return;
+                $.ajax({
+                    url: '/Api/Turnout/' + turnoutPoint.id,
+                    type: 'DELETE'
+                });
+            };
+            return App;
+        }());
+        Index.App = App;
+    })(Index = Turnout.Index || (Turnout.Index = {}));
+})(Turnout || (Turnout = {}));
+var Turnout;
+(function (Turnout) {
+    var IndexOld;
+    (function (IndexOld) {
         var StatusViewModel = (function () {
             function StatusViewModel(name) {
                 this.name = name;
@@ -444,8 +511,8 @@ var Turnout;
             }
             return App;
         }());
-        Index.App = App;
-    })(Index = Turnout.Index || (Turnout.Index = {}));
+        IndexOld.App = App;
+    })(IndexOld = Turnout.IndexOld || (Turnout.IndexOld = {}));
 })(Turnout || (Turnout = {}));
 var Punctuality;
 (function (Punctuality) {
@@ -599,6 +666,13 @@ var Punctuality;
                 };
                 this.hub.client.updatedStatus = function (houses) {
                     _this.houses(ko.utils.arrayMap(houses, function (h) { return new HouseStatusViewModel(h); }));
+                    _this.houses.sort(function (a, b) {
+                        if (a.scouts.length < b.scouts.length)
+                            return 1;
+                        if (a.scouts.length > b.scouts.length)
+                            return -1;
+                        return 0;
+                    });
                 };
                 $.connection.hub.start()
                     .done(function () {
@@ -816,4 +890,3 @@ var Helpers;
     }
     Helpers.compare = compare;
 })(Helpers || (Helpers = {}));
-//# sourceMappingURL=App.js.map

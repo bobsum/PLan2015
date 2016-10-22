@@ -1,0 +1,35 @@
+﻿<div class="col-xs-12" data-bind="with: upload">
+    <div class="panel panel-default">
+        <div class="panel-heading">Indlæs turnout points</div>
+        <div class="panel-body">
+            <form class="form-horizontal" data-bind="submit: sendUplaod">
+                <div class="form-group form-group-sm">
+                    <label class="col-xs-12 col-sm-2 control-label">File</label>
+                    <div class="col-xs-12 col-sm-10">
+                        <input type="file" class="form-control" multiple data-bind="event: { change: selectFile }">
+                    </div>
+                </div>
+                <div class="form-group form-group-sm">
+                    <div class="col-xs-12 col-sm-offset-2 col-sm-10">
+                        <button type="submit" class="btn btn-primary" data-bind="enable: isValid">Upload</button>
+                    </div>
+                </div>
+            </form>
+            <div data-bind="foreach: status">
+                <div class="progress">
+                    <div class="progress-bar progress-bar-success  progress-bar-striped" style="width: 45%" data-bind="css: {active : progress() < 100}, style: {width:progress() + '%'}">
+                        <span data-bind="text: name"></span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+@section Scripts
+{
+    <script type="text/javascript">
+        $(function() {
+            ko.applyBindings(new Turnout.Index.App());
+        });
+    </script>
+}

@@ -403,7 +403,7 @@ module Boxter.Marker {
                 let map = {};
                 ko.utils.arrayForEach(swipes, swipe => {
                     let house = map[swipe.houseName] || (map[swipe.houseName] = []);
-                    house.push(swipe.boxIdFriendly);
+                    house.push(swipe.boxId);
                 });
 
                 this.result(ko.utils.arrayMap(this.houses(),
@@ -420,6 +420,76 @@ module Boxter.Marker {
 }
 
 module Turnout.Index {
+    class CreateTurnoutPointViewModel {
+        houseId = ko.observable<number>();
+        amount = ko.observable<number>();
+        isValid = ko.computed<boolean>(() => !!this.houseId() && !!this.amount());
+    }
+
+    export class App {
+        newTurnoutPoint = ko.observable<CreateTurnoutPointViewModel>(new CreateTurnoutPointViewModel());
+        houses = ko.observableArray<IHouseDto>();
+        turnoutPoints = ko.observableArray<ITurnoutPointDto>();
+
+        constructor() {
+            var hub = $.connection.turnoutPointHub;
+
+            hub.client.add = point => {
+                this.add(point);
+            };
+
+            hub.client.remove = id => {
+                this.remove(id);
+            };
+
+            $.connection.hub.start();
+
+            $.get('/Api/Turnout', turnoutPoints => {
+                ko.utils.arrayForEach(turnoutPoints, turnoutPoint => {
+                    this.add(<ITurnoutPointDto>turnoutPoint);
+                });
+            }, 'json');
+
+            $.get('/Api/House', houses => {
+                this.houses(houses);
+            }, 'json');
+        }
+
+        add(turnoutPoint: ITurnoutPointDto) {
+            this.turnoutPoints.push(turnoutPoint);
+        }
+
+        remove(id: number) {
+            this.turnoutPoints.remove(a => (a.id === id));
+        }
+
+        sendCreate() {
+            var turnoutPoint = this.newTurnoutPoint();
+
+            $.ajax({
+                url: '/Api/Turnout',
+                type: 'POST',
+                data: <ITurnoutPointDto>{
+                    houseId: turnoutPoint.houseId(),
+                    amount: turnoutPoint.amount()
+                }
+            });
+
+            this.newTurnoutPoint(new CreateTurnoutPointViewModel());
+        }
+
+        sendDelete(turnoutPoint: ITurnoutPointDto) {
+            if (!confirm("Er du sikker på du vil slette turnout?")) return;
+
+            $.ajax({
+                url: '/Api/Turnout/' + turnoutPoint.id,
+                type: 'DELETE'
+            });
+        }
+    }
+}
+
+module Turnout.IndexOld {
     class StatusViewModel {
         progress = ko.observable<number>(0);
         constructor(public name: string) {}
@@ -638,6 +708,11 @@ module Punctuality.Station {
 
             this.hub.client.updatedStatus = houses => {
                 this.houses(ko.utils.arrayMap(houses, h => new HouseStatusViewModel(h)));
+                this.houses.sort((a: HouseStatusViewModel, b: HouseStatusViewModel) => {
+                    if (a.scouts.length < b.scouts.length) return 1;
+                    if (a.scouts.length > b.scouts.length) return -1;
+                    return 0;
+                });
             };
             $.connection.hub.start()
                 .done(() => {

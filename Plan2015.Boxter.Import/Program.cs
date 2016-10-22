@@ -14,7 +14,7 @@ namespace Plan2015.Boxter.Import
 {
     class Program
     {
-        private const int DELAY = 30*1000;
+        private const int DELAY = 15*1000;
         private const string URL = "http://boxter-v42.azurewebsites.net/umbraco/api/boxcall/getall";
 
         private static readonly ILog _log;
@@ -70,9 +70,14 @@ namespace Plan2015.Boxter.Import
                             foreach (var dto in dtos)
                             {
                                 long rfid;
-                                if (!long.TryParse(dto.Tag, out rfid))
+                                try
                                 {
-                                    if (_isWarnEnabled) _log.Warn($"Rfid not valid: {rfid}");
+                                    rfid = Convert.ToInt64(dto.Tag);
+                                }
+                                catch
+                                {
+                                    if (_isWarnEnabled) _log.Warn($"Rfid not valid: {dto.Tag}");
+
                                     continue;
                                 }
                                 var scout = await db.Scouts.FirstOrDefaultAsync(s => s.Rfid == rfid);
